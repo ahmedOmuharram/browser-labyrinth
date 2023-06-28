@@ -1,0 +1,20 @@
+body{
+    margin: none;
+    padding: none;
+}
+
+.object{
+    background-color: red;
+    border-style: solid;
+    border-color: black;
+    position: absolute;
+}
+
+#player{
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    width: 25px;
+    height: 25px;
+}
