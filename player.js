@@ -26,6 +26,9 @@ function checkCollision(obj1, obj2) {
 }
 
 function updatePlayerPosition() {
+  const d = new Date();
+  let time = d.getTime();
+  
   verticalVelocity += gravity;
   playerY += verticalVelocity;
   
@@ -64,7 +67,8 @@ function updatePlayerPosition() {
 
   player.style.transform = `translate(${playerX}px, ${playerY}px)`;
 
-  requestAnimationFrame(updatePlayerPosition);
+
+  setInterval(requestAnimationFrame(updatePlayerPosition), 16 - (d.getTime - time));
 }
 
 function jump() {
