@@ -1,22 +1,35 @@
-let player = document.getElementById("player")
+let player = document.getElementById("player");
+let keyState = {};
 
-let speed = 10
+let playerX = 0;
+let playerY = 0;
+let playerSpeed = 5;
 
-document.addEventListener("keydown", (event) =>{
-    if(event.key=="w"){
-        let str = window.getComputedStyle(player).getPropertyValue("top")
-        player.style.top = parseInt(str.substring(0, str.length-2)) - speed + 'px'
-    }
-    if(event.key=="a"){
-        let str = window.getComputedStyle(player).getPropertyValue("left")
-        player.style.left = parseInt(str.substring(0, str.length-2)) - speed + 'px'
-    }
-    if(event.key=="s"){
-        let str = window.getComputedStyle(player).getPropertyValue("top")
-        player.style.top = parseInt(str.substring(0, str.length-2)) + speed + 'px'
-    }
-    if(event.key=="d"){
-        let str = window.getComputedStyle(player).getPropertyValue("left")
-        player.style.left = parseInt(str.substring(0, str.length-2)) + speed + 'px'
-    }
-})
+function updatePlayerPosition() {
+  if (keyState["KeyW"]) {
+    playerY -= playerSpeed;
+  }
+  if (keyState["KeyA"]) {
+    playerX -= playerSpeed;
+  }
+  if (keyState["KeyS"]) {
+    playerY += playerSpeed;
+  }
+  if (keyState["KeyD"]) {
+    playerX += playerSpeed;
+  }
+  
+  player.style.transform = `translate(${playerX}px, ${playerY}px)`;
+
+  requestAnimationFrame(updatePlayerPosition);
+}
+
+document.addEventListener("keydown", (event) => {
+  keyState[event.code] = true;
+});
+
+document.addEventListener("keyup", (event) => {
+  keyState[event.code] = false;
+});
+
+updatePlayerPosition();
