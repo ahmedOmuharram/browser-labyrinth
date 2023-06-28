@@ -6,6 +6,11 @@ let playerX = 0;
 let playerY = 0;
 let playerSpeed = 5;
 
+let gravity = 0.5;
+let verticalVelocity = 0;
+let jumpForce = 10;
+let isOnGround = false;
+
 function checkCollision(obj1, obj2) {
   let rect1 = obj1.getBoundingClientRect();
   let rect2 = obj2.getBoundingClientRect();
@@ -21,6 +26,9 @@ function checkCollision(obj1, obj2) {
 }
 
 function updatePlayerPosition() {
+  verticalVelocity += gravity;
+  playerY += verticalVelocity;
+  
   if (keyState["KeyW"]) {
     playerY -= playerSpeed;
   }
@@ -34,23 +42,24 @@ function updatePlayerPosition() {
     playerX += playerSpeed;
   }
   
-  if (checkCollision(player, solid)) {
-    console.log("Collision");
-  } else {
-    console.log("No Collision");
-  }
-
   if (playerX < 0) {
     playerX = 0;
+    isOnGround = true;
   }
+
   if (playerY < 0) {
     playerY = 0;
   }
+
   if (playerX + player.offsetWidth > window.innerWidth) {
     playerX = window.innerWidth - player.offsetWidth;
+    isOnGround = true;
   }
+
   if (playerY + player.offsetHeight > window.innerHeight) {
     playerY = window.innerHeight - player.offsetHeight;
+    verticalVelocity = 0;
+    isOnGround = true;
   }
 
   player.style.transform = `translate(${playerX}px, ${playerY}px)`;
@@ -58,8 +67,19 @@ function updatePlayerPosition() {
   requestAnimationFrame(updatePlayerPosition);
 }
 
+function jump() {
+    if (isOnGround) { 
+      verticalVelocity = -jumpForce;
+      isOnGround = false;
+    }
+}
+
 document.addEventListener("keydown", (event) => {
   keyState[event.code] = true;
+
+  if (event.code === "Space") {
+    jump();
+  }
 });
 
 document.addEventListener("keyup", (event) => {
