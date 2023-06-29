@@ -10,6 +10,7 @@ let gravity = 0.5;
 let verticalVelocity = 0;
 let jumpForce = 10;
 let isOnGround = false;
+let lastTime = 0;
 
 function checkCollision(obj1, obj2) {
   let rect1 = obj1.getBoundingClientRect();
@@ -25,9 +26,9 @@ function checkCollision(obj1, obj2) {
   return false;
 }
 
-function updatePlayerPosition() {
-  const d = new Date();
-  let time = d.getTime();
+function updatePlayerPosition(currentTime) {
+  const deltaTime = (currentTime - lastTime) / 1000;
+  lastTime = currentTime;
   
   verticalVelocity += gravity;
   playerY += verticalVelocity;
@@ -68,7 +69,7 @@ function updatePlayerPosition() {
   player.style.transform = `translate(${playerX}px, ${playerY}px)`;
 
 
-  setInterval(requestAnimationFrame(updatePlayerPosition), 16 - (d.getTime - time));
+  requestAnimationFrame(updatePlayerPosition);
 }
 
 function jump() {
@@ -90,4 +91,4 @@ document.addEventListener("keyup", (event) => {
   keyState[event.code] = false;
 });
 
-updatePlayerPosition();
+requestAnimationFrame(updatePlayerPosition);
