@@ -1,5 +1,3 @@
-let player = document.getElementById("player");
-let solid = document.getElementById("solid");
 let keyState = {};
 
 let playerX = 0;
@@ -16,6 +14,24 @@ const targetInterval = 1000 / targetFPS;
 
 let previousTimestamp = 0;
 
+function createCustomBody(bottomValue, rightValue, widthValue, heightValue) {
+  document.body.innerHTML += `<div class="object solid" style="position:absolute; box-shadow: inset 0 0 10px 5px #0f0, inset 0 0 15px 10px #fff, 0 0 15px 5px #0f0; background-color: #fff; bottom: ${bottomValue}px; right: ${rightValue}px; width: ${widthValue}px; height: ${heightValue}px"></div>`;
+}
+
+createCustomBody('0', '200', '200', '20');
+createCustomBody('200', '50', '20', '500');
+createCustomBody('100', '500', '20', '500');
+createCustomBody('400', '800', '500', '20');
+createCustomBody('600', '300', '400', '20');
+
+function createRamp(bottomValue, rightValue, widthValue, heightValue) {
+  document.body.innerHTML += `<div class="object solid" style="border-radius: 0% 100% 0% 0%; position:absolute; box-shadow: inset 0 0 10px 5px #0f0, inset 0 0 15px 10px #fff, 0 0 15px 5px #0f0; background-color: #fff; bottom: ${bottomValue}px; right: ${rightValue}px; width: ${widthValue}px; height: ${heightValue}px"></div>`;
+}
+
+createRamp('400', '200', '200', '100');
+
+let player = document.getElementById("player");
+let solids = document.querySelectorAll('.solid');
 
 function checkCollision(obj1, obj2) {
   let rect1 = obj1.getBoundingClientRect();
@@ -51,9 +67,15 @@ function gameLoop(timestamp) {
         playerX += playerSpeed * deltaTime;
     }
 
-    if (checkCollision(player, solid)) {
-      resolveCollision();
-    } else {
+    let colliding = false;
+    for( var i = 0; i < solids.length; i++) {
+      if (checkCollision(player, solids[i])) {
+        colliding = true;
+        console.log("Colliding")
+        resolveCollision(player.getBoundingClientRect(), solids[i].getBoundingClientRect());
+      }
+    }
+    if (!colliding) {
       gravity = 1000;
     }
     
@@ -88,9 +110,7 @@ function gameLoop(timestamp) {
     }, targetInterval);
 }
 
-function resolveCollision() {
-  const playerRect = player.getBoundingClientRect();
-  const solidRect = solid.getBoundingClientRect();
+function resolveCollision(playerRect, solidRect) {
 
   const dx = (playerRect.left + playerRect.right) / 2 - (solidRect.left + solidRect.right) / 2;
   const dy = (playerRect.top + playerRect.bottom) / 2 - (solidRect.top + solidRect.bottom) / 2;
