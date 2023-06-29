@@ -38,17 +38,23 @@ function gameLoop(timestamp) {
     verticalVelocity += gravity * deltaTime;
     playerY += verticalVelocity * deltaTime;
     
-    if (keyState["KeyW"]) {
-        playerY -= playerSpeed * deltaTime;
-    }
+    // if (keyState["KeyW"]) {
+    //     playerY -= playerSpeed * deltaTime;
+    // }
     if (keyState["KeyA"]) {
         playerX -= playerSpeed * deltaTime;
     }
-    if (keyState["KeyS"]) {
-        playerY += playerSpeed * deltaTime;
-    }
+    // if (keyState["KeyS"]) {
+    //     playerY += playerSpeed * deltaTime;
+    // }
     if (keyState["KeyD"]) {
         playerX += playerSpeed * deltaTime;
+    }
+
+    if (checkCollision(player, solid)) {
+      resolveCollision();
+    } else {
+      gravity = 1000;
     }
     
     if (playerX < 0) {
@@ -59,17 +65,18 @@ function gameLoop(timestamp) {
     if (playerY < 0) {
         playerY = 0;
     }
-
+    
     if (playerX + player.offsetWidth > window.innerWidth) {
         playerX = window.innerWidth - player.offsetWidth;
         isOnGround = true;
     }
-
+    
     if (playerY + player.offsetHeight > window.innerHeight) {
         playerY = window.innerHeight - player.offsetHeight;
         verticalVelocity = 0;
         isOnGround = true;
     }
+
 
     player.style.transform = `translate(${playerX}px, ${playerY}px)`;
 
@@ -79,6 +86,45 @@ function gameLoop(timestamp) {
     setTimeout(() => {
         requestAnimationFrame(gameLoop);
     }, targetInterval);
+}
+
+function resolveCollision() {
+  const playerRect = player.getBoundingClientRect();
+  const solidRect = solid.getBoundingClientRect();
+
+  const dx = (playerRect.left + playerRect.right) / 2 - (solidRect.left + solidRect.right) / 2;
+  const dy = (playerRect.top + playerRect.bottom) / 2 - (solidRect.top + solidRect.bottom) / 2;
+
+  const combinedHalfWidths = (playerRect.width + solidRect.width) / 2;
+  const combinedHalfHeights = (playerRect.height + solidRect.height) / 2;
+
+  if (Math.abs(dx) < combinedHalfWidths && Math.abs(dy) < combinedHalfHeights) {
+    const overlapX = combinedHalfWidths - Math.abs(dx);
+    const overlapY = combinedHalfHeights - Math.abs(dy);
+
+    if (overlapX >= overlapY) {
+      if (dy > 0) {
+        playerY += overlapY;
+        verticalVelocity = 0;
+      } else {
+        if (verticalVelocity > 0) {
+          verticalVelocity = 0;
+        }
+        isOnGround = true;
+        playerY -= overlapY;
+      }
+      return true;
+    } else {
+      if (dx > 0) {
+        playerX += overlapX;
+        isOnGround = true;
+      } else {
+        playerX -= overlapX;
+        isOnGround = true;
+      }
+      return true;
+    }
+  }
 }
 
 function jump() {
