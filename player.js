@@ -4,13 +4,18 @@ let keyState = {};
 
 let playerX = 0;
 let playerY = 0;
-let playerSpeed = 5;
+let playerSpeed = 300;
 
-let gravity = 0.5;
+let gravity = 1000;
 let verticalVelocity = 0;
-let jumpForce = 10;
+let jumpForce = 500;
 let isOnGround = false;
-let lastTime = 0;
+
+const targetFPS = 60;
+const targetInterval = 1000 / targetFPS;
+
+let previousTimestamp = 0;
+
 
 function checkCollision(obj1, obj2) {
   let rect1 = obj1.getBoundingClientRect();
@@ -26,50 +31,54 @@ function checkCollision(obj1, obj2) {
   return false;
 }
 
-function updatePlayerPosition(currentTime) {
-  const deltaTime = (currentTime - lastTime) / 1000;
-  lastTime = currentTime;
-  
-  verticalVelocity += gravity;
-  playerY += verticalVelocity;
-  
-  if (keyState["KeyW"]) {
-    playerY -= playerSpeed;
-  }
-  if (keyState["KeyA"]) {
-    playerX -= playerSpeed;
-  }
-  if (keyState["KeyS"]) {
-    playerY += playerSpeed;
-  }
-  if (keyState["KeyD"]) {
-    playerX += playerSpeed;
-  }
-  
-  if (playerX < 0) {
-    playerX = 0;
-    isOnGround = true;
-  }
+function gameLoop(timestamp) {
+    const elapsed = timestamp - previousTimestamp;
+    const deltaTime = elapsed / 1000;
 
-  if (playerY < 0) {
-    playerY = 0;
-  }
+    verticalVelocity += gravity * deltaTime;
+    playerY += verticalVelocity * deltaTime;
+    
+    if (keyState["KeyW"]) {
+        playerY -= playerSpeed * deltaTime;
+    }
+    if (keyState["KeyA"]) {
+        playerX -= playerSpeed * deltaTime;
+    }
+    if (keyState["KeyS"]) {
+        playerY += playerSpeed * deltaTime;
+    }
+    if (keyState["KeyD"]) {
+        playerX += playerSpeed * deltaTime;
+    }
+    
+    if (playerX < 0) {
+        playerX = 0;
+        isOnGround = true;
+    }
 
-  if (playerX + player.offsetWidth > window.innerWidth) {
-    playerX = window.innerWidth - player.offsetWidth;
-    isOnGround = true;
-  }
+    if (playerY < 0) {
+        playerY = 0;
+    }
 
-  if (playerY + player.offsetHeight > window.innerHeight) {
-    playerY = window.innerHeight - player.offsetHeight;
-    verticalVelocity = 0;
-    isOnGround = true;
-  }
+    if (playerX + player.offsetWidth > window.innerWidth) {
+        playerX = window.innerWidth - player.offsetWidth;
+        isOnGround = true;
+    }
 
-  player.style.transform = `translate(${playerX}px, ${playerY}px)`;
+    if (playerY + player.offsetHeight > window.innerHeight) {
+        playerY = window.innerHeight - player.offsetHeight;
+        verticalVelocity = 0;
+        isOnGround = true;
+    }
+
+    player.style.transform = `translate(${playerX}px, ${playerY}px)`;
 
 
-  requestAnimationFrame(updatePlayerPosition);
+    previousTimestamp = timestamp;
+    
+    setTimeout(() => {
+        requestAnimationFrame(gameLoop);
+    }, targetInterval);
 }
 
 function jump() {
@@ -91,4 +100,4 @@ document.addEventListener("keyup", (event) => {
   keyState[event.code] = false;
 });
 
-requestAnimationFrame(updatePlayerPosition);
+requestAnimationFrame(gameLoop);
