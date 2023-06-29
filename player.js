@@ -14,20 +14,39 @@ const targetInterval = 1000 / targetFPS;
 
 let previousTimestamp = 0;
 
+
+
+
+
 function createCustomBody(bottomValue, rightValue, widthValue, heightValue) {
   document.body.innerHTML += `<div class="object solid" style="position:absolute; box-shadow: 2px 3px; border: 1px solid white; background-color: #c3c3c3; ${bottomValue}px; ${rightValue}px; width: ${widthValue}; height: ${heightValue}"></div>`;
 }
 
-createCustomBody('bottom: 200', 'right: 50', '20px', '500px');
-createCustomBody('bottom: 100', 'right: 500', '20px', '500px');
-createCustomBody('bottom: 400', 'right: 800', '500px', '20px');
-createCustomBody('bottom: 600', 'right: 300', '400px', '20px');
+//Main Menu
+function createMainMenu(){
+  createCustomBody('bottom: 200', 'right: 50', '20px', '500px');
+  createCustomBody('bottom: 100', 'right: 500', '20px', '500px');
+  createCustomBody('bottom: 400', 'right: 800', '500px', '20px');
+  createCustomBody('bottom: 600', 'right: 300', '400px', '20px');
+}
+
+//Level 1
+function createLevel1(){
+  createCustomBody('top:100', 'left: 600', '300px', '100px');
+
+  createCustomBody('bottom : 1', 'left: 730', '30px', '90%');
+}
+
 
 function createRamp(bottomValue, rightValue, widthValue, heightValue) {
   document.body.innerHTML += `<div class="object solid" style="border-radius: 0% 100% 0% 0%; box-shadow: 2px 3px; position:absolute; border: 1px solid white; background-color: #c3c3c3; bottom: ${bottomValue}px; right: ${rightValue}px; width: ${widthValue}px; height: ${heightValue}px"></div>`;
 }
 
+createMainMenu();
+
 createRamp('400', '200', '200', '100');
+
+let startButton = document.getElementById("start")
 
 let player = document.getElementById("player");
 let solids = document.querySelectorAll('.solid');
@@ -66,6 +85,16 @@ function gameLoop(timestamp) {
         playerX += playerSpeed * deltaTime;
     }
 
+    if(keyState["Enter"])
+    if(checkCollision(player, startButton)){
+      for(var i = 5; i < solids.length; i++){
+        solids[i].remove();
+      }
+      startButton.remove();
+      createLevel1();
+      player = document.getElementById("player");
+      solids = document.querySelectorAll('.solid');
+    }
     let colliding = false;
     let collidingWithStart = false;
     for( var i = 0; i < solids.length; i++) {
@@ -105,13 +134,14 @@ function gameLoop(timestamp) {
         verticalVelocity = 0;
         isOnGround = true;
     }
-
+    if(window.innerHeight < 70){
+      player.remove();
+    }
 
     player.style.transform = `translate(${playerX}px, ${playerY}px)`;
 
 
     previousTimestamp = timestamp;
-    
     setTimeout(() => {
         requestAnimationFrame(gameLoop);
     }, targetInterval);
@@ -163,7 +193,6 @@ function jump() {
 
 document.addEventListener("keydown", (event) => {
   keyState[event.code] = true;
-
   if (event.code === "Space") {
     jump();
   }
