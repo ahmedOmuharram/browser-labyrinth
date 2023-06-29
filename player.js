@@ -15,9 +15,6 @@ const targetInterval = 1000 / targetFPS;
 let previousTimestamp = 0;
 
 
-
-
-
 function createCustomBody(bottomValue, rightValue, widthValue, heightValue) {
   document.body.innerHTML += `<div class="object solid" style="position:absolute; box-shadow: 2px 3px; border: 1px solid white; background-color: #c3c3c3; ${bottomValue}px; ${rightValue}px; width: ${widthValue}; height: ${heightValue}"></div>`;
 }
@@ -32,10 +29,23 @@ function createMainMenu(){
 
 //Level 1
 function createLevel1(){
-  createCustomBody('top:100', 'left: 600', '300px', '100px');
+  createCustomBody('top: 100', 'left: 600', '300px', '100px');
 
   createCustomBody('bottom : 1', 'left: 730', '30px', '90%');
 }
+
+function createLevel2(){
+  for (var i = 1; i <= 14; i++) {
+    if (i % 2 == 0) {
+      console.log()
+      createCustomBody('top: -1', `left: ${i}00`, '30px', '500px');
+    } else {
+      createCustomBody('bottom: -1', `left: ${i}00`, '30px', '500px');
+    }
+  }
+  
+}
+
 
 
 function createRamp(bottomValue, rightValue, widthValue, heightValue) {
@@ -91,12 +101,11 @@ function gameLoop(timestamp) {
         solids[i].remove();
       }
       startButton.remove();
-      createLevel1();
+      createLevel2();
       player = document.getElementById("player");
       solids = document.querySelectorAll('.solid');
     }
     let colliding = false;
-    let collidingWithStart = false;
     for( var i = 0; i < solids.length; i++) {
       if (checkCollision(player, solids[i])) {
         colliding = true;
