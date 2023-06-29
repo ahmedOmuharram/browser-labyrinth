@@ -15,17 +15,16 @@ const targetInterval = 1000 / targetFPS;
 let previousTimestamp = 0;
 
 function createCustomBody(bottomValue, rightValue, widthValue, heightValue) {
-  document.body.innerHTML += `<div class="object solid" style="position:absolute; box-shadow: inset 0 0 10px 5px #0f0, inset 0 0 15px 10px #fff, 0 0 15px 5px #0f0; background-color: #fff; bottom: ${bottomValue}px; right: ${rightValue}px; width: ${widthValue}px; height: ${heightValue}px"></div>`;
+  document.body.innerHTML += `<div class="object solid" style="position:absolute; box-shadow: 2px 3px; border: 1px solid white; background-color: #c3c3c3; ${bottomValue}px; ${rightValue}px; width: ${widthValue}; height: ${heightValue}"></div>`;
 }
 
-createCustomBody('0', '200', '200', '20');
-createCustomBody('200', '50', '20', '500');
-createCustomBody('100', '500', '20', '500');
-createCustomBody('400', '800', '500', '20');
-createCustomBody('600', '300', '400', '20');
+createCustomBody('bottom: 200', 'right: 50', '20px', '500px');
+createCustomBody('bottom: 100', 'right: 500', '20px', '500px');
+createCustomBody('bottom: 400', 'right: 800', '500px', '20px');
+createCustomBody('bottom: 600', 'right: 300', '400px', '20px');
 
 function createRamp(bottomValue, rightValue, widthValue, heightValue) {
-  document.body.innerHTML += `<div class="object solid" style="border-radius: 0% 100% 0% 0%; position:absolute; box-shadow: inset 0 0 10px 5px #0f0, inset 0 0 15px 10px #fff, 0 0 15px 5px #0f0; background-color: #fff; bottom: ${bottomValue}px; right: ${rightValue}px; width: ${widthValue}px; height: ${heightValue}px"></div>`;
+  document.body.innerHTML += `<div class="object solid" style="border-radius: 0% 100% 0% 0%; box-shadow: 2px 3px; position:absolute; border: 1px solid white; background-color: #c3c3c3; bottom: ${bottomValue}px; right: ${rightValue}px; width: ${widthValue}px; height: ${heightValue}px"></div>`;
 }
 
 createRamp('400', '200', '200', '100');
@@ -68,17 +67,25 @@ function gameLoop(timestamp) {
     }
 
     let colliding = false;
+    let collidingWithStart = false;
     for( var i = 0; i < solids.length; i++) {
       if (checkCollision(player, solids[i])) {
         colliding = true;
-        console.log("Colliding")
         resolveCollision(player.getBoundingClientRect(), solids[i].getBoundingClientRect());
+        solids[i].style.backgroundColor = "#ff0081"
+      } else {
+        if (solids[i].id == "start") {
+          solids[i].style.backgroundColor = "#010081"
+        } else {
+          solids[i].style.backgroundColor = "#c3c3c3"
+        }
       }
     }
+
     if (!colliding) {
       gravity = 1000;
     }
-    
+
     if (playerX < 0) {
         playerX = 0;
         isOnGround = true;
