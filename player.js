@@ -11,7 +11,7 @@ let verticalVelocity = 0;
 let jumpForce = 500;
 let isOnGround = false;
 
-const targetFPS = 60;
+const targetFPS = 1001;
 const targetInterval = 1000 / targetFPS;
 
 let previousTimestamp = 0;
