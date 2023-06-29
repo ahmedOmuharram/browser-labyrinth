@@ -4,25 +4,14 @@ body{
 }
 
 .object{
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
     background-color: white;
     border-style: solid;
     border-color: black;
     position: absolute;
-    width: 25px;
-    height: 25px;
-}
-
-#solid{
-    top:500px;
-    left:500px;
-}
-
-#player{
-    background-color: red;
-    top: 0px;
-    left: 0px;
-    right: 0px;
-    bottom: 0px;
     width: 25px;
     height: 25px;
 }
