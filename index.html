@@ -5,9 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Neon Nemesis</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        #player {
+            width: 20px;
+            height: 20px;
+            background-color: #fff;
+            box-shadow:
+                0 0 10px 5px #fff,  /* inner white */
+                0 0 15px 10px #0ff; /* middle magenta */
+        }
+    </style>
 </head>
 <body>
-    <div class="object" id="player" style="background-color: red; width: 25px; height: 25px;"></div>
+    <div class="object" id="player"></div>
 
     <script src="player.js"></script>
 </body>
