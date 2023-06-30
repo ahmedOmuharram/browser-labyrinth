@@ -10,6 +10,7 @@ let jumpForce = 500;
 let isOnGround = false;
 
 let currentLevel = 0;
+var Zoom = 1;
 
 const targetFPS = 1001;
 const targetInterval = 1000 / targetFPS;
@@ -183,7 +184,7 @@ function checkCollision(obj1, obj2) {
 function gameLoop(timestamp) {
     const elapsed = timestamp - previousTimestamp;
     const deltaTime = elapsed / 1000;
-
+    Zoom = window.devicePixelRatio || window.screen.availWidth / document.documentElement.clientWidth;
     verticalVelocity += gravity * deltaTime;
     playerY += verticalVelocity * deltaTime;
     
@@ -249,7 +250,7 @@ function gameLoop(timestamp) {
     if(window.innerHeight < 70){
       player.remove();
     }
-
+    console.log(Zoom);
     player.style.transform = `translate(${playerX}px, ${playerY}px)`;
 
 
@@ -311,7 +312,7 @@ function kill() {
   setLevel(currentLevel);
   playerX = 0.5 * window.innerWidth - 610;
   playerY = 0.5 * window.innerHeight + 330;
-  console.log(currentLevel)
+  //console.log("Current level: " + currentLevel)
   player = document.getElementById("player");
   solids = document.querySelectorAll('.solid');
 }
