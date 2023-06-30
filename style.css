@@ -40,10 +40,10 @@ body {
     font-family: 'W95FA', sans-serif;
     color: white;
     text-align: center;
-    font-size: 60px;
+    font-size: 2vmax;
     text-shadow: 5px 5px #000000;
     position: absolute;
-    top: 80px;
-    right: 100px;
+    top: calc(50vh - 300px);
+    left: calc(50vw - 580px);;
     animation: float 7s linear infinite;
 }
