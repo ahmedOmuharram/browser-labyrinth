@@ -46,7 +46,7 @@ function createLevel2(){
       createCustomBody('bottom: -1', `left: ${i}00`, '30px', '500px');
     }
   }
-  
+
 }
 
 //Level 3
@@ -114,8 +114,6 @@ function createRamp(bottomValue, rightValue, widthValue, heightValue) {
 }
 
 createMainMenu();
-
-createRamp('400', '200', '200', '100');
 
 let startButton = document.getElementById("start")
 
