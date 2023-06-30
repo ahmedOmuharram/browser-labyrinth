@@ -34,6 +34,7 @@ function createLevel1(){
   createCustomBody('bottom : 1', 'left: 730', '30px', '90%');
 }
 
+//Level 2
 function createLevel2(){
   for (var i = 1; i <= 14; i++) {
     if (i % 2 == 0) {
@@ -44,6 +45,25 @@ function createLevel2(){
     }
   }
 
+}
+
+//Level 3
+function createLevel3(){
+  for (var i = 2; i <= 7; i++) {
+    if (i % 2 == 0) {
+      console.log()
+      createCustomBody(`bottom: ${i}00`, 'left: 800', '800px', '30px');
+    } else {
+      createCustomBody(`bottom: ${i}00`, 'right: 800', '800px', '30px');
+    }
+  }
+  createCustomBody('top: 100', 'right: 700', '300px', '100px');
+}
+
+
+
+function createRamp(bottomValue, rightValue, widthValue, heightValue) {
+  document.body.innerHTML += `<div class="object solid" style="border-radius: 0% 100% 0% 0%; box-shadow: 2px 3px; position:absolute; border: 1px solid white; background-color: #c3c3c3; bottom: ${bottomValue}px; right: ${rightValue}px; width: ${widthValue}px; height: ${heightValue}px"></div>`;
 }
 
 createMainMenu();
@@ -93,7 +113,7 @@ function gameLoop(timestamp) {
         solids[i].remove();
       }
       startButton.remove();
-      createLevel2();
+      createLevel3();
       player = document.getElementById("player");
       solids = document.querySelectorAll('.solid');
     }
