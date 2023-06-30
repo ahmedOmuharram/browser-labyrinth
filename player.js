@@ -41,9 +41,9 @@ function createLevel2(){
   for (var i = 1; i <= 14; i++) {
     if (i % 2 == 0) {
       console.log()
-      createCustomBody('top: -1', `left: ${i}00`, '30px', '500px');
+      createCustomBody('top: -1', `left: ${i}00`, '2vw', 'calc(400vw - 400vh)');
     } else {
-      createCustomBody('bottom: -1', `left: ${i}00`, '30px', '500px');
+      createCustomBody('bottom: -1', `left: ${i}00`, '2vw', 'calc(400vw - 400vh)');
     }
   }
 
