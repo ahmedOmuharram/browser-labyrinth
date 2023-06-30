@@ -64,7 +64,12 @@ function createLevel3(){
 
 //Level 4
 function createLevel4(){
-  
+  for (var i = 1; i <= 6; i++) {
+    createCustomBody(`bottom: ${i}00`, `left: ${-i}00`, `${2*i+4}00px`, '30px');
+    createCustomBody(`bottom: ${i}00`, `left: ${i+5}00`, '1500px', '30px');
+    createCustomBody(`top: ${-i}00`, `right: ${i+3}00`, '30px', `${2*i}00px`);
+    createCustomBody(`top: ${i+1}00`, `right: ${i+3}00`, '30px', '700px');  
+}
 }
 
 function removeLevel(){
@@ -84,6 +89,9 @@ function nextLevel(){
       break;
     case 2:
       createLevel3();
+      break;
+    case 3:
+      createLevel4();
       break;
   }
   currentLevel++;
