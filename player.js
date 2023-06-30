@@ -34,8 +34,9 @@ function createMainMenu(){
 //Level 1
  function createLevel1(){
    createCustomBody('top: 100', 'left: 600', '300px', '100px');
-
    createCustomBody('bottom : 1', 'left: 730', '30px', '90%');
+   playerX = 0.5 * window.innerWidth - 610;
+   playerY = 0.5 * window.innerHeight + 330;
  }
 
 //Level 2
@@ -48,34 +49,35 @@ function createMainMenu(){
        createCustomBody('bottom: -1', `left: ${i}00`, '2vw', 'calc(200vh - 40vw)');
      }
    }
-
+   playerX = 0.5 * window.innerWidth - 610;
+   playerY = 0.5 * window.innerHeight + 330;
 }
 
 //Level 3
-// function createLevel3(){
-//   for (var i = 2; i <= 7; i++) {
-//     if (i % 2 == 0) {
-//       console.log()
-//       createCustomBody(`bottom: ${i}00`, 'left: 800', '1500px', '130px');
-//     } else {
-//       createCustomBody(`bottom: ${i}00`, 'right: 800', '1500px', '130px');
-//     }
-//   }
-//   createCustomBody('top: 100', 'right: 700', '300px', '100px');
-// }
+function createLevel3(){
+  for (var i = 2; i <= 7; i++) {
+    if (i % 2 == 0) {
+      createCustomBody(`bottom: ${i}00`, 'left: 800', '1500px', '130px');
+    } else {
+      createCustomBody(`bottom: ${i}00`, 'right: 800', '1500px', '130px');
+    }
+  }
+  createCustomBody('top: 100', 'right: 700', '300px', '100px');
+}
 
 //Level 4
-// function createLevel4(){
-//   for (var i = 1; i <= 6; i++) {
-//     createCustomBody(`bottom: ${i}00`, `left: ${-i}00`, `${2*i+4}00px`, '30px');
-//     createCustomBody(`bottom: ${i}00`, `left: ${i+4}70`, '1500px', '30px');
-//     createCustomBody(`top: ${-i}00`, `right: ${i+3}00`, '30px', `${2*i}00px`);
-//     createCustomBody(`top: ${i}70`, `right: ${i+3}00`, '30px', '700px');  
-// }
-// }
-// function createLevel5(){
-//   createCustomBody('top: 100', 'left: 700', '300px', '100px');
-// }
+function createLevel4(){
+  for (var i = 1; i <= 6; i++) {
+    createCustomBody(`bottom: ${i}00`, `left: ${-i}00`, `${2*i+4}00px`, '30px');
+    createCustomBody(`bottom: ${i}00`, `left: ${i+4}70`, '1500px', '30px');
+    createCustomBody(`top: ${-i}00`, `right: ${i+3}00`, '30px', `${2*i}00px`);
+    createCustomBody(`top: ${i}70`, `right: ${i+3}00`, '30px', '700px');  
+  }
+}
+
+function createLevel5(){
+  createCustomBody('top: 100', 'left: 700', '300px', '100px');
+}
 
 function removeLevel(){
   for(var i = 4; i < solids.length; i++){
