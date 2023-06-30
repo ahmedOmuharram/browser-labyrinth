@@ -107,22 +107,22 @@ function nextLevel(){
   solids = document.querySelectorAll('.solid');
 }
 
-function restartLevel(){
+function setLevel(inputLevel){
   removeLevel();
-  switch (currentLevel){
-    case 1:
+  switch (inputLevel){
+    case 0:
       createMainMenu();
       break;
-    case 2:
+    case 1:
       createLevel1();
       break;
-    case 3:
+    case 2:
       createLevel2();
       break;
-    case 4:
+    case 3:
       createLevel3();
       break;
-    case 5:
+    case 4:
       createLevel4();
       break;
   }
@@ -308,7 +308,12 @@ function jump() {
 }
 
 function kill() {
-  restartLevel();
+  setLevel(currentLevel);
+  playerX = 0.5 * window.innerWidth - 610;
+  playerY = 0.5 * window.innerHeight + 330;
+  console.log(currentLevel)
+  player = document.getElementById("player");
+  solids = document.querySelectorAll('.solid');
 }
 
 document.addEventListener("keydown", (event) => {
