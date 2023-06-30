@@ -43,18 +43,10 @@ function createLevel2(){
       createCustomBody('bottom: -1', `left: ${i}00`, '30px', '500px');
     }
   }
-  
-}
 
-
-
-function createRamp(bottomValue, rightValue, widthValue, heightValue) {
-  document.body.innerHTML += `<div class="object solid" style="border-radius: 0% 100% 0% 0%; box-shadow: 2px 3px; position:absolute; border: 1px solid white; background-color: #c3c3c3; bottom: ${bottomValue}px; right: ${rightValue}px; width: ${widthValue}px; height: ${heightValue}px"></div>`;
 }
 
 createMainMenu();
-
-createRamp('400', '200', '200', '100');
 
 let startButton = document.getElementById("start")
 
