@@ -1,5 +1,6 @@
 const gravity = 0.1;
 const terminalVelocity = 1000000;
+var colliding = false;
 
 const app = new PIXI.Application({ 
     antialias: true, 
@@ -15,13 +16,13 @@ app.renderer.autoDensity = true;
 
 
 blocks = []
-blocks.push(new PIXI.Graphics().lineStyle(20, "#c3c3c3").drawRect(0, window.innerHeight/2 + 340, 1240, 30));
 blocks.push(new PIXI.Graphics().lineStyle(20, "#c3c3c3").drawRect(window.innerWidth/2 - 640, window.innerHeight/2 - 360, 1280, 20));
+blocks.push(new PIXI.Graphics().lineStyle(20, "#c3c3c3").drawRect(window.innerWidth/2 - 640, window.innerHeight/2 + 360, 1280, 20));
+blocks.push(new PIXI.Graphics().lineStyle(20, "#c3c3c3").drawRect(window.innerWidth/2 - 640, window.innerHeight/2 - 360, 20, 720));
+blocks.push(new PIXI.Graphics().lineStyle(20, "#c3c3c3").drawRect(window.innerWidth/2 + 640, window.innerHeight/2 - 360, 20, 740));
 blocks.forEach(block => {
   app.stage.addChild(block)
 });
-
-
 
 const playerSprite = PIXI.Sprite.from('media/sprite.png');
 
@@ -30,11 +31,13 @@ playerSprite.anchor.set(0.5);
 
 // move the sprite to the center of the screen
 playerSprite.x = app.screen.width / 2;
-playerSprite.y = 0;
+playerSprite.y = 500;
 playerSprite.xSpeed = 0;
 playerSprite.ySpeed = 0;
+playerSprite.width = 36;
+playerSprite.height = 40;
 let isOnGround = true;
-const playerJumpForce = 10;
+const playerJumpForce = 5;
 
 app.stage.addChild(playerSprite);
 
@@ -83,16 +86,16 @@ function gameLoop(delta) {
 
     playerSprite.x += playerSprite.xSpeed;
     playerSprite.y += playerSprite.ySpeed;
-    for(var i = 0; i < blocks.length; i++)
-    if (isColliding(playerSprite, blocks[i])) {
-      resolveCollision(playerSprite, blocks[i]);
-      break;
-    }
-    else{
-      isOnGround = false;
+    for (var i = 0; i < blocks.length; i++) {
+        if (isColliding(playerSprite, blocks[i])) {
+           resolveCollision(playerSprite, blocks[i]);
+           colliding = true;
+        }
     }
 
-  
+    if (!colliding) {
+        isOnGround = false;
+    }
 }
 
 function isColliding(sprite, rect) {
@@ -124,8 +127,8 @@ function resolveCollision(sprite, rect) {
       if (dy > 0) {
         //Player top side collision
         playerSprite.y += overlapY;
-        playerSprite.ySpeed = 0.1;
-      } else {
+        playerSprite.ySpeed += gravity;
+    } else {
         //Player bottom side collision
         if (playerSprite.ySpeed > 0) {
           playerSprite.ySpeed = 0;
