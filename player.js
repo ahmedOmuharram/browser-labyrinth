@@ -43,9 +43,9 @@ function createMainMenu(){
    for (var i = 1; i <= 14; i++) {
      if (i % 2 == 0) {
        console.log()
-       createCustomBody('top: -1', `left: ${i}00`, '2vw', 'calc(400vw - 400vh)');
+       createCustomBody('top: -1', `left: ${i}00`, '2vw', 'calc(200vh - 40vw)');
      } else {
-       createCustomBody('bottom: -1', `left: ${i}00`, '2vw', 'calc(400vw - 400vh)');
+       createCustomBody('bottom: -1', `left: ${i}00`, '2vw', 'calc(200vh - 40vw)');
      }
    }
 
