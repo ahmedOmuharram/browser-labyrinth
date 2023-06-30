@@ -12,17 +12,48 @@ const app = new PIXI.Application({
     
 document.body.appendChild(app.view);
 
-app.renderer.autoDensity = true;
-
+app.stage.interactive = true;
+app.stage.hitArea = app.screen;
+let topBorder = new PIXI.Graphics();
+let bottomBorder = new PIXI.Graphics();
+let leftBorder = new PIXI.Graphics();
+let rightBorder = new PIXI.Graphics();
+topBorder.interactive = true;
+topBorder.hitArea = new PIXI.Rectangle(window.innerWidth/2 - 640, window.innerHeight/2 - 360, 1300, 20);
+topBorder.on('pointerdown', ronDragStart, topBorder);
+function ronDragStart(){
+  console.log("red");
+}
+bottomBorder.interactive = true;
+bottomBorder.hitArea = new PIXI.Rectangle(window.innerWidth/2 - 640, window.innerHeight/2 + 360, 1300, 20);
+bottomBorder.on('pointerdown', gonDragStart, bottomBorder);
+function gonDragStart(){
+  console.log("green");
+}
+leftBorder.interactive = true;
+leftBorder.hitArea = new PIXI.Rectangle(window.innerWidth/2 - 640, window.innerHeight/2 - 360, 20, 740);
+leftBorder.on('pointerdown', bonDragStart, leftBorder);
+function bonDragStart(){
+  console.log("blue");
+}
+rightBorder.interactive = true;
+rightBorder.hitArea = new PIXI.Rectangle(window.innerWidth/2 + 640, window.innerHeight/2 - 360, 20, 740);
+rightBorder.on('pointerdown', ponDragStart, rightBorder);
+function ponDragStart(){
+  console.log("purple");
+}
 
 blocks = []
-blocks.push(new PIXI.Graphics().lineStyle(20, "#c3c3c3").drawRect(window.innerWidth/2 - 640, window.innerHeight/2 - 360, 1280, 20));
-blocks.push(new PIXI.Graphics().lineStyle(20, "#c3c3c3").drawRect(window.innerWidth/2 - 640, window.innerHeight/2 + 360, 1280, 20));
-blocks.push(new PIXI.Graphics().lineStyle(20, "#c3c3c3").drawRect(window.innerWidth/2 - 640, window.innerHeight/2 - 360, 20, 720));
-blocks.push(new PIXI.Graphics().lineStyle(20, "#c3c3c3").drawRect(window.innerWidth/2 + 640, window.innerHeight/2 - 360, 20, 740));
-blocks.forEach(block => {
-  app.stage.addChild(block)
-});
+blocks.push(topBorder);
+blocks.push(bottomBorder);
+blocks.push(leftBorder);
+blocks.push(rightBorder);
+
+app.stage.addChild(topBorder);
+app.stage.addChild(bottomBorder);
+app.stage.addChild(leftBorder);
+app.stage.addChild(rightBorder);
+
 
 const playerSprite = PIXI.Sprite.from('media/sprite.png');
 
@@ -70,7 +101,7 @@ const keys = {
   app.ticker.add(gameLoop);
   
 function gameLoop(delta) {
-    if(!isOnGround)
+    drawObjects();
     playerSprite.ySpeed += gravity;
     playerSprite.xSpeed = 0;
     if (playerSprite.ySpeed > terminalVelocity) {
@@ -86,6 +117,7 @@ function gameLoop(delta) {
 
     playerSprite.x += playerSprite.xSpeed;
     playerSprite.y += playerSprite.ySpeed;
+    colliding = false;
     for (var i = 0; i < blocks.length; i++) {
         if (isColliding(playerSprite, blocks[i])) {
            resolveCollision(playerSprite, blocks[i]);
@@ -150,4 +182,14 @@ function resolveCollision(sprite, rect) {
       return true;
     }
   }
+}
+function drawObjects(){
+  topBorder.clear();
+  bottomBorder.clear();
+  leftBorder.clear();
+  rightBorder.clear();
+  topBorder.lineStyle(20, "#ff0000").drawRect(window.innerWidth/2 - 640, window.innerHeight/2 - 360, 1300, 20);
+  bottomBorder.lineStyle(2, "#00ff00").drawRect(window.innerWidth/2 - 640, window.innerHeight/2 + 360, 1300, 20);
+  leftBorder.lineStyle(2, "#0000ff").drawRect(window.innerWidth/2 - 640, window.innerHeight/2 - 360, 20, 740);
+  rightBorder.lineStyle(2, "#ff00ff").drawRect(window.innerWidth/2 + 640, window.innerHeight/2 - 360, 20, 740);
 }
