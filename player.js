@@ -204,6 +204,24 @@ function gameLoop(timestamp) {
         kill()
     }
 
+    if (playerX < 0) {
+      playerX = 0;
+    }
+
+    if (playerY < 0) {
+        playerY = 0;
+    }
+    
+    if (playerX + player.offsetWidth > window.innerWidth) {
+        playerX = window.innerWidth - player.offsetWidth;
+        isOnGround = true;
+    }
+    
+    if (playerY + player.offsetHeight > window.innerHeight) {
+        playerY = window.innerHeight - player.offsetHeight;
+        verticalVelocity = 0;
+        isOnGround = true;
+    }
     if(window.innerHeight < 70){
       player.remove();
     }
