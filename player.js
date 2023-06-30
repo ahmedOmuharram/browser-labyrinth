@@ -199,25 +199,11 @@ function gameLoop(timestamp) {
       gravity = 1000;
     }
 
-    if (playerX < 0) {
-        playerX = 0;
-        isOnGround = true;
+    if (playerY > 0.5 * window.innerHeight + 340 || playerY < 0.5 * window.innerHeight - 380
+      || playerX > 0.5 * window.innerWidth + 660 || playerX < 0.5 * window.innerWidth - 660) {
+        kill()
     }
 
-    if (playerY < 0) {
-        playerY = 0;
-    }
-    
-    if (playerX + player.offsetWidth > window.innerWidth) {
-        playerX = window.innerWidth - player.offsetWidth;
-        isOnGround = true;
-    }
-    
-    if (playerY + player.offsetHeight > window.innerHeight) {
-        playerY = window.innerHeight - player.offsetHeight;
-        verticalVelocity = 0;
-        isOnGround = true;
-    }
     if(window.innerHeight < 70){
       player.remove();
     }
@@ -277,6 +263,14 @@ function jump() {
       verticalVelocity = -jumpForce;
       isOnGround = false;
     }
+}
+
+function kill() {
+  removeLevel();
+  currentLevel = 0;
+  createMainMenu();
+  player = document.getElementById("player");
+  solids = document.querySelectorAll('.solid');
 }
 
 document.addEventListener("keydown", (event) => {
