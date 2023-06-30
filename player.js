@@ -66,10 +66,13 @@ function createLevel3(){
 function createLevel4(){
   for (var i = 1; i <= 6; i++) {
     createCustomBody(`bottom: ${i}00`, `left: ${-i}00`, `${2*i+4}00px`, '30px');
-    createCustomBody(`bottom: ${i}00`, `left: ${i+5}00`, '1500px', '30px');
+    createCustomBody(`bottom: ${i}00`, `left: ${i+4}70`, '1500px', '30px');
     createCustomBody(`top: ${-i}00`, `right: ${i+3}00`, '30px', `${2*i}00px`);
-    createCustomBody(`top: ${i+1}00`, `right: ${i+3}00`, '30px', '700px');  
+    createCustomBody(`top: ${i}70`, `right: ${i+3}00`, '30px', '700px');  
 }
+}
+function createLevel5(){
+  createCustomBody('top: 100', 'left: 700', '300px', '100px');
 }
 
 function removeLevel(){
@@ -93,6 +96,9 @@ function nextLevel(){
     case 3:
       createLevel4();
       break;
+    case 4:
+      createLevel5();
+      break;
   }
   currentLevel++;
   player = document.getElementById("player");
@@ -109,6 +115,12 @@ function previousLevel(){
       break;
     case 3:
       createLevel2();
+      break;
+    case 4:
+      createLevel3();
+      break;
+    case 5:
+      createLevel4();
       break;
   }
   currentLevel--;
