@@ -1,5 +1,5 @@
-const gravity = 9.8;
-const terminalVelocity = 100;
+const gravity = 0.1;
+const terminalVelocity = 1000000;
 
 const app = new PIXI.Application({ 
     antialias: true, 
@@ -13,11 +13,15 @@ document.body.appendChild(app.view);
 
 app.renderer.autoDensity = true;
 
-const graphics = new PIXI.Graphics();
-graphics.lineStyle(20, "#c3c3c3");
-graphics.drawRect(window.innerWidth/2 - 640, window.innerHeight/2 - 360, 1280, 720);
 
-app.stage.addChild(graphics);
+blocks = []
+blocks.push(new PIXI.Graphics().lineStyle(20, "#c3c3c3").drawRect(0, window.innerHeight/2 + 340, 1240, 30));
+blocks.push(new PIXI.Graphics().lineStyle(20, "#c3c3c3").drawRect(window.innerWidth/2 - 640, window.innerHeight/2 - 360, 1280, 20));
+blocks.forEach(block => {
+  app.stage.addChild(block)
+});
+
+
 
 const playerSprite = PIXI.Sprite.from('media/sprite.png');
 
@@ -26,7 +30,11 @@ playerSprite.anchor.set(0.5);
 
 // move the sprite to the center of the screen
 playerSprite.x = app.screen.width / 2;
-playerSprite.y = app.screen.height / 2;
+playerSprite.y = 0;
+playerSprite.xSpeed = 0;
+playerSprite.ySpeed = 0;
+let isOnGround = true;
+const playerJumpForce = 10;
 
 app.stage.addChild(playerSprite);
 
@@ -59,45 +67,84 @@ const keys = {
   app.ticker.add(gameLoop);
   
 function gameLoop(delta) {
-    playerSprite.y += gravity;
-
+    if(!isOnGround)
+    playerSprite.ySpeed += gravity;
+    playerSprite.xSpeed = 0;
     if (playerSprite.ySpeed > terminalVelocity) {
         playerSprite.ySpeed = terminalVelocity;
     }
-    if (keys.w) {
-      playerSprite.y -= speed;
+
+    if(keys.w && isOnGround){
+      playerSprite.ySpeed = -playerJumpForce;
+      isOnGround = false;
     }
-    if (keys.a) {
-      playerSprite.x -= speed;
+    playerSprite.xSpeed -= keys.a*speed;
+    playerSprite.xSpeed += keys.d*speed;
+
+    playerSprite.x += playerSprite.xSpeed;
+    playerSprite.y += playerSprite.ySpeed;
+    for(var i = 0; i < blocks.length; i++)
+    if (isColliding(playerSprite, blocks[i])) {
+      resolveCollision(playerSprite, blocks[i]);
+      break;
     }
-    if (keys.s) {
-      playerSprite.y += speed;
-    }
-    if (keys.d) {
-      playerSprite.x += speed;
+    else{
+      isOnGround = false;
     }
 
-  if (isColliding(playerSprite, graphics)) {
-    console.log("I am crying :(")
-  }
+  
 }
 
 function isColliding(sprite, rect) {
-    const spriteBounds = sprite.getBounds();
-    const rectBounds = rect.getBounds();
-  
-    const borderThickness = 2; // Specify the thickness of the square's borders
-  
-    const spriteRight = spriteBounds.x + spriteBounds.width;
-    const spriteBottom = spriteBounds.y + spriteBounds.height;
-    const rectRight = rectBounds.x + rectBounds.width;
-    const rectBottom = rectBounds.y + rectBounds.height;
-  
-    // Check if any of the sprite's borders overlap with the rectangle's borders
-    const collidingLeft = spriteRight > rectBounds.x && spriteBounds.x < rectBounds.x + borderThickness;
-    const collidingRight = spriteBounds.x < rectRight && spriteRight > rectRight - borderThickness;
-    const collidingTop = spriteBottom > rectBounds.y && spriteBounds.y < rectBounds.y + borderThickness;
-    const collidingBottom = spriteBounds.y < rectBottom && spriteBottom > rectBottom - borderThickness;
-  
-    return collidingLeft || collidingRight || collidingTop || collidingBottom;
+  const spriteBounds = sprite.getBounds();
+  const rectBounds = rect.getLocalBounds();
+
+  return spriteBounds.x + spriteBounds.width >= rectBounds.x &&
+         spriteBounds.x <= rectBounds.x + rectBounds.width &&
+         spriteBounds.y + spriteBounds.height >= rectBounds.y &&
+         spriteBounds.y <= rectBounds.y + rectBounds.height;
+}
+
+function resolveCollision(sprite, rect) {
+  const spriteBounds = sprite.getBounds();
+  const rectBounds = rect.getLocalBounds();
+
+
+  const dx = (spriteBounds.x + spriteBounds.x + spriteBounds.width) / 2 - (rectBounds.x + rectBounds.x + rectBounds.width) / 2;
+  const dy = (spriteBounds.y + spriteBounds.y + spriteBounds.height) / 2 - (rectBounds.y + rectBounds.y + rectBounds.height) / 2;
+
+  const combinedHalfWidths = (spriteBounds.width + rectBounds.width) / 2;
+  const combinedHalfHeights = (spriteBounds.height + rectBounds.height) / 2;
+
+  if (Math.abs(dx) < combinedHalfWidths && Math.abs(dy) < combinedHalfHeights) {
+    const overlapX = combinedHalfWidths - Math.abs(dx);
+    const overlapY = combinedHalfHeights - Math.abs(dy);
+
+    if (overlapX >= overlapY) {
+      if (dy > 0) {
+        //Player top side collision
+        playerSprite.y += overlapY;
+        playerSprite.ySpeed = 0.1;
+      } else {
+        //Player bottom side collision
+        if (playerSprite.ySpeed > 0) {
+          playerSprite.ySpeed = 0;
+        }
+        isOnGround = true;
+        playerSprite.y -= overlapY;
+      }
+      return true;
+    } else {
+      if (dx > 0) {
+        //Player left side collision
+        playerSprite.x += overlapX;
+        isOnGround = true;
+      } else {
+        //Player right side collision
+        playerSprite.x -= overlapX;
+        isOnGround = true;
+      }
+      return true;
+    }
+  }
 }
