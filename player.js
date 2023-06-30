@@ -9,6 +9,8 @@ let verticalVelocity = 0;
 let jumpForce = 500;
 let isOnGround = false;
 
+let currentLevel = 0;
+
 const targetFPS = 1001;
 const targetInterval = 1000 / targetFPS;
 
@@ -52,16 +54,59 @@ function createLevel3(){
   for (var i = 2; i <= 7; i++) {
     if (i % 2 == 0) {
       console.log()
-      createCustomBody(`bottom: ${i}00`, 'left: 800', '800px', '30px');
+      createCustomBody(`bottom: ${i}00`, 'left: 800', '1500px', '130px');
     } else {
-      createCustomBody(`bottom: ${i}00`, 'right: 800', '800px', '30px');
+      createCustomBody(`bottom: ${i}00`, 'right: 800', '1500px', '130px');
     }
   }
   createCustomBody('top: 100', 'right: 700', '300px', '100px');
 }
 
 //Level 4
+function createLevel4(){
+  
+}
 
+function removeLevel(){
+  for(var i = 4; i < solids.length; i++){
+    solids[i].remove();
+  }
+}
+
+function nextLevel(){
+  removeLevel();
+  switch (currentLevel){
+    case 0:
+      createLevel1();
+      break;
+    case 1:
+      createLevel2();
+      break;
+    case 2:
+      createLevel3();
+      break;
+  }
+  currentLevel++;
+  player = document.getElementById("player");
+  solids = document.querySelectorAll('.solid');
+}
+function previousLevel(){
+  removeLevel();
+  switch (currentLevel){
+    case 1:
+      createMainMenu();
+      break;
+    case 2:
+      createLevel1();
+      break;
+    case 3:
+      createLevel2();
+      break;
+  }
+  currentLevel--;
+  player = document.getElementById("player");
+  solids = document.querySelectorAll('.solid');
+}
 
 
 function createRamp(bottomValue, rightValue, widthValue, heightValue) {
@@ -113,13 +158,7 @@ function gameLoop(timestamp) {
 
     if(keyState["Enter"])
     if(checkCollision(player, startButton)){
-      for(var i = 5; i < solids.length; i++){
-        solids[i].remove();
-      }
-      startButton.remove();
-      createLevel3();
-      player = document.getElementById("player");
-      solids = document.querySelectorAll('.solid');
+      nextLevel();
     }
     let colliding = false;
     for( var i = 0; i < solids.length; i++) {
@@ -186,9 +225,11 @@ function resolveCollision(playerRect, solidRect) {
 
     if (overlapX >= overlapY) {
       if (dy > 0) {
+        //Player top side collision
         playerY += overlapY;
         verticalVelocity = 0;
       } else {
+        //Player bottom side collision
         if (verticalVelocity > 0) {
           verticalVelocity = 0;
         }
@@ -198,9 +239,11 @@ function resolveCollision(playerRect, solidRect) {
       return true;
     } else {
       if (dx > 0) {
+        //Player left side collision
         playerX += overlapX;
         isOnGround = true;
       } else {
+        //Player right side collision
         playerX -= overlapX;
         isOnGround = true;
       }
@@ -220,6 +263,12 @@ document.addEventListener("keydown", (event) => {
   keyState[event.code] = true;
   if (event.code === "Space") {
     jump();
+  }
+  if (event.code === "KeyN") {
+    nextLevel();
+  }
+  if (event.code === "KeyP") {
+    previousLevel();
   }
 });
 
