@@ -19,28 +19,34 @@
             background-size: cover;
             box-shadow: 1px 2px;
         }
+
         #info {
             background-image: url("media/info.png");
             background-repeat: no-repeat;
             background-size: cover;
         }
+
+        .container {
+            display: flex;
+            justify-content: center; /* center horizontally */
+            align-items: center; /* center vertically */
+            height: 100vh; /* set the container height to full viewport height */
+        }
     </style>
 </head>
 <body>
-    <div class="object solid" style="position:absolute; background-color: #c3c3c3; top: calc(50vh - 360px); left: calc(50vw - 640px); width: 1280px; height: 20px"></div>
-    <div class="object solid" style="position:absolute; background-color: #c3c3c3; bottom: calc(50vh - 360px); right: calc(50vw - 640px); width: 20px; height: 720px"></div>
-    <div class="object solid" style="position:absolute; background-color: #c3c3c3; top: calc(50vh - 360px); left: calc(50vw - 640px); width: 20px; height: 720px"></div>
-    <div class="object solid" style="position:absolute; background-color: #c3c3c3; bottom: calc(50vh - 360px); right: calc(50vw - 640px); width: 1280px; height: 20px">
-        <div class="object solid" id="start" style="position:absolute; border: 1px solid #fff; background-color: #010081; bottom: 0px; left: 19px; width: 10vw; height: 19px">
-            <i class="fa fa-desktop" aria-hidden="true"></i> Start
-        </div>
-    </div>
-    <div class="object solid" id="info" style="position:absolute; background-color: #c3c3c3; top: calc(50vh - 360px); right: calc(50vw - 640px); width: 50px; height: 50px"></div>
+    <div class="container">
+        <canvas id="main" width="1280" height="720"></canvas>
+    </div> 
+    <!-- <div class="object solid" id="info" style="position:absolute; background-color: #c3c3c3; top: calc(50vh - 360px); right: calc(50vw - 640px); width: 50px; height: 50px"></div>
     <div class="text">
         Welcome to Browser's Labyrinth
     </div>
-    <div class="object" id="player"></div>
-    <script src="player.js"></script>
+                <div class="object solid" id="start" style="border: 1px solid #fff; background-color: #010081; width: 10vw; height: 19px">
+                <i class="fa fa-desktop" aria-hidden="true"></i> Start
+            </div>
+    <div class="object" id="player"></div>-->
+    <script src="script.js"></script>
 </body>
 
 </html>
