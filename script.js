@@ -11,10 +11,10 @@ document.body.appendChild(app.view);
 app.stage.interactive = true;
 app.stage.hitArea = app.screen;
 
-let topBorder = new Block(window.innerWidth/2 - 640, window.innerHeight/2 - 360, 1300, 20, 10, "#FF0000");
-let bottomBorder = new Block(window.innerWidth/2 - 640, window.innerHeight/2 + 360, 1300, 20, 10, "#00FF00");
-let leftBorder = new Block(window.innerWidth/2 - 640, window.innerHeight/2 - 360, 20, 740, 10, "#0000FF");
-let rightBorder = new Block(window.innerWidth/2 + 640, window.innerHeight/2 - 360, 20, 740, 10, "#FF00FF");
+let topBorder = new Border(window.innerWidth/2 - 640, window.innerHeight/2 - 360, 1300, 20, 10, "#FF0000", 'v');
+let bottomBorder = new Border(window.innerWidth/2 - 640, window.innerHeight/2 + 360, 1300, 20, 10, "#00FF00", 'v');
+let leftBorder = new Border(window.innerWidth/2 - 640, window.innerHeight/2 - 360, 20, 740, 10, "#0000FF", 'h');
+let rightBorder = new Border(window.innerWidth/2 + 640, window.innerHeight/2 - 360, 20, 740, 10, "#FF00FF", 'h');
 
 blocks = []
 blocks.push(topBorder);
