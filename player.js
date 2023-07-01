@@ -15,10 +15,9 @@ playerSprite.height = 40;
 app.stage.addChild(playerSprite);
 
 const keys = {
-    w: false,
-    a: false,
-    s: false,
-    d: false
+    32: false,
+    65: false,
+    68: false
 };
 
 const speed = 5;
@@ -27,14 +26,14 @@ document.addEventListener('keydown', onKeyDown);
 document.addEventListener('keyup', onKeyUp);
 
 function onKeyDown(event) {
-    const key = event.key.toLowerCase();
+    const key = event.which;
     if (keys.hasOwnProperty(key)) {
         keys[key] = true;
     }
 }
 
 function onKeyUp(event) {
-    const key = event.key.toLowerCase();
+    const key = event.which;
     if (keys.hasOwnProperty(key)) {
         keys[key] = false;
     }
@@ -49,12 +48,12 @@ function gameLoop(delta) {
         playerSprite.ySpeed = terminalVelocity;
     }
 
-    if (keys.w && isOnGround) {
+    if (keys[32] && isOnGround) {
         playerSprite.ySpeed = -playerJumpForce;
         isOnGround = false;
     }
-    playerSprite.xSpeed -= keys.a * speed;
-    playerSprite.xSpeed += keys.d * speed;
+    playerSprite.xSpeed -= keys[65] * speed;
+    playerSprite.xSpeed += keys[68] * speed;
 
     playerSprite.x += playerSprite.xSpeed;
     playerSprite.y += playerSprite.ySpeed;
