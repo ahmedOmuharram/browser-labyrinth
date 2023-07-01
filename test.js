@@ -2,6 +2,12 @@ const gravity = 0.1;
 const terminalVelocity = 1000000;
 var colliding = false;
 
+topBorderY = 0
+bottomBorderY = 360
+leftBorderX = -640
+rightBorderX = 640
+
+
 const app = new PIXI.Application({ 
     antialias: true, 
     width: window.innerWidth, 
@@ -12,7 +18,6 @@ const app = new PIXI.Application({
     
 document.body.appendChild(app.view);
 
-
 app.stage.interactive = true;
 app.stage.hitArea = app.screen;
 
@@ -20,30 +25,109 @@ let topBorder = new PIXI.Graphics();
 let bottomBorder = new PIXI.Graphics();
 let leftBorder = new PIXI.Graphics();
 let rightBorder = new PIXI.Graphics();
+
 topBorder.interactive = true;
-topBorder.hitArea = new PIXI.Rectangle(window.innerWidth/2 - 640, window.innerHeight/2 - 360, 1300, 20);
-topBorder.on('pointerdown', ronDragStart, topBorder);
-function ronDragStart(){
-  console.log("red");
-}
 bottomBorder.interactive = true;
-bottomBorder.hitArea = new PIXI.Rectangle(window.innerWidth/2 - 640, window.innerHeight/2 + 360, 1300, 20);
-bottomBorder.on('pointerdown', gonDragStart, bottomBorder);
-function gonDragStart(){
-  console.log("green");
-}
 leftBorder.interactive = true;
-leftBorder.hitArea = new PIXI.Rectangle(window.innerWidth/2 - 640, window.innerHeight/2 - 360, 20, 740);
-leftBorder.on('pointerdown', bonDragStart, leftBorder);
-function bonDragStart(){
-  console.log("blue");
-}
 rightBorder.interactive = true;
-rightBorder.hitArea = new PIXI.Rectangle(window.innerWidth/2 + 640, window.innerHeight/2 - 360, 20, 740);
-rightBorder.on('pointerdown', ponDragStart, rightBorder);
-function ponDragStart(){
-  console.log("purple");
-}
+
+topBorder.hitArea = new PIXI.Rectangle(window.innerWidth/2 - 640, window.innerHeight/2 - 360 + topBorderY, 1300, 20);
+bottomBorder.hitArea = new PIXI.Rectangle(window.innerWidth/2 - 640, window.innerHeight/2 + bottomBorderY, 1300, 20);
+leftBorder.hitArea = new PIXI.Rectangle(window.innerWidth/2 + leftBorderX, window.innerHeight/2 - 360, 20, 740);
+rightBorder.hitArea = new PIXI.Rectangle(window.innerWidth/2 + rightBorderX, window.innerHeight/2 - 360, 20, 740);
+
+const tonDragStart = (event) => {
+  event.stopPropagation();
+  dragPoint = event.data.getLocalPosition(topBorder.parent);
+  dragPoint.x -= topBorder.x;
+  dragPoint.y -= topBorder.y;
+  topBorder.parent.on("pointermove", tonDragMove);
+};
+
+const tonDragMove = (event) => {
+    const newPoint = event.data.getLocalPosition(topBorder.parent);
+    topBorderY = newPoint.y - dragPoint.y;
+    topBorder.hitArea = new PIXI.Rectangle(window.innerWidth/2 - 640, window.innerHeight/2 - 360 + topBorderY, 1300, 20);
+}; 
+  
+
+const tonDragEnd = (event) => {
+  event.stopPropagation();
+  topBorder.parent.off("pointermove", tonDragMove);
+};
+
+const bonDragStart = (event) => {
+  event.stopPropagation();
+  dragPoint = event.data.getLocalPosition(bottomBorder.parent);
+  dragPoint.x -= bottomBorder.x;
+  dragPoint.y -= bottomBorder.y;
+  bottomBorder.parent.on("pointermove", bonDragMove);
+};
+
+const bonDragMove = (event) => {
+  const newPoint = event.data.getLocalPosition(bottomBorder.parent);
+  bottomBorderY = newPoint.y - dragPoint.y;
+
+};
+
+const bonDragEnd = (event) => {
+  event.stopPropagation();
+  bottomBorder.parent.off("pointermove", bonDragMove);
+};
+
+const lonDragStart = (event) => {
+  event.stopPropagation();
+  dragPoint = event.data.getLocalPosition(leftBorder.parent);
+  dragPoint.x -= leftBorder.x;
+  dragPoint.y -= leftBorder.y;
+  leftBorder.parent.on("pointermove", lonDragMove);
+};
+
+const lonDragMove = (event) => {
+  const newPoint = event.data.getLocalPosition(leftBorder.parent);
+  leftBorderX = newPoint.x - dragPoint.x;
+};
+
+const lonDragEnd = (event) => {
+  event.stopPropagation();
+  leftBorder.parent.off("pointermove", lonDragMove);
+};
+
+
+const ronDragStart = (event) => {
+  event.stopPropagation();
+  dragPoint = event.data.getLocalPosition(rightBorder.parent);
+  dragPoint.x -= rightBorder.x;
+  dragPoint.y -= rightBorder.y;
+  rightBorder.parent.on("pointermove", ronDragMove);
+};
+
+const ronDragMove = (event) => {
+  const newPoint = event.data.getLocalPosition(rightBorder.parent);
+  rightBorderX = newPoint.x - dragPoint.x;
+};
+
+const ronDragEnd = (event) => {
+  event.stopPropagation();
+  rightBorder.parent.off("pointermove", ronDragMove);
+};
+
+topBorder.on("pointerdown", tonDragStart);
+topBorder.on("pointerup", tonDragEnd);
+topBorder.on("pointerupoutside", tonDragEnd);
+
+bottomBorder.on("pointerdown", bonDragStart);
+bottomBorder.on("pointerup", bonDragEnd);
+bottomBorder.on("pointerupoutside", bonDragEnd);
+
+leftBorder.on("pointerdown", lonDragStart);
+leftBorder.on("pointerup", lonDragEnd);
+leftBorder.on("pointerupoutside", lonDragEnd);
+
+rightBorder.on("pointerdown", ronDragStart);
+rightBorder.on("pointerup", ronDragEnd);
+rightBorder.on("pointerupoutside", ronDragEnd);
+
 /*let box = new PIXI.Graphics();
 box.lineStyle(20, "#ff0000").drawRect(window.innerWidth/2 - 640, window.innerHeight/2 - 360, 1280, 720);
 
@@ -108,6 +192,7 @@ const keys = {
   app.ticker.add(gameLoop);
   
 function gameLoop(delta) {
+    topBorder.updateTransform();
     drawObjects();
     playerSprite.ySpeed += gravity;
     playerSprite.xSpeed = 0;
@@ -244,8 +329,8 @@ function drawObjects(){
   bottomBorder.clear();
   leftBorder.clear();
   rightBorder.clear();
-  topBorder.lineStyle(2, "#ff0000").drawRect(window.innerWidth/2 - 640, window.innerHeight/2 - 360, 1300, 20);
-  bottomBorder.lineStyle(2, "#00ff00").drawRect(window.innerWidth/2 - 640, window.innerHeight/2 + 360, 1300, 20);
-  leftBorder.lineStyle(2, "#0000ff").drawRect(window.innerWidth/2 - 640, window.innerHeight/2 - 360, 20, 740);
-  rightBorder.lineStyle(2, "#ff00ff").drawRect(window.innerWidth/2 + 640, window.innerHeight/2 - 360, 20, 740);
+  topBorder.lineStyle(2, "#ff0000").drawRect(window.innerWidth/2 - 640, window.innerHeight/2 - 360 + topBorderY, 1300, 20);
+  bottomBorder.lineStyle(2, "#00ff00").drawRect(window.innerWidth/2 - 640, window.innerHeight/2 + bottomBorderY, 1300, 20);
+  leftBorder.lineStyle(2, "#0000ff").drawRect(window.innerWidth/2 + leftBorderX, window.innerHeight/2 - 360, 20, 740);
+  rightBorder.lineStyle(2, "#ff00ff").drawRect(window.innerWidth/2 + rightBorderX, window.innerHeight/2 - 360, 20, 740);
 }
