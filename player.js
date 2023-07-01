@@ -18,8 +18,6 @@ playerSprite.leftCollision = false;
 playerSprite.rightCollision = false;
 
 
-
-
 app.stage.addChild(playerSprite);
 
 const keys = {
@@ -84,13 +82,20 @@ function gameLoop(delta) {
     if (playerSprite.y - playerSprite.height/2 < topBorder.positionY ||
         playerSprite.y + playerSprite.height/2 > bottomBorder.positionY + bottomBorder.height ||
         playerSprite.x - playerSprite.width/2 < leftBorder.positionX || 
-        playerSprite.x + playerSprite.width/2 > rightBorder.positionX + rightBorder.width)
-        playerSprite.destroy();
-    if(playerSprite.topCollision && playerSprite.bottomCollision || playerSprite.leftCollision && playerSprite.rightCollision){
-      playerSprite.destroy();
+        playerSprite.x + playerSprite.width/2 > rightBorder.positionX + rightBorder.width) {
+          playerSprite.height = 0;
+          lose()
+        }
+    if (playerSprite.topCollision && playerSprite.bottomCollision || playerSprite.leftCollision && playerSprite.rightCollision){
+      playerSprite.height = 0    
+      lose()
     }
 
     if (!colliding) {
         isOnGround = false;
     }
+}
+
+function lose() {
+  console.log("L")
 }
