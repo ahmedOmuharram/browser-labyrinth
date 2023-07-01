@@ -16,11 +16,32 @@ let bottomBorder = new Border(window.innerWidth/2 - 640, window.innerHeight/2 + 
 let leftBorder = new Border(window.innerWidth/2 - 640, window.innerHeight/2 - 360, 20, 740, 10, "#0000FF", 'h', "#0000FF");
 let rightBorder = new Border(window.innerWidth/2 + 640, window.innerHeight/2 - 360, 20, 740, 10, "#FF00FF", 'h', "#FF00FF");
 
+let tlBlock = new Block(window.innerWidth/2 - 100, window.innerHeight/2 + 200, 100, 100, 2, "#FFF", 'v', null);
+let trBlock = new Block(window.innerWidth/2 - 100, window.innerHeight/2 + 200, 100, 100, 2, "#FFF", 'v', null);
+let blBlock = new Block(window.innerWidth/2 - 100, window.innerHeight/2 + 200, 100, 100, 2, "#FFF", 'v', null);
+let brBlock = new Block(window.innerWidth/2 - 100, window.innerHeight/2 + 200, 100, 100, 2, "#FFF", 'v', null);
+
+
+
+
 blocks = []
 blocks.push(topBorder);
 blocks.push(bottomBorder);
 blocks.push(leftBorder);
 blocks.push(rightBorder);
+blocks.push(tlBlock);
+blocks.push(trBlock);
+blocks.push(blBlock);
+blocks.push(brBlock);
+topBorder.blocks.push(tlBlock);
+topBorder.blocks.push(trBlock);
+bottomBorder.blocks.push(blBlock);
+bottomBorder.blocks.push(brBlock);
+leftBorder.blocks.push(tlBlock);
+leftBorder.blocks.push(blBlock);
+rightBorder.blocks.push(trBlock);
+rightBorder.blocks.push(brBlock);
+
   
 app.ticker.add(gameLoop);
   
