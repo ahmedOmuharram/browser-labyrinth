@@ -3,6 +3,7 @@ var dragPoint = 0;
 class Border extends Block{
   constructor(positionX, positionY, width, height, thickness, color, direction, fillColor) {
     super(positionX, positionY, width, height, thickness, color, direction, fillColor)
+    this.blocks = [];
     this.graphic.interactive = true;
     this.graphic.hitArea = new PIXI.Rectangle(positionX, positionY, width, height);
     this.graphic.on("pointerdown", this.onDragStart);
@@ -29,17 +30,27 @@ class Border extends Block{
       const newPoint = event.data.getLocalPosition(this.graphic.parent);
       if (this.direction == 'v') {
         const offsetY = newPoint.y - dragPoint.y;
+        this.blocks.forEach(block => {
+          block.positionY += offsetY;
+        });
         this.positionY += offsetY;
         dragPoint.y = newPoint.y;
       } else if(this.direction == 'h') {
         const offsetX = newPoint.x - dragPoint.x;
         this.positionX += offsetX;
+        this.blocks.forEach(block => {
+          block.positionX += offsetX;
+        });
         dragPoint.x = newPoint.x;
       } else {
         const offsetX = newPoint.x - dragPoint.x;
         const offsetY = newPoint.y - dragPoint.y;
         this.positionX += offsetX;
         this.positionY += offsetY;
+        this.blocks.forEach(block => {
+          block.positionX += offsetX;
+          block.positionY += offsetY;
+        });
         dragPoint.x = newPoint.x;
         dragPoint.y = newPoint.y;
       } 
