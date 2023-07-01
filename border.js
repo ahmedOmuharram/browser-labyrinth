@@ -1,8 +1,8 @@
 var dragPoint = 0;
 
 class Border extends Block{
-  constructor(positionX, positionY, width, height, thickness, color, direction){
-    super(positionX, positionY, width, height, thickness, color, direction)
+  constructor(positionX, positionY, width, height, thickness, color, direction, fillColor) {
+    super(positionX, positionY, width, height, thickness, color, direction, fillColor)
     this.graphic.interactive = true;
     this.graphic.hitArea = new PIXI.Rectangle(positionX, positionY, width, height);
     this.graphic.on("pointerdown", this.onDragStart);
@@ -12,7 +12,9 @@ class Border extends Block{
 
   drawBlock() {
     this.graphic.clear();
+    this.graphic.beginFill(this.fillColor);
     this.graphic.lineStyle(this.thickness, this.color).drawRect(this.positionX, this.positionY, this.width, this.height);
+    this.graphic.endFill();    
     let bounds = this.graphic.getBounds()
     this.graphic.hitArea = new PIXI.Rectangle(bounds.x, bounds.y, bounds.width, bounds.height);
   }
