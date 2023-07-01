@@ -12,9 +12,10 @@ const app = new PIXI.Application({
     
 document.body.appendChild(app.view);
 
-/*
+
 app.stage.interactive = true;
 app.stage.hitArea = app.screen;
+
 let topBorder = new PIXI.Graphics();
 let bottomBorder = new PIXI.Graphics();
 let leftBorder = new PIXI.Graphics();
@@ -42,15 +43,15 @@ rightBorder.hitArea = new PIXI.Rectangle(window.innerWidth/2 + 640, window.inner
 rightBorder.on('pointerdown', ponDragStart, rightBorder);
 function ponDragStart(){
   console.log("purple");
-}*/
-let box = new PIXI.Graphics();
-box.lineStyle(1, "#ff0000").drawRect(window.innerWidth/2 - 640, window.innerHeight/2 - 360, 1280, 720);
-blocks = []
+}
+/*let box = new PIXI.Graphics();
+box.lineStyle(20, "#ff0000").drawRect(window.innerWidth/2 - 640, window.innerHeight/2 - 360, 1280, 720);
+
 
 blocks.push(box)
-app.stage.addChild(box);
+app.stage.addChild(box);*/
+blocks = []
 
-/*
 blocks.push(topBorder);
 blocks.push(bottomBorder);
 blocks.push(leftBorder);
@@ -59,7 +60,7 @@ blocks.push(rightBorder);
 app.stage.addChild(topBorder);
 app.stage.addChild(bottomBorder);
 app.stage.addChild(leftBorder);
-app.stage.addChild(rightBorder);*/
+app.stage.addChild(rightBorder);
 
 const playerSprite = PIXI.Sprite.from('media/sprite.png');
 
@@ -107,6 +108,7 @@ const keys = {
   app.ticker.add(gameLoop);
   
 function gameLoop(delta) {
+    drawObjects();
     playerSprite.ySpeed += gravity;
     playerSprite.xSpeed = 0;
     if (playerSprite.ySpeed > terminalVelocity) {
@@ -124,18 +126,18 @@ function gameLoop(delta) {
     playerSprite.y += playerSprite.ySpeed;
     colliding = false;
     for (var i = 0; i < blocks.length; i++) {
-        if (isCollidingBox(playerSprite, blocks[i])) {
+        if (isColliding(playerSprite, blocks[i])) {
             console.log("test")
-           resolveBoxCollision(playerSprite, blocks[i]);
+           resolveCollision(playerSprite, blocks[i]);
            colliding = true;
         }
     }
 
     if (!colliding) {
-        isOnGround = true;
+        isOnGround = false;
     }
 }
-
+/*
 function isCollidingBox(sprite, rect) {
     const spriteBounds = sprite.getBounds();
     const rectBounds = rect.getBounds();
@@ -159,27 +161,30 @@ function isCollidingBox(sprite, rect) {
 function resolveBoxCollision(sprite, rect) {
     const spriteBounds = sprite.getBounds();
     const rectBounds = rect.getLocalBounds();
+    const rectThickness = 20
     
     const left = rectBounds.x;
     const right = rectBounds.x + rectBounds.width;
     const top = rectBounds.y;
     const bottom = rectBounds.y + rectBounds.height;
 
-    if (spriteBounds.x <= left) {
-        playerSprite.x = left;
-    } else if (spriteBounds.x > right) {
-        playerSprite.x = right;
+    if (spriteBounds.x <= left+rectThickness) {
+        playerSprite.x = left+spriteBounds.width/2+rectThickness;
+    }
+    if (spriteBounds.x+spriteBounds.width >= right-rectThickness) {
+        playerSprite.x = right-spriteBounds.width/2-rectThickness;
     }
 
-    if (spriteBounds.y > bottom) {
-        playerSprite.y = bottom;
+    if (spriteBounds.y+spriteBounds.height >= bottom-rectThickness) {
+        isOnGround = true;
+        playerSprite.y = bottom-spriteBounds.height/2-rectThickness;
     }
     
-    if (spriteBounds.y < top) {
-        playerSprite.y = top;
+    if (spriteBounds.y <= top+rectThickness) {
+        playerSprite.y = top+spriteBounds.height/2+rectThickness;
     }
 }
-
+*/
 
 function isColliding(sprite, rect) {
   const spriteBounds = sprite.getBounds();
@@ -233,7 +238,7 @@ function resolveCollision(sprite, rect) {
     }
   }
 }
-/*
+
 function drawObjects(){
   topBorder.clear();
   bottomBorder.clear();
@@ -243,4 +248,4 @@ function drawObjects(){
   bottomBorder.lineStyle(2, "#00ff00").drawRect(window.innerWidth/2 - 640, window.innerHeight/2 + 360, 1300, 20);
   leftBorder.lineStyle(2, "#0000ff").drawRect(window.innerWidth/2 - 640, window.innerHeight/2 - 360, 20, 740);
   rightBorder.lineStyle(2, "#ff00ff").drawRect(window.innerWidth/2 + 640, window.innerHeight/2 - 360, 20, 740);
-}*/
+}
