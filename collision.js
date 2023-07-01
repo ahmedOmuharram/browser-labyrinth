@@ -27,9 +27,15 @@ function resolveCollision(obj1, obj2) {
 
     if (overlapX >= overlapY) {
       if (dy > 0) {
+        if(overlapY>5)
+          obj1.topCollision = true;
+        console.log("top")
         obj1.y += overlapY;
         obj1.ySpeed += gravity;
     } else {
+      if(overlapY>5)
+        obj1.bottomCollision = true;
+      console.log("bottom")
         if (obj1.ySpeed > 0) {
           obj1.ySpeed = 0;
         }
@@ -39,9 +45,15 @@ function resolveCollision(obj1, obj2) {
       return true;
     } else {
       if (dx > 0) {
+        if(overlapX>5)
+          obj1.leftCollision = true;
+        console.log("left")
         obj1.x += overlapX;
         isOnGround = true;
       } else {
+        if(overlapX>5)
+          obj1.rightCollision = true;
+        console.log("right")
         obj1.x -= overlapX;
         isOnGround = true;
       }

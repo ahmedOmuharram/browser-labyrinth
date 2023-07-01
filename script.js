@@ -11,10 +11,10 @@ document.body.appendChild(app.view);
 app.stage.interactive = true;
 app.stage.hitArea = app.screen;
 
-let topBorder = new Border(window.innerWidth/2 - 640, window.innerHeight/2 - 360, 1300, 20, 2, "#FF0000", 'v', "#FF0000");
-let bottomBorder = new Border(window.innerWidth/2 - 640, window.innerHeight/2 + 360, 1300, 20, 2, "#00FF00", 'v', "#00FF00");
-let leftBorder = new Border(window.innerWidth/2 - 640, window.innerHeight/2 - 360, 20, 740, 2, "#0000FF", 'h', "#0000FF");
-let rightBorder = new Border(window.innerWidth/2 + 640, window.innerHeight/2 - 360, 20, 740, 2, "#FF00FF", 'h', "#FF00FF");
+let topBorder = new Border(window.innerWidth/2 - 640, window.innerHeight/2 - 360, 1300, 20, 20, "#FF0000", 'v', "#FF0000");
+let bottomBorder = new Border(window.innerWidth/2 - 640, window.innerHeight/2 + 360, 1300, 20, 20, "#00FF00", 'v', "#00FF00");
+let leftBorder = new Border(window.innerWidth/2 - 640, window.innerHeight/2 - 360, 20, 740, 20, "#0000FF", 'h', "#0000FF");
+let rightBorder = new Border(window.innerWidth/2 + 640, window.innerHeight/2 - 360, 20, 740, 20, "#FF00FF", 'h', "#FF00FF");
 
 function refresh(){
     topBorder.positionX = window.innerWidth/2 - 640;

@@ -12,6 +12,14 @@ playerSprite.ySpeed = 0;
 playerSprite.width = 36;
 playerSprite.height = 40;
 
+playerSprite.topCollision = false;
+playerSprite.bottomCollision = false;
+playerSprite.leftCollision = false;
+playerSprite.rightCollision = false;
+
+
+
+
 app.stage.addChild(playerSprite);
 
 const keys = {
@@ -63,11 +71,23 @@ function gameLoop(delta) {
     playerSprite.x += playerSprite.xSpeed;
     playerSprite.y += playerSprite.ySpeed;
     colliding = false;
+    playerSprite.topCollision = false;
+    playerSprite.bottomCollision = false;
+    playerSprite.leftCollision = false;
+    playerSprite.rightCollision = false;
     for (let i = 0; i < blocks.length; i++) {
         if (isColliding(playerSprite, blocks[i].graphic)) {
             resolveCollision(playerSprite, blocks[i].graphic);
             colliding = true;
         }
+    }
+    if (playerSprite.y - playerSprite.height/2 < topBorder.positionY ||
+        playerSprite.y + playerSprite.height/2 > bottomBorder.positionY + bottomBorder.height ||
+        playerSprite.x - playerSprite.width/2 < leftBorder.positionX || 
+        playerSprite.x + playerSprite.width/2 > rightBorder.positionX + rightBorder.width)
+        playerSprite.destroy();
+    if(playerSprite.topCollision && playerSprite.bottomCollision || playerSprite.leftCollision && playerSprite.rightCollision){
+      playerSprite.destroy();
     }
 
     if (!colliding) {
