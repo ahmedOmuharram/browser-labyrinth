@@ -44,9 +44,6 @@ blocks.push(bottomBorder);
 blocks.push(leftBorder);
 blocks.push(rightBorder);
 
-test.blocks.forEach(block => {
-    app.stage.addChild(block)
-});
 
 app.ticker.add(gameLoop);
 
@@ -77,4 +74,5 @@ function gameLoop(delta) {
         rightBorder.positionY = topBorder.positionY;
         rightBorder.height = bottomBorder.positionY - topBorder.positionY + bottomBorder.height/2 + topBorder.height/2;
     }
+    test.blocks[0].height = 3 * bottomBorder.width/4;
 }

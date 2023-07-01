@@ -7,6 +7,7 @@ class Level{
 
   addBlock(x, y, width, height, thickness, color, fillColor, borders) {
     let block = new Block(x, y, width, height, thickness, color, 'v', fillColor);
+    this.blocks.push(block);
     blocks.push(block);
     for (let i = 0; i < borders.length; i++) {
         switch (borders[i]) {

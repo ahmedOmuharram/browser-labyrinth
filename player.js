@@ -36,7 +36,6 @@ document.addEventListener('keydown', onKeyDown);
 document.addEventListener('keyup', onKeyUp);
 
 function onKeyDown(event) {
-  console.log(event.key + ": " + event.which);
     const key = event.which;
     if (keys.hasOwnProperty(key)) {
         keys[key] = true;
