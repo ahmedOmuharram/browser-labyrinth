@@ -55,7 +55,19 @@ class Border extends Block{
         });
         dragPoint.x = newPoint.x;
         dragPoint.y = newPoint.y;
-      } 
+      }
+      if (isColliding(topBorder.graphic, bottomBorder.graphic)) {
+        resolveBorderCollision(topBorder, bottomBorder);
+      }
+      if (isColliding(leftBorder.graphic, rightBorder.graphic)) {
+        resolveBorderCollision(leftBorder, rightBorder);
+      }
+      if (isColliding(bottomBorder.graphic, topBorder.graphic)) {
+        resolveBorderCollision(bottomBorder, topBorder);
+      }
+      if (isColliding(rightBorder.graphic, leftBorder.graphic)) {
+        resolveBorderCollision(rightBorder, leftBorder);
+      }
   };
   
   onDragEnd = (event) => {
