@@ -1,7 +1,7 @@
 var dragPoint = 0;
 
 class Block{
-  constructor(positionX, positionY, width, height, thickness, color, direction){
+  constructor(positionX, positionY, width, height, thickness, color, direction) {
     this.positionX = positionX;
     this.positionY = positionY;
     this.width = width;
@@ -13,7 +13,7 @@ class Block{
     app.stage.addChild(this.graphic);
   }
 
-  drawBlock(){
+  drawBlock() {
     this.graphic.clear();
     this.graphic.lineStyle(this.thickness, this.color).drawRect(this.positionX, this.positionY, this.width, this.height);
   }

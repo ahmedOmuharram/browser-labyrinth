@@ -10,7 +10,7 @@ class Border extends Block{
     this.graphic.on("pointerupoutside", this.onDragEnd);
   }
 
-  drawBlock(){
+  drawBlock() {
     this.graphic.clear();
     this.graphic.lineStyle(this.thickness, this.color).drawRect(this.positionX, this.positionY, this.width, this.height);
     let bounds = this.graphic.getBounds()
@@ -25,25 +25,22 @@ class Border extends Block{
   
   onDragMove = (event) => {
       const newPoint = event.data.getLocalPosition(this.graphic.parent);
-      if(this.direction == 'v'){
+      if (this.direction == 'v') {
         const offsetY = newPoint.y - dragPoint.y;
         this.positionY += offsetY;
         dragPoint.y = newPoint.y;
-      }
-      else if(this.direction == 'h'){
-      const offsetX = newPoint.x - dragPoint.x;
-      this.positionX += offsetX;
-      dragPoint.x = newPoint.x;
-      }
-      else{
+      } else if(this.direction == 'h') {
+        const offsetX = newPoint.x - dragPoint.x;
+        this.positionX += offsetX;
+        dragPoint.x = newPoint.x;
+      } else {
         const offsetX = newPoint.x - dragPoint.x;
         const offsetY = newPoint.y - dragPoint.y;
         this.positionX += offsetX;
         this.positionY += offsetY;
         dragPoint.x = newPoint.x;
         dragPoint.y = newPoint.y;
-     }
-      
+      } 
   };
   
   onDragEnd = (event) => {

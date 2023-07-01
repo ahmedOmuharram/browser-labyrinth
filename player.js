@@ -59,7 +59,7 @@ function gameLoop(delta) {
     playerSprite.x += playerSprite.xSpeed;
     playerSprite.y += playerSprite.ySpeed;
     colliding = false;
-    for (var i = 0; i < blocks.length; i++) {
+    for (let i = 0; i < blocks.length; i++) {
         if (isColliding(playerSprite, blocks[i].graphic)) {
             resolveCollision(playerSprite, blocks[i].graphic);
             colliding = true;
@@ -72,15 +72,15 @@ function gameLoop(delta) {
 }
 
 function isColliding(sprite, rect) {
-    const spriteBounds = sprite.getBounds();
-    const rectBounds = rect.getLocalBounds();
+  const { x, y, width, height } = sprite.getBounds();
+  const { x: rectX, y: rectY, width: rectWidth, height: rectHeight } = rect.getLocalBounds();
 
-    return (
-        spriteBounds.x + spriteBounds.width >= rectBounds.x &&
-        spriteBounds.x <= rectBounds.x + rectBounds.width &&
-        spriteBounds.y + spriteBounds.height >= rectBounds.y &&
-        spriteBounds.y <= rectBounds.y + rectBounds.height
-    );
+  return (
+      x + width >= rectX &&
+      x <= rectX + rectWidth &&
+      y + height >= rectY &&
+      y <= rectY + rectHeight
+  );
 }
 
 function resolveCollision(sprite, rect) {
@@ -99,11 +99,9 @@ function resolveCollision(sprite, rect) {
 
     if (overlapX >= overlapY) {
       if (dy > 0) {
-        //Player top side collision
         playerSprite.y += overlapY;
         playerSprite.ySpeed += gravity;
     } else {
-        //Player bottom side collision
         if (playerSprite.ySpeed > 0) {
           playerSprite.ySpeed = 0;
         }
@@ -113,11 +111,9 @@ function resolveCollision(sprite, rect) {
       return true;
     } else {
       if (dx > 0) {
-        //Player left side collision
         playerSprite.x += overlapX;
         isOnGround = true;
       } else {
-        //Player right side collision
         playerSprite.x -= overlapX;
         isOnGround = true;
       }
