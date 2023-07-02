@@ -119,8 +119,8 @@ function lose() {
           explosion.rotation = Math.random() * Math.PI;
           explosion.scale.set(0.75 + Math.random() * 0.5);
           explosion.gotoAndPlay(0);
-          app.stage.addChild(explosion);
           playerSprite.height = 0;
+          app.stage.addChild(explosion);
       }
       explosion.loop = false;
       explosion.onComplete = () => {
@@ -130,6 +130,15 @@ function lose() {
   });
 }
 function restart() {
+  app.stage.removeChildren();
+  backgroundScreen = new Block(0, 0, screenWidth, screenHeight, 2, "#ffffff", 'v', "#ffffff");
+  bottomBorder = new Border(0, 710, 1300, 10, 2, "#c8c8c8", 'v', "#c8c8c8");
+  leftBorder = new Border(0, 0, 10, 720, 2, "#c8c8c8", 'h', "#c8c8c8");
+  rightBorder = new Border(1270, 0, 10, 740, 2, "#c8c8c8", 'h', "#c8c8c8");
+  topBorder = new Border(0, 0, 1280, 20, 2, "#c8c8c8", 'v', "#010081");
+  blocks = [topBorder, bottomBorder, leftBorder, rightBorder]
+  levelBlocks = [];
+  app.stage.addChild(playerSprite);
   playerSprite.x = screenWidth / 2 - 600;
   playerSprite.y = 500;
   playerSprite.height = 40;
