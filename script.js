@@ -51,7 +51,7 @@ function gameLoop(delta) {
     backgroundScreen.positionY = topBorder.positionY;
     backgroundScreen.height = bottomBorder.positionY - topBorder.positionY + bottomBorder.height;
     if (levelBlocks[0]) {
-        levelBlocks[0].height = Math.min(leftBorder.height, 3 * bottomBorder.width/4);
+        levelBlocks[0].height = Math.min(leftBorder.height, 3 * bottomBorder.width/4) - 20;
     }
     blocks.forEach(block => {
         block.drawBlock();
