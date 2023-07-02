@@ -33,6 +33,8 @@ class Level{
   }
 
   refresh() {
+    APPHTML.style.marginLeft = (window.innerWidth/2 - screenWidth/2) + "px";
+    /*
     topBorder.positionX = window.innerWidth/2 - 640;
     topBorder.positionY = window.innerHeight/2 - 360;
 
@@ -45,7 +47,9 @@ class Level{
     rightBorder.positionX = window.innerWidth/2 + 640;
     rightBorder.positionY = window.innerHeight/2 - 360;
     
-    app.renderer.resize(window.innerWidth, window.innerHeight);
+    app.renderer.resize(screenWidth, screenHeight);
+    */
+    
   }
 
   generate() {
