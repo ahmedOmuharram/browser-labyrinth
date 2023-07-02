@@ -15,17 +15,19 @@ APPHTML.style.marginLeft = (window.innerWidth/2 - screenWidth/2) + "px";
 
 app.stage.interactive = true;
 app.stage.hitArea = app.screen;
-let backgroundScreen = new Block(window.innerWidth/2 - 640, window.innerHeight/2 - 360, 1000, 750, 2, "#ffffff", 'v', "#ffffff");
-let bottomBorder = new Border(0, 710, 1300, 10, 2, "#c8c8c8", 'v', "#c8c8c8");
-let leftBorder = new Border(0, 0, 10, 720, 2, "#c8c8c8", 'h', "#c8c8c8");
-let rightBorder = new Border(1270, 0, 10, 740, 2, "#c8c8c8", 'h', "#c8c8c8");
-let topBorder = new Border(0, 0, 1280, 20, 2, "#c8c8c8", 'v', "#010081");
 
-blocks = [topBorder, bottomBorder, leftBorder, rightBorder]
+let backgroundScreen = new Block(window.innerWidth/2 - 640, window.innerHeight/2 - 360, 1000, 750, 2, "#ffffff", 'v', "#ffffff");
 
 let test = new Level("test", 0);
 levelBlocks = []
 test.generate()
+
+blocks = test.blocks
+topBorder = test.blocks[0]
+bottomBorder = test.blocks[1]
+leftBorder = test.blocks[2]
+rightBorder = test.blocks[3]
+
 
 app.ticker.add(gameLoop);
 

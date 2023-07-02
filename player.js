@@ -2,10 +2,11 @@ const gravity = 0.1;
 const terminalVelocity = 1000000;
 let isOnGround = true;
 const playerJumpForce = 5;
+let lost = false;
 
 const playerSprite = PIXI.Sprite.from('media/sprite.png');
 playerSprite.anchor.set(0.5);
-playerSprite.x = app.screen.width / 2;
+playerSprite.x = screenWidth / 2 - 600;
 playerSprite.y = 500;
 playerSprite.xSpeed = 0;
 playerSprite.ySpeed = 0;
@@ -77,16 +78,16 @@ function gameLoop(delta) {
             colliding = true;
         }
     }
-    if (playerSprite.y - playerSprite.height/2 < topBorder.positionY ||
-        playerSprite.y + playerSprite.height/2 > bottomBorder.positionY + bottomBorder.height ||
-        playerSprite.x - playerSprite.width/2 < leftBorder.positionX || 
-        playerSprite.x + playerSprite.width/2 > rightBorder.positionX + rightBorder.width) {
-          playerSprite.height = 0;
-          lose()
+    if (playerSprite.y - playerSprite.height/2 < topBorder.positionY && !lost ||
+        playerSprite.y + playerSprite.height/2 > bottomBorder.positionY + bottomBorder.height && !lost||
+        playerSprite.x - playerSprite.width/2 < leftBorder.positionX && !lost || 
+        playerSprite.x + playerSprite.width/2 > rightBorder.positionX + rightBorder.width && !lost) {
+          lose();
+          lost = true;
         }
-    if (playerSprite.topCollision && playerSprite.bottomCollision || playerSprite.leftCollision && playerSprite.rightCollision){
-      playerSprite.height = 0    
-      lose()
+    if (playerSprite.topCollision && playerSprite.bottomCollision && !lost || playerSprite.leftCollision && playerSprite.rightCollision && !lost){
+      lose();
+      lost = true;
     }
 
     if (!colliding) {
@@ -94,6 +95,44 @@ function gameLoop(delta) {
     }
 }
 
-function lose() {
-  console.log("L")
+function lose() { 
+  console.log("test")
+  playerSprite.ySpeed = 0;
+  PIXI.Assets.load('https://pixijs.com/assets/spritesheet/mc.json').then(() =>
+  {
+      // create an array to store the textures
+      const explosionTextures = [];
+      let i;
+
+      for (i = 0; i < 26; i++)
+      {
+          const texture = PIXI.Texture.from(`Explosion_Sequence_A ${i + 1}.png`);
+          explosionTextures.push(texture);
+      }
+
+      const explosion = new PIXI.AnimatedSprite(explosionTextures);
+      for (i = 0; i < 1; i++)
+      {
+          explosion.x = playerSprite.x;
+          explosion.y = playerSprite.y;
+          explosion.anchor.set(0.5);
+          explosion.rotation = Math.random() * Math.PI;
+          explosion.scale.set(0.75 + Math.random() * 0.5);
+          explosion.gotoAndPlay(0);
+          app.stage.addChild(explosion);
+          playerSprite.height = 0;
+      }
+      explosion.loop = false;
+      explosion.onComplete = () => {
+        setTimeout(restart, 1500);
+        app.stage.removeChild(explosion);
+      };
+  });
+}
+function restart() {
+  playerSprite.x = screenWidth / 2 - 600;
+  playerSprite.y = 500;
+  playerSprite.height = 40;
+  lost = false;
+  test.generate()
 }

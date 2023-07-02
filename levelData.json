@@ -11,14 +11,14 @@
             "borders": "tl"
         },
         {
-            "x": "screenWidth/2 + 50",
-            "y": "screenHeight/2 + 50",
+            "x": "screenWidth/2 - 10",
+            "y": "screenHeight/2 - 10",
             "width": "screenWidth/2",
             "height": "screenHeight/2",
             "thickness": 2,
             "color": "#c8c8c8",
             "fillColor": "#c8c8c8",
-            "borders": "tr"
+            "borders": "br"
         },
         {
             "x": "screenWidth/2 + 50",

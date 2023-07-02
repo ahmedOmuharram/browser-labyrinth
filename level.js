@@ -53,6 +53,12 @@ class Level{
   }
 
   generate() {
+    let bottomBorder = new Border(0, 710, 1300, 10, 2, "#c8c8c8", 'v', "#c8c8c8");
+    let leftBorder = new Border(0, 0, 10, 720, 2, "#c8c8c8", 'h', "#c8c8c8");
+    let rightBorder = new Border(1270, 0, 10, 740, 2, "#c8c8c8", 'h', "#c8c8c8");
+    let topBorder = new Border(0, 0, 1280, 20, 2, "#c8c8c8", 'v', "#010081");
+    this.blocks.push(topBorder, bottomBorder, leftBorder, rightBorder);
+
     fetch('levelData.json')
     .then(response => response.json())
     .then(data => {
