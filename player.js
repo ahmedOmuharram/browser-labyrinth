@@ -17,7 +17,6 @@ playerSprite.bottomCollision = false;
 playerSprite.leftCollision = false;
 playerSprite.rightCollision = false;
 
-
 app.stage.addChild(playerSprite);
 
 const keys = {
