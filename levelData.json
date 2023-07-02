@@ -1,0 +1,44 @@
+{
+    "test": [
+        {
+            "x": "leftBorder.positionX + 150",
+            "y": "leftBorder.positionY",
+            "width": "2 * leftBorder.width",
+            "height": "Math.min(leftBorder.height, 3 * bottomBorder.width/4)",
+            "thickness": 2,
+            "color": "#c8c8c8",
+            "fillColor": "#c8c8c8",
+            "borders": "tl"
+        },
+        {
+            "x": "window.innerWidth/2 - 50",
+            "y": "window.innerHeight/2 + 50",
+            "width": "leftBorder.positionX/2",
+            "height": "topBorder.positionY/2",
+            "thickness": 2,
+            "color": "#c8c8c8",
+            "fillColor": "#c8c8c8",
+            "borders": "tr"
+        },
+        {
+            "x": "window.innerWidth/2 - 50",
+            "y": "window.innerHeight/2 + 50",
+            "width": "leftBorder.positionX/2",
+            "height": "topBorder.positionY/2",
+            "thickness": 2,
+            "color": "#c8c8c8",
+            "fillColor": "#c8c8c8",
+            "borders": "bl"
+        },
+        {
+            "x": "window.innerWidth/2 - 50",
+            "y": "window.innerHeight/2 + 50",
+            "width": "leftBorder.positionX/2",
+            "height": "topBorder.positionY/2",
+            "thickness": 2,
+            "color": "#c8c8c8",
+            "fillColor": "#c8c8c8",
+            "borders": "br"
+        }
+    ]
+}
