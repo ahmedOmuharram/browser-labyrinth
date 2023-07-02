@@ -130,6 +130,10 @@ function lose() {
   });
 }
 function restart() {
+  bottomBorder.onDragEnd();
+  leftBorder.onDragEnd();
+  rightBorder.onDragEnd();
+  topBorder.onDragEnd();
   app.stage.removeChildren();
   backgroundScreen = new Block(0, 0, screenWidth, screenHeight, 2, "#ffffff", 'v', "#ffffff");
   bottomBorder = new Border(0, 710, 1300, 10, 2, "#c8c8c8", 'v', "#c8c8c8");

@@ -22,7 +22,6 @@ class Border extends Block{
   }
   
   onDragStart = (event) => {
-    event.stopPropagation();
     dragPoint = event.data.getLocalPosition(this.graphic.parent);
     this.graphic.parent.on("pointermove", this.onDragMove);
   };
@@ -59,7 +58,6 @@ class Border extends Block{
   };
   
   onDragEnd = (event) => {
-    event.stopPropagation();
     this.rechanging = true;
     this.graphic.parent.off("pointermove", this.onDragMove);
   };
