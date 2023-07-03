@@ -80,7 +80,7 @@
             text-align: center;
             text-decoration: none;
             display: inline-block;
-            font-size: 16px;
+            font-size: 20px;
             margin: 4px 2px;
             cursor: pointer;
             font-family: 'W95FA', sans-serif;
@@ -137,7 +137,7 @@
     <div class="object" id="player"></div>-->
     <div id="welcome">
         <span class="animated-text">Welcome to Browser's Labyrinth</span>
-        <button onclick="start()" class="button">Boot up PC</button>
+        <button onclick="start()" class="button">Turn On Your Computer</button>
     </div>
     <div id="loading">
         <span>Loading</span>
@@ -170,7 +170,7 @@
             </div>
             <div class="grid-item">
                 <img src="media/bin.png" alt="recycle bin img" width="50" height="50">
-                <div>Recycle bin</div>
+                <div>Recycle Bin</div>
             </div>
             <div class="grid-item">
                 <img src="media/internet.png" alt="recycle bin img" width="50" height="50">
@@ -209,7 +209,7 @@
                 }
 
                 function setRandomInterval() {
-                    const randomInterval = getRandomInt(1, 1000);
+                    const randomInterval = getRandomInt(1, 300);
                     setTimeout(() => {
                     changeRectangleColor();
                     setRandomInterval();
@@ -229,7 +229,7 @@
                 document.getElementById("loading").style.display = "none";
                 document.getElementById("canvas").style.display = "block";
                 document.getElementById("main").appendChild(app.view);
-            }, 10000);
+            }, 4500);
         }
     </script>
     <script src="node_modules/pixi.js/dist/pixi.min.js"></script>

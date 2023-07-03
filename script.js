@@ -84,36 +84,36 @@ function gameLoop(delta) {
             block.positionX += offsetX;
           })
     }
-    //Readjust size of screen after changing positions of borders
+    // Readjust size of screen after changing positions of borders
     if (topBorder.rechanging) {
-        document.getElementById("main").style.borderTop = "3px dashed #008080";
+        document.getElementById("main").style.borderTop = "5px dashed #008080";
         topBorder.positionX = leftBorder.positionX;
         topBorder.width = rightBorder.positionX - leftBorder.positionX + rightBorder.width;
     } else {
         document.getElementById("main").style.borderTopColor = "#ff0081";
     }
     if (bottomBorder.rechanging) {
-        document.getElementById("main").style.borderBottom = "3px dashed #008080";
+        document.getElementById("main").style.borderBottom = "5px dashed #008080";
         bottomBorder.positionX = leftBorder.positionX;
         bottomBorder.width = rightBorder.positionX - leftBorder.positionX + rightBorder.width;
     } else {
         document.getElementById("main").style.borderBottomColor = "#ff0081";
     }
     if (leftBorder.rechanging) {
-        document.getElementById("main").style.borderLeft = "3px dashed #008080";
+        document.getElementById("main").style.borderLeft = "5px dashed #008080";
         leftBorder.positionY = topBorder.positionY;
         leftBorder.height = bottomBorder.positionY - topBorder.positionY + bottomBorder.height;
     } else {
         document.getElementById("main").style.borderLeftColor = "#ff0081";
     }
     if (rightBorder.rechanging) {
-        document.getElementById("main").style.borderRight = "3px dashed #008080";
+        document.getElementById("main").style.borderRight = "5px dashed #008080";
         rightBorder.positionY = topBorder.positionY;
         rightBorder.height = bottomBorder.positionY - topBorder.positionY + bottomBorder.height;
     } else {
         document.getElementById("main").style.borderRightColor = "#ff0081";
     }
-
+    
     backgroundScreen.positionX = leftBorder.positionX;
     backgroundScreen.width = rightBorder.positionX - leftBorder.positionX + rightBorder.width;
     backgroundScreen.positionY = topBorder.positionY;
