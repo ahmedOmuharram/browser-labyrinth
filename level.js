@@ -32,26 +32,6 @@ class Level{
     return block
   }
 
-  refresh() {
-    APPHTML.style.marginLeft = (window.innerWidth/2 - screenWidth/2) + "px";
-    /*
-    topBorder.positionX = window.innerWidth/2 - 640;
-    topBorder.positionY = window.innerHeight/2 - 360;
-
-    bottomBorder.positionX = window.innerWidth/2 - 640;
-    bottomBorder.positionY = window.innerHeight/2 + 360;
-
-    leftBorder.positionX = window.innerWidth/2 - 640;
-    leftBorder.positionY = window.innerHeight/2 - 360;
-
-    rightBorder.positionX = window.innerWidth/2 + 640;
-    rightBorder.positionY = window.innerHeight/2 - 360;
-    
-    app.renderer.resize(screenWidth, screenHeight);
-    */
-    
-  }
-
   generate() {
     fetch('levelData.json')
     .then(response => response.json())

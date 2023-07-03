@@ -27,13 +27,9 @@ let test = new Level("test", 0);
 levelBlocks = []
 test.generate()
 
-
-
-
 app.ticker.add(gameLoop);
 
 function gameLoop(delta) {
-    //Readjust border positions after leaving the screen
     if (topBorder.positionY < 0) {
         const offsetY = -topBorder.positionY
         topBorder.positionY += offsetY;
