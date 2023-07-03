@@ -27,19 +27,23 @@
         }
 
         #welcome {
-            font-family: 'Levi Windows', sans-serif;
-            color: white;
-            text-align: center;
-            font-size: 5vw;
             display: flex;
             flex-direction: column;
-            justify-content: center; /* center horizontally */
-            align-items: center; /* center vertically */
+            justify-content: center;
+            align-items: center;
             height: 100vh; /* set the container height to full viewport height */
-            text-shadow: 5px 5px #000;
         }
 
         .animated-text {
+            font-family: 'Levi Windows', sans-serif;
+            color: white;
+            text-align: center;
+            font-size: 3vw;
+            text-shadow: 5px 5px #000;
+            padding: 10px;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center; 
             animation: float 7s linear infinite;
         }
 
@@ -123,7 +127,12 @@
             <div class="loading-rectangle"></div>
         </div>
     </div>
-    <center id="main"></center>
+    <center>
+        <span class="animated-text" id="upper-text" style="display: none;">Browser's Labyrinth</span>
+        <div id="main" style="border: 2px #c8c8c8 dotted; height: 720px; width: fit-content;">
+
+        </div>
+    </center>
     <script>
         function start() {
             document.getElementById("welcome").style.display = "none";
@@ -166,6 +175,7 @@
             changeColor();
             setInterval(() => {
                 document.getElementById("loading").style.display = "none";
+                document.getElementById("upper-text").style.display = "flex";
                 document.getElementById("main").appendChild(app.view);
             }, 10000);
         }
