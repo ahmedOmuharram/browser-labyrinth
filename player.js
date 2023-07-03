@@ -78,10 +78,10 @@ function gameLoop(delta) {
             colliding = true;
         }
     }
-    if (playerSprite.y - playerSprite.height/2 < topBorder.positionY && !lost ||
-        playerSprite.y + playerSprite.height/2 > bottomBorder.positionY + bottomBorder.height && !lost||
-        playerSprite.x - playerSprite.width/2 < leftBorder.positionX && !lost || 
-        playerSprite.x + playerSprite.width/2 > rightBorder.positionX + rightBorder.width && !lost) {
+    if (playerSprite.y + playerSprite.height/2 < topBorder.positionY && !lost ||
+        playerSprite.y - playerSprite.height/2 > bottomBorder.positionY + bottomBorder.height && !lost||
+        playerSprite.x + playerSprite.width/2 < leftBorder.positionX && !lost || 
+        playerSprite.x - playerSprite.width/2 > rightBorder.positionX + rightBorder.width && !lost) {
           lose();
           lost = true;
         }
