@@ -38,6 +38,7 @@ window.onresize = function()
 }
 
 function gameLoop(delta) {
+    //Readjust border positions after leaving the screen
     if (topBorder.positionY < 0) {
         const offsetY = -topBorder.positionY
         topBorder.positionY += offsetY;
@@ -66,6 +67,36 @@ function gameLoop(delta) {
             block.positionX += offsetX;
           });
     }
+    //Readjust border positions after colliding with their opposite border
+    if (topBorder.positionY > bottomBorder.positionY - topBorder.height && !topBorder.rechanging) {
+        const offsetY = bottomBorder.positionY - topBorder.positionY - topBorder.height;
+        topBorder.positionY += offsetY;
+        topBorder.blocks.forEach(block => {
+            block.positionY += offsetY;
+          });
+    }
+    if (leftBorder.positionX > rightBorder.positionX - leftBorder.width && !leftBorder.rechanging) {
+        const offsetX = rightBorder.positionX - leftBorder.positionX - leftBorder.width;
+        leftBorder.positionX += offsetX;
+        leftBorder.blocks.forEach(block => {
+            block.positionX += offsetX;
+          });
+    }
+    if (bottomBorder.positionY < topBorder.positionY + topBorder.height && !bottomBorder.rechanging) {
+        const offsetY = topBorder.positionY + topBorder.height - bottomBorder.positionY; 
+        bottomBorder.positionY += offsetY;
+        bottomBorder.blocks.forEach(block => {
+            block.positionY += offsetY;
+          });
+    }
+    if (rightBorder.positionX < leftBorder.positionX + leftBorder.width && !rightBorder.rechanging) {
+        const offsetX = leftBorder.positionX + leftBorder.width - rightBorder.positionX;
+        rightBorder.positionX += offsetX;
+        rightBorder.blocks.forEach(block => {
+            block.positionX += offsetX;
+          })
+    }
+    //Readjust size of screen after changing positions of borders
     if (topBorder.rechanging) {
         topBorder.positionX = leftBorder.positionX;
         topBorder.width = rightBorder.positionX - leftBorder.positionX + rightBorder.width;
