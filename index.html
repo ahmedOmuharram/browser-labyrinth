@@ -10,8 +10,10 @@
     <link rel="manifest" href="media/site.webmanifest">
     <link rel="stylesheet" href="style.css">
     <style>
-        @import url('https://fonts.cdnfonts.com/css/w95fa');
-
+        @font-face {
+            font-family: 'Levi Windows';
+            src: url(media/font.ttf);
+        }
         @keyframes float {
             0% {
             transform: translatey(0px);
@@ -25,7 +27,7 @@
         }
 
         #welcome {
-            font-family: 'W95FA', sans-serif;
+            font-family: 'Levi Windows', sans-serif;
             color: white;
             text-align: center;
             font-size: 5vw;
@@ -40,6 +42,34 @@
         .animated-text {
             animation: float 7s linear infinite;
         }
+
+        #loading {
+            font-family: 'Levi Windows', sans-serif;
+            color: white;
+            text-shadow: 5px 5px #000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            display: hidden;
+            justify-content: center; 
+            font-size: 3vw;
+            height: 100vh;
+        }
+
+        #loading-bar {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;     
+            background-color: #c8c8c8;
+        }
+
+        .loading-rectangle {
+            width: 20px;
+            height: 50px;
+            margin: 5px;
+            background-color: #c8c8c8;
+        }
         
         .button {
             padding: 16px 320px;
@@ -52,10 +82,6 @@
             font-family: 'W95FA', sans-serif;
             background-color: #010081;
             color: white;
-        }
-
-        .background {
-            background-color: #c8c8c8;
         }
 
         .button:hover {
@@ -73,20 +99,75 @@
             </div>
     <div class="object" id="player"></div>-->
     <div id="welcome">
-        <span class="animated-text">Welcome to Browser's Labyrinth</span><br>
+        <span class="animated-text">Welcome to Browser's Labyrinth</span>
         <button onclick="start()" class="button">Boot up PC</button>
     </div>
-    <!--<div id="loading">
-        <div class="background">
-            <span class="animated-text">Loading</span><br>
-            <button onclick="start()" class="button">Boot up PC</button>
+    <div id="loading">
+        <span>Loading</span>
+        <div id="loading-text">0%</div>
+        <div id="loading-bar">
+            <div class="loading-rectangle"></div>
+            <div class="loading-rectangle"></div>
+            <div class="loading-rectangle"></div>
+            <div class="loading-rectangle"></div>
+            <div class="loading-rectangle"></div>
+            <div class="loading-rectangle"></div>
+            <div class="loading-rectangle"></div>
+            <div class="loading-rectangle"></div>
+            <div class="loading-rectangle"></div>
+            <div class="loading-rectangle"></div>
+            <div class="loading-rectangle"></div>
+            <div class="loading-rectangle"></div>
+            <div class="loading-rectangle"></div>
+            <div class="loading-rectangle"></div>
+            <div class="loading-rectangle"></div>
         </div>
-    </div>-->
+    </div>
     <center id="main"></center>
     <script>
         function start() {
             document.getElementById("welcome").style.display = "none";
-            document.getElementById("main").appendChild(app.view);
+            const rectangles = document.querySelectorAll('.loading-rectangle');
+            document.getElementById("loading").style.display = "flex";
+            function changeColor() {
+                const rectangles = document.getElementsByClassName("loading-rectangle");
+                const loadingText = document.getElementById("loading-text");
+
+                let blueRectanglesCount = 0;
+                let index = 0;
+
+                function changeRectangleColor() {
+                    const currentRectangle = rectangles[index];
+                    currentRectangle.style.backgroundColor = '#010081';
+                    blueRectanglesCount++;
+
+                    const percentage = (blueRectanglesCount / rectangles.length) * 100;
+                    loadingText.innerText = `${percentage.toFixed(0)}%`;
+
+                    index++;
+                }
+
+                function setRandomInterval() {
+                    const randomInterval = getRandomInt(1, 1000);
+                    setTimeout(() => {
+                    changeRectangleColor();
+                    setRandomInterval();
+                    }, randomInterval);
+                }
+
+                setRandomInterval();
+                }
+
+
+            function getRandomInt(min, max) {
+                return Math.floor(Math.random() * (max - min + 1) + min);
+            }
+
+            changeColor();
+            setInterval(() => {
+                document.getElementById("loading").style.display = "none";
+                document.getElementById("main").appendChild(app.view);
+            }, 10000);
         }
     </script>
     <script src="node_modules/pixi.js/dist/pixi.min.js"></script>
