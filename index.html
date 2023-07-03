@@ -10,27 +10,56 @@
     <link rel="manifest" href="media/site.webmanifest">
     <link rel="stylesheet" href="style.css">
     <style>
-        #player {
-            width: 30px;
-            height: 30px;
-            background-color: black;
-            background-image: url("media/sprite.png");
-            background-repeat: no-repeat;
-            background-size: cover;
-            box-shadow: 1px 2px;
+        @import url('https://fonts.cdnfonts.com/css/w95fa');
+
+        @keyframes float {
+            0% {
+            transform: translatey(0px);
+            }
+            50% {
+            transform: translatey(-10px);
+            }
+            100% {
+            transform: translatey(0px);
+            }
         }
 
-        #info {
-            background-image: url("media/info.png");
-            background-repeat: no-repeat;
-            background-size: cover;
-        }
-
-        .container {
+        #welcome {
+            font-family: 'W95FA', sans-serif;
+            color: white;
+            text-align: center;
+            font-size: 5vw;
             display: flex;
+            flex-direction: column;
             justify-content: center; /* center horizontally */
             align-items: center; /* center vertically */
             height: 100vh; /* set the container height to full viewport height */
+            text-shadow: 5px 5px #000;
+        }
+
+        .animated-text {
+            animation: float 7s linear infinite;
+        }
+        
+        .button {
+            padding: 16px 320px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            font-family: 'W95FA', sans-serif;
+            background-color: #010081;
+            color: white;
+        }
+
+        .background {
+            background-color: #c8c8c8;
+        }
+
+        .button:hover {
+            background-color: #0000bb;
         }
     </style>
     </head>
@@ -43,7 +72,23 @@
                 <i class="fa fa-desktop" aria-hidden="true"></i> Start
             </div>
     <div class="object" id="player"></div>-->
+    <div id="welcome">
+        <span class="animated-text">Welcome to Browser's Labyrinth</span><br>
+        <button onclick="start()" class="button">Boot up PC</button>
+    </div>
+    <!--<div id="loading">
+        <div class="background">
+            <span class="animated-text">Loading</span><br>
+            <button onclick="start()" class="button">Boot up PC</button>
+        </div>
+    </div>-->
     <center id="main"></center>
+    <script>
+        function start() {
+            document.getElementById("welcome").style.display = "none";
+            document.getElementById("main").appendChild(app.view);
+        }
+    </script>
     <script src="node_modules/pixi.js/dist/pixi.min.js"></script>
     <script src="collision.js" defer></script>
     <script src="block.js" defer></script>

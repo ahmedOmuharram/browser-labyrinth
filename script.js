@@ -10,9 +10,6 @@ const app = new PIXI.Application({
     resolution: 1,
 });
 
-let APPHTML = document.getElementById("main").appendChild(app.view);
-
-
 app.stage.interactive = true;
 app.stage.hitArea = app.screen;
 
