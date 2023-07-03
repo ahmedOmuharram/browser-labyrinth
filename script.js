@@ -10,8 +10,8 @@ const app = new PIXI.Application({
     resolution: 1,
 });
 
-let APPHTML = document.body.appendChild(app.view);
-APPHTML.style.marginLeft = (window.innerWidth/2 - screenWidth/2) + "px";
+let APPHTML = document.getElementById("main").appendChild(app.view);
+
 
 app.stage.interactive = true;
 app.stage.hitArea = app.screen;
@@ -31,11 +31,6 @@ test.generate()
 
 
 app.ticker.add(gameLoop);
-
-window.onresize = function()
-{
-    test.refresh();
-}
 
 function gameLoop(delta) {
     //Readjust border positions after leaving the screen
