@@ -3,7 +3,16 @@ const terminalVelocity = 1000000;
 let isOnGround = true;
 const playerJumpForce = 5;
 let lost = false;
-
+const explosionTextures = [];
+PIXI.Assets.load('https://pixijs.com/assets/spritesheet/mc.json').then(() =>
+  {
+      // create an array to store the textures
+      for (let i = 0; i < 26; i++)
+      {
+          const texture = PIXI.Texture.from(`Explosion_Sequence_A ${i + 1}.png`);
+          explosionTextures.push(texture);
+      }
+  });
 const playerSprite = PIXI.Sprite.from('media/sprite.png');
 playerSprite.anchor.set(0.5);
 playerSprite.x = screenWidth / 2 - 600;
@@ -89,7 +98,7 @@ function gameLoop(delta) {
       lose();
       lost = true;
     }
-
+    
     if (!colliding) {
         isOnGround = false;
     }
@@ -98,36 +107,23 @@ function gameLoop(delta) {
 function lose() { 
   console.log("test")
   playerSprite.ySpeed = 0;
-  PIXI.Assets.load('https://pixijs.com/assets/spritesheet/mc.json').then(() =>
-  {
-      // create an array to store the textures
-      const explosionTextures = [];
-      let i;
-
-      for (i = 0; i < 26; i++)
-      {
-          const texture = PIXI.Texture.from(`Explosion_Sequence_A ${i + 1}.png`);
-          explosionTextures.push(texture);
-      }
-
-      const explosion = new PIXI.AnimatedSprite(explosionTextures);
-      for (i = 0; i < 1; i++)
-      {
-          explosion.x = playerSprite.x;
-          explosion.y = playerSprite.y;
-          explosion.anchor.set(0.5);
-          explosion.rotation = Math.random() * Math.PI;
-          explosion.scale.set(0.75 + Math.random() * 0.5);
-          explosion.gotoAndPlay(0);
-          playerSprite.height = 0;
-          app.stage.addChild(explosion);
-      }
-      explosion.loop = false;
-      explosion.onComplete = () => {
-        setTimeout(restart, 1500);
-        app.stage.removeChild(explosion);
-      };
-  });
+  playerSprite.height = 0;
+  const explosion = new PIXI.AnimatedSprite(explosionTextures);
+    for (i = 0; i < 1; i++)
+    {
+        explosion.x = playerSprite.x;
+        explosion.y = playerSprite.y;
+        explosion.anchor.set(0.5);
+        explosion.rotation = Math.random() * Math.PI;
+        explosion.scale.set(0.75 + Math.random() * 0.5);
+        explosion.gotoAndPlay(0);
+        app.stage.addChild(explosion);
+    }
+    explosion.loop = false;
+    explosion.onComplete = () => {
+    setTimeout(restart, 1500);
+    app.stage.removeChild(explosion);
+    };
 }
 function restart() {
   bottomBorder.onDragEnd();
