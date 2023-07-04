@@ -1,13 +1,12 @@
 # Browser's Labyrinth: Unravel the Glitches, Guide the Packet!
 
 ## Tech stack
-HTML, CSS, JavaScript, PixiJS
-
+![Teck Stack](https://skillicons.dev/icons?i=html,css,js) (including the PixiJS library)
 ## Contributors
-Ahmed Muharram
-[Portfolio](https://muharram.dev)
-[LinkedIn](https://www.linkedin.com/in/ahmed-muharram/)
-[GitHub](https://github.com/ahmedOmuharram)
+Ahmed Muharram <br />
+[ [Portfolio](https://muharram.dev) |
+[LinkedIn](https://www.linkedin.com/in/ahmed-muharram/) |
+[GitHub](https://github.com/ahmedOmuharram) ]
 
 Youssef Saleh
 
