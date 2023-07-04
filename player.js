@@ -4,15 +4,14 @@ let isOnGround = true;
 const playerJumpForce = 5;
 let lost = false;
 const explosionTextures = [];
-PIXI.Assets.load('https://pixijs.com/assets/spritesheet/mc.json').then(() =>
-  {
-      // create an array to store the textures
-      for (let i = 0; i < 26; i++)
-      {
-          const texture = PIXI.Texture.from(`Explosion_Sequence_A ${i + 1}.png`);
-          explosionTextures.push(texture);
-      }
-  });
+
+for (let i = 0; i < 11; i++)
+{
+    const texture = PIXI.Texture.from(`media/file_crumble_large_png_sequence/File Crumble Large${i + 1}.png`);
+    console.log(texture)
+    explosionTextures.push(texture);
+}
+
 const playerSprite = PIXI.Sprite.from('media/sprite.png');
 playerSprite.anchor.set(0.5);
 playerSprite.x = screenWidth / 2 - 600;
@@ -113,9 +112,9 @@ function lose() {
     {
         explosion.x = playerSprite.x;
         explosion.y = playerSprite.y;
+        explosion.width = 60;
+        explosion.height = 45;
         explosion.anchor.set(0.5);
-        explosion.rotation = Math.random() * Math.PI;
-        explosion.scale.set(0.75 + Math.random() * 0.5);
         explosion.gotoAndPlay(0);
         app.stage.addChild(explosion);
     }
