@@ -8,7 +8,6 @@ const explosionTextures = [];
 for (let i = 0; i < 11; i++)
 {
     const texture = PIXI.Texture.from(`media/file_crumble_large_png_sequence/File Crumble Large${i + 1}.png`);
-    console.log(texture)
     explosionTextures.push(texture);
 }
 
@@ -104,43 +103,42 @@ function gameLoop(delta) {
 }
 
 function lose() { 
-  console.log("test")
-  playerSprite.ySpeed = 0;
-  playerSprite.height = 0;
-  const explosion = new PIXI.AnimatedSprite(explosionTextures);
-    for (i = 0; i < 1; i++)
-    {
-        explosion.x = playerSprite.x;
-        explosion.y = playerSprite.y;
-        explosion.width = 60;
-        explosion.height = 45;
-        explosion.anchor.set(0.5);
-        explosion.gotoAndPlay(0);
-        app.stage.addChild(explosion);
-    }
+    playerSprite.ySpeed = 0;
+    playerSprite.height = 0;
+    const explosion = new PIXI.AnimatedSprite(explosionTextures);
+    explosion.x = playerSprite.x;
+    explosion.y = playerSprite.y;
+    explosion.width = 60;
+    explosion.height = 45;
+    explosion.anchor.set(0.5);
+    explosion.gotoAndPlay(0);
+    app.stage.addChild(explosion);
     explosion.loop = false;
     explosion.onComplete = () => {
-    setTimeout(restart, 1500);
-    app.stage.removeChild(explosion);
+        setTimeout(restart, 1500);
+        app.stage.removeChild(explosion);
     };
 }
 function restart() {
-  bottomBorder.onDragEnd();
-  leftBorder.onDragEnd();
-  rightBorder.onDragEnd();
-  topBorder.onDragEnd();
-  app.stage.removeChildren();
-  backgroundScreen = new Block(0, 0, screenWidth, screenHeight, 2, "#ffffff", 'v', "#ffffff");
-  bottomBorder = new Border(0, 710, 1300, 10, 2, "#c8c8c8", 'v', "#c8c8c8");
-  leftBorder = new Border(0, 0, 10, 720, 2, "#c8c8c8", 'h', "#c8c8c8");
-  rightBorder = new Border(1270, 0, 10, 740, 2, "#c8c8c8", 'h', "#c8c8c8");
-  topBorder = new Border(0, 0, 1280, 20, 2, "#c8c8c8", 'v', "#010081");
-  blocks = [topBorder, bottomBorder, leftBorder, rightBorder]
-  levelBlocks = [];
-  app.stage.addChild(playerSprite);
-  playerSprite.x = screenWidth / 2 - 600;
-  playerSprite.y = 500;
-  playerSprite.height = 40;
-  lost = false;
-  test.generate()
+    blocks = [];
+    bottomBorder.onDragEnd();
+    leftBorder.onDragEnd();
+    rightBorder.onDragEnd();
+    topBorder.onDragEnd();
+    app.stage.removeChildren();
+    elapsed = 0;
+    backgroundScreen = new Block(0, 0, screenWidth, screenHeight, 2, "#ffffff", 'v', "#ffffff");
+    bottomBorder = new Border(0, 710, 1300, 10, 2, "#c8c8c8", 'v', "#c8c8c8");
+    leftBorder = new Border(0, 0, 10, 720, 2, "#c8c8c8", 'h', "#c8c8c8");
+    rightBorder = new Border(1270, 0, 10, 740, 2, "#c8c8c8", 'h', "#c8c8c8");
+    topBorder = new Border(0, 0, 1280, 20, 2, "#c8c8c8", 'v', "#010081");
+    levelBlocks = [];
+    app.stage.addChild(playerSprite);
+    playerSprite.x = screenWidth / 2 - 600;
+    playerSprite.y = 500;
+    playerSprite.height = 40;
+    lost = false;
+    test.generate();
+    blocks.push(topBorder, bottomBorder, leftBorder, rightBorder)
+    console.log(blocks)
 }

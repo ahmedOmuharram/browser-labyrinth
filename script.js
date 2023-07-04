@@ -1,6 +1,6 @@
 const screenWidth = 1280;
 const screenHeight = 720;
-
+let elapsed = 0;
 
 const app = new PIXI.Application({ 
     antialias: true,
@@ -20,7 +20,7 @@ let leftBorder = new Border(0, 0, 10, 720, 2, "#c8c8c8", 'h', "#c8c8c8");
 let rightBorder = new Border(1270, 0, 10, 740, 2, "#c8c8c8", 'h', "#c8c8c8");
 let topBorder = new Border(0, 0, 1280, 20, 2, "#c8c8c8", 'v', "#010081");
 let blocks = [topBorder, bottomBorder, leftBorder, rightBorder]
-let test = new Level("test", 0);
+let test = new Level("1", 0);
 levelBlocks = []
 test.generate()
 
@@ -118,8 +118,25 @@ function gameLoop(delta) {
     backgroundScreen.width = rightBorder.positionX - leftBorder.positionX + rightBorder.width;
     backgroundScreen.positionY = topBorder.positionY;
     backgroundScreen.height = bottomBorder.positionY - topBorder.positionY + bottomBorder.height;
+    // Test level
+    /*
     if (levelBlocks[0]) {
         levelBlocks[0].height = Math.min(leftBorder.height, 3 * bottomBorder.width/4) - 20;
+    }*/        
+    for (let i = 0; i < 7; i++) {
+        if (levelBlocks[i]) {
+            if (i == 0) {
+                elapsed += delta;
+                levelBlocks[i].positionY = Math.sin(elapsed/50.0) * 400.0 + Math.cos(elapsed/14.0) * 0.8;
+                levelBlocks[i].positionX = Math.cos(elapsed/50.0) * 400.0 + Math.sin(elapsed/14.0) * 0.8 + screenWidth/2 - 200;
+                console.log(levelBlocks[0].positionX +", " + levelBlocks[0].positionY)
+            } else if (i % 2 == 0) {
+                levelBlocks[i].height = Math.min(5 * leftBorder.height, 3 * bottomBorder.width/4) - 20;
+            } else {
+                levelBlocks[i].positionY = - Math.min(leftBorder.height, 2.5 * bottomBorder.width/4) + 30 + bottomBorder.positionY - topBorder.positionY
+                levelBlocks[i].height = Math.min(5 * leftBorder.height, 2.8 * bottomBorder.width/4) - 20;
+            }
+        }
     }
     /*if (levelBlocks[1])
         levelBlocks[1].height = Math.min(screenHeight/2, topBorder.positionY - 10);*/

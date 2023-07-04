@@ -33,12 +33,14 @@ class Level{
   }
 
   generate() {
+    blocks = []
     fetch('levelData.json')
     .then(response => response.json())
     .then(data => {
         var levelName = this.name;
         var jsonData = Array.isArray(data) ? data : [data];
         jsonData.forEach(obj => {
+            console.log(obj)
             obj[levelName].forEach(block => {
                 var x = eval(block.x);
                 var y = eval(block.y);
