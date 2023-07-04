@@ -1,5 +1,5 @@
 {
-    "test": [
+    "0": [
         {
             "x": "leftBorder.positionX + 150",
             "y": "leftBorder.positionY + 20",

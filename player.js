@@ -34,6 +34,8 @@ const keys = {
     39: false,
     65: false,
     68: false,
+    78: false,
+    80: false,
     87: false
 };
 
@@ -64,7 +66,19 @@ function gameLoop(delta) {
     if (playerSprite.ySpeed > terminalVelocity) {
         playerSprite.ySpeed = terminalVelocity;
     }
-
+    
+    if(keys[78]){    
+        if(currentLevel<1){
+        currentLevel++;
+        setLevel(currentLevel);
+        }
+    }
+    if(keys[80]){
+        if(currentLevel>0){
+        currentLevel--;
+        setLevel(currentLevel);
+        }
+    }
     if ((keys[32] || keys[38] || keys[87]) && isOnGround) {
         playerSprite.ySpeed = -playerJumpForce;
         isOnGround = false;
@@ -115,11 +129,11 @@ function lose() {
     app.stage.addChild(explosion);
     explosion.loop = false;
     explosion.onComplete = () => {
-        setTimeout(restart, 1500);
+        setTimeout(setLevel(currentLevel), 1500);
         app.stage.removeChild(explosion);
     };
 }
-function restart() {
+function setLevel(level) {
     blocks = [];
     bottomBorder.onDragEnd();
     leftBorder.onDragEnd();
@@ -132,12 +146,13 @@ function restart() {
     leftBorder = new Border(0, 0, 10, 720, 2, "#c8c8c8", 'h', "#c8c8c8");
     rightBorder = new Border(1270, 0, 10, 740, 2, "#c8c8c8", 'h', "#c8c8c8");
     topBorder = new Border(0, 0, 1280, 20, 2, "#c8c8c8", 'v', "#010081");
-    levelBlocks = [];
     app.stage.addChild(playerSprite);
     playerSprite.x = screenWidth / 2 - 600;
     playerSprite.y = 500;
     playerSprite.height = 40;
     lost = false;
-    test.generate();
+    playLevel = new Level(currentLevel.toString(), 0);
+    levelBlocks = []
+    playLevel.generate();
     blocks.push(topBorder, bottomBorder, leftBorder, rightBorder)
 }
