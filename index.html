@@ -83,7 +83,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100vh; /* set the container height to full viewport height */
+            height: 100vh;
         }
 
         .animated-text {
@@ -237,7 +237,7 @@
     <div id="welcome">
         <img class="rotated-computer" src="media/computer.png" onclick="onComputerClick()" alt="my computer img" width="256" height="256"> 
         <div class="rotated-bin" onclick="onBinClick(this)" width="256" height="256"></div>
-        <span class="animated-text">Welcome to Browser's Labyrinth</span>
+        <span class="animated-text" style="z-index: -1">Welcome to Browser's Labyrinth</span>
         <button onclick="start()" class="button">Turn On Your Computer</button>
         <span class="grid-item" style="position: absolute; bottom: 5px; right: 5px; text-align: right">
             Version 0.0.1 (Alpha)<br>
