@@ -16,13 +16,65 @@
         }
         @keyframes float {
             0% {
-            transform: translatey(0px);
+                transform: translatey(0px);
             }
             50% {
-            transform: translatey(-10px);
+                transform: translatey(-10px);
             }
             100% {
-            transform: translatey(0px);
+                transform: translatey(0px);
+            }
+        }
+
+        @keyframes computer-rotate-float {
+            0% {
+                -webkit-transform: rotate(-45deg);
+                -moz-transform: rotate(-45deg);
+                -ms-transform: rotate(-45deg);
+                -o-transform: rotate(-45deg);
+                transform: rotate(-45deg) translatey(0px);
+            }
+            50% {
+                transform: translatey(-10px);
+                -webkit-transform: rotate(-45deg);
+                -moz-transform: rotate(-45deg);
+                -ms-transform: rotate(-45deg);
+                -o-transform: rotate(-45deg);
+                transform:  translatey(-20px) rotate(-45deg);
+            }
+            100% {
+                transform: translatey(0px);
+                -webkit-transform: rotate(-45deg);
+                -moz-transform: rotate(-45deg);
+                -ms-transform: rotate(-45deg);
+                -o-transform: rotate(-45deg);
+                transform: rotate(-45deg) translatey(0px);
+            }
+        }
+
+        @keyframes bin-rotate-float {
+            0% {
+                -webkit-transform: rotate(30deg);
+                -moz-transform: rotate(30deg);
+                -ms-transform: rotate(30deg);
+                -o-transform: rotate(30deg);
+                transform: rotate(30deg) translatey(0px);
+            }
+            50% {
+                transform: translatey(-10px);
+                -webkit-transform: rotate(30deg);
+                -moz-transform: rotate(30deg);
+                -ms-transform: rotate(30deg);
+                -o-transform: rotate(30deg);
+                transform:  translatey(-20px) rotate(30deg);
+            }
+            100% {
+                transform: translatey(0px);
+                -webkit-transform: rotate(30deg);
+                -moz-transform: rotate(30deg);
+                -ms-transform: rotate(30deg);
+                -o-transform: rotate(30deg);
+                transform: rotate(30deg) translatey(0px);
             }
         }
 
@@ -143,6 +195,34 @@
         .start-button:hover{
             background-color: #a3a3a3;
         }
+
+        .rotated-computer {
+            position: absolute;
+            top: 100px;
+            left: 100px;
+            opacity: 0.5;
+            animation: computer-rotate-float 5s linear infinite;
+        }
+
+        .rotated-bin {
+            position: absolute;
+            background: url(media/bin.png);
+            background-repeat: no-repeat;
+            background-size: cover;
+            width: 256px;
+            height: 256px;
+            bottom: 100px;
+            right: 100px;
+            opacity: 0.5;
+            animation: bin-rotate-float 6s linear infinite;
+        }
+
+        .rotated-bin.clicked {
+            right: 99px;
+            background: url(media/full-bin.png);
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
     </style>
     </head>
 <body>
@@ -155,8 +235,15 @@
             </div>
     <div class="object" id="player"></div>-->
     <div id="welcome">
+        <img class="rotated-computer" src="media/computer.png" onclick="onComputerClick()" alt="my computer img" width="256" height="256"> 
+        <div class="rotated-bin" onclick="onBinClick(this)" width="256" height="256"></div>
         <span class="animated-text">Welcome to Browser's Labyrinth</span>
         <button onclick="start()" class="button">Turn On Your Computer</button>
+        <span class="grid-item" style="position: absolute; bottom: 5px; right: 5px; text-align: right">
+            Version 0.0.1 (Alpha)<br>
+            Made by Ahmed Muharram & Youssef Saleh<br>
+            Art by Anas Muharram<br>
+            Use Google Chrome for optimal experience</span>
     </div>
     <div id="loading">
         <span>Loading</span>
@@ -260,6 +347,23 @@
             document.getElementById("main").style.display = "none";
             document.getElementById("")
         }
+
+        function onBinClick(element) {
+            if (element.classList.contains('clicked')) {
+                element.classList.remove('clicked');
+            } else {
+                element.classList.add('clicked');
+            }
+            
+            new Audio("media/pop.wav").play();
+        }
+
+        function onComputerClick() {
+            let audio = new Audio("media/computer.mp3");
+            audio.volume = 0.5;
+            audio.play()
+        }
+
     </script>
     <script src="node_modules/pixi.js/dist/pixi.min.js"></script>
     <script src="collision.js" defer></script>

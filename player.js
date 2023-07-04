@@ -140,5 +140,4 @@ function restart() {
     lost = false;
     test.generate();
     blocks.push(topBorder, bottomBorder, leftBorder, rightBorder)
-    console.log(blocks)
 }

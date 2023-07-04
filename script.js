@@ -129,7 +129,6 @@ function gameLoop(delta) {
                 elapsed += delta;
                 levelBlocks[i].positionY = Math.sin(elapsed/50.0) * 400.0 + Math.cos(elapsed/14.0) * 0.8;
                 levelBlocks[i].positionX = Math.cos(elapsed/50.0) * 400.0 + Math.sin(elapsed/14.0) * 0.8 + screenWidth/2 - 200;
-                console.log(levelBlocks[0].positionX +", " + levelBlocks[0].positionY)
             } else if (i % 2 == 0) {
                 levelBlocks[i].height = Math.min(5 * leftBorder.height, 3 * bottomBorder.width/4) - 20;
             } else {
