@@ -61,6 +61,9 @@ class Level{
     }
    }
   Level1(delta){
+    
+  }
+  Level2(delta){
     for (let i = 0; i < 7; i++) {
         if (levelBlocks[i]) {
             if (i == 0) {
@@ -75,9 +78,6 @@ class Level{
             }
         }
     }
-  }
-  Level2(delta){
-    
   }
 }
 

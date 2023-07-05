@@ -60,6 +60,22 @@ function onKeyUp(event) {
 
 app.ticker.add(gameLoop);
 
+document.onkeydown = function (e) {
+    if (keys[78]) {
+        if (currentLevel < 2) {
+            currentLevel++;
+            setLevel(currentLevel);
+        }
+    }
+
+    if (keys[80]) {
+        if (currentLevel > 0){
+            currentLevel--;
+            setLevel(currentLevel);
+        }
+    }
+};
+
 function gameLoop(delta) {
     playerSprite.ySpeed += gravity;
     playerSprite.xSpeed = 0;
@@ -67,18 +83,6 @@ function gameLoop(delta) {
         playerSprite.ySpeed = terminalVelocity;
     }
     
-    if(keys[78]){    
-        if(currentLevel<1){
-        currentLevel++;
-        setLevel(currentLevel);
-        }
-    }
-    if(keys[80]){
-        if(currentLevel>0){
-        currentLevel--;
-        setLevel(currentLevel);
-        }
-    }
     if ((keys[32] || keys[38] || keys[87]) && isOnGround) {
         playerSprite.ySpeed = -playerJumpForce;
         isOnGround = false;
