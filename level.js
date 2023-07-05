@@ -79,6 +79,9 @@ class Level{
         }
     }
   }
+  Level3(delta){
+
+  }
 }
 
 window.Level = Level;
