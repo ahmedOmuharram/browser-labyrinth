@@ -7,6 +7,12 @@ let won = false;
 const explosionTextures = [];
 const winTextures = [];
 
+const zeroTexture = PIXI.Texture.from('media/internet.png')
+const oneTexture = PIXI.Texture.from('media/computer.png')
+
+let zeroParticleGenerator = new Particles(zeroTexture, -20, 20, -20, 20, 0.9, 0.2, 3, 0.005, 0.01);
+let oneParticleGenerator = new Particles(oneTexture, -20, 20, -20, 20, 0.9, 0.2, 3, 0.005, 0.01);
+
 for (let i = 0; i < 11; i++)
 {
     const texture = PIXI.Texture.from(`media/file_crumble_large_png_sequence/File Crumble Large${i + 1}.png`);
@@ -147,12 +153,17 @@ function gameLoop(delta) {
     if (!colliding) {
         isOnGround = false;
     }
+
+    zeroParticleGenerator.renderParticles();
+    oneParticleGenerator.renderParticles();
 }
 
 function lose() { 
     playerSprite.ySpeed = 0;
     playerSprite.height = 0;
     const explosion = new PIXI.AnimatedSprite(explosionTextures);
+    zeroParticleGenerator.createParticles(Math.random() * 10, playerSprite.x, playerSprite.y);
+    oneParticleGenerator.createParticles(Math.random() * 10, playerSprite.x, playerSprite.y);
     explosion.x = playerSprite.x;
     explosion.y = playerSprite.y;
     explosion.animationSpeed = 0.2;
