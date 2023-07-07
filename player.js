@@ -7,11 +7,11 @@ let won = false;
 const explosionTextures = [];
 const winTextures = [];
 
-const zeroTexture = PIXI.Texture.from('media/internet.png')
-const oneTexture = PIXI.Texture.from('media/computer.png')
+const zeroTexture = PIXI.Texture.from('media/zero.png')
+const oneTexture = PIXI.Texture.from('media/one.png')
 
-let zeroParticleGenerator = new Particles(zeroTexture, -20, 20, -20, 20, 0.9, 0.2, 3, 0.005, 0.01);
-let oneParticleGenerator = new Particles(oneTexture, -20, 20, -20, 20, 0.9, 0.2, 3, 0.005, 0.01);
+let zeroParticleGenerator = new Particles(zeroTexture, -5, 5, -5, 5, 0.1, -0.03, 0.03, 0.005, 0.01, 0.1, 0.5);
+let oneParticleGenerator = new Particles(oneTexture, -5, 5, -5, 5, 0.1, -0.03, 0.03, 0.005, 0.01, 0.1, 0.5);
 
 for (let i = 0; i < 11; i++)
 {
