@@ -123,22 +123,25 @@ function gameLoop(delta) {
             colliding = true;
         }
     }
-    if (playerSprite.y + playerSprite.height/2 < topBorder.positionY && !lost ||
-        playerSprite.y - playerSprite.height/2 > bottomBorder.positionY + bottomBorder.height && !lost||
-        playerSprite.x + playerSprite.width/2 < leftBorder.positionX && !lost || 
-        playerSprite.x - playerSprite.width/2 > rightBorder.positionX + rightBorder.width && !lost) {
-          lose();
-          lost = true;
-        }
-
-    if (playerSprite.topCollision && playerSprite.bottomCollision && !lost || playerSprite.leftCollision && playerSprite.rightCollision && !lost){
-      lose();
-      lost = true;
-    }
 
     if (playerSprite.getBounds().x >= 1200 && playerSprite.getBounds().y <= 24 && !won) {
         won = true;
         win();
+    }
+
+    if (!won) {
+        if (playerSprite.y + playerSprite.height/2 < topBorder.positionY && !lost ||
+        playerSprite.y - playerSprite.height/2 > bottomBorder.positionY + bottomBorder.height && !lost||
+        playerSprite.x + playerSprite.width/2 < leftBorder.positionX && !lost || 
+        playerSprite.x - playerSprite.width/2 > rightBorder.positionX + rightBorder.width && !lost) {
+            lose();
+            lost = true;
+        }
+
+        if (playerSprite.topCollision && playerSprite.bottomCollision && !lost && !won || playerSprite.leftCollision && playerSprite.rightCollision && !lost){
+            lose();
+            lost = true;
+        }
     }
     
     if (!colliding) {
