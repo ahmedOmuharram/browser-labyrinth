@@ -10,8 +10,8 @@ const winTextures = [];
 const zeroTexture = PIXI.Texture.from('media/zero.png')
 const oneTexture = PIXI.Texture.from('media/one.png')
 
-let zeroParticleGenerator = new Particles(zeroTexture, -5, 5, -5, 5, 0.1, -0.03, 0.03, 0.005, 0.01, 0.1, 0.5, "#00FF00");
-let oneParticleGenerator = new Particles(oneTexture, -5, 5, -5, 5, 0.1, -0.03, 0.03, 0.005, 0.01, 0.1, 0.5, "#00FF00");
+let zeroParticleGenerator = new Particles(zeroTexture, -5, 5, -5, 5, 0.1, -0.03, 0.03, 0.005, 0.01, 0.1, 0.2, "#00FF00");
+let oneParticleGenerator = new Particles(oneTexture, -5, 5, -5, 5, 0.1, -0.03, 0.03, 0.005, 0.01, 0.1, 0.2, "#00FF00");
 
 for (let i = 0; i < 11; i++)
 {
