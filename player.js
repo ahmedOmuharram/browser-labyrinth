@@ -197,7 +197,7 @@ function lose() {
     }
     app.stage.addChild(text);
     explosion.onComplete = () => {
-        setTimeout(() => setLevel(currentLevel), 1500);
+        setTimeout(setLevel(currentLevel), 1500);
         app.stage.removeChild(explosion);
         lost = false;
     };
