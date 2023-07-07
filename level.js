@@ -87,6 +87,29 @@ class Level{
         levelBlocks[4].positionX = Math.max(playerSprite.x - 100, 400)
     }
   }
+
+  Level5(delta){
+    if (levelBlocks[0]) {
+        levelBlocks[0].positionY = Math.max(playerSprite.y + 10, 0)
+        levelBlocks[0].positionX = Math.max(playerSprite.x - 100, 400)
+    }
+
+    if (levelBlocks[1]) {
+        levelBlocks[1].positionY = Math.min(playerSprite.y - 100, 100)
+        levelBlocks[1].positionX = Math.min(playerSprite.x + 100, 1200)
+        if (levelBlocks[1].height > leftBorder.height){
+            levelBlocks[1].height = leftBorder.height
+        }
+    }
+
+    if (levelBlocks[2]) {
+        levelBlocks[2].positionX = Math.min(playerSprite.x + 100, 1000)
+    }
+
+    if (levelBlocks[4]) {
+        levelBlocks[4].positionY -= 0.7 * delta;
+    }
+  }
 }
 
 window.Level = Level;

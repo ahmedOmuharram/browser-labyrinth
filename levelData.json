@@ -505,5 +505,60 @@
             "fillColor": "#c8c8c8",
             "borders": "tbr"
         }
+    ],
+
+
+    "5": [
+        {
+            "x": "1100",
+            "y": "400",
+            "width": "80",
+            "height": "600",
+            "thickness": 2,
+            "color": "#c8c8c8",
+            "fillColor": "#c8c8c8",
+            "borders": "trl"
+        },
+
+        {
+            "x": "100",
+            "y": "400",
+            "width": "70",
+            "height": "600",
+            "thickness": 2,
+            "color": "#c8c8c8",
+            "fillColor": "#c8c8c8",
+            "borders": "brl"
+        },
+        {
+            "x": "50",
+            "y": "100",
+            "width": "100",
+            "height": "600",
+            "thickness": 2,
+            "color": "#c8c8c8",
+            "fillColor": "#c8c8c8",
+            "borders": "tbrl"
+        },
+        {
+            "x": "0",
+            "y": "200",
+            "width": "1000",
+            "height": "100",
+            "thickness": 2,
+            "color": "#c8c8c8",
+            "fillColor": "#c8c8c8",
+            "borders": "trl"
+        },
+        {
+            "x": "0",
+            "y": "720",
+            "width": "1280",
+            "height": "50",
+            "thickness": 2,
+            "color": "#c8c8c8",
+            "fillColor": "#c8c8c8",
+            "borders": ""
+        }
     ]
 }

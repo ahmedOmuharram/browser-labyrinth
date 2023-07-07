@@ -85,7 +85,7 @@ app.ticker.add(gameLoop);
 
 document.onkeydown = function (e) {
     if (keys[78]) {
-        if (currentLevel < 4) {
+        if (currentLevel < 5) {
             currentLevel++;
             setLevel(currentLevel);
         }
