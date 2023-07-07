@@ -253,13 +253,14 @@ function setLevel(level) {
     leftBorder = new Border(0, 0, 10, 720, 2, "#c8c8c8", 'h', "#c8c8c8");
     rightBorder = new Border(1270, 0, 10, 740, 2, "#c8c8c8", 'h', "#c8c8c8");
     topBorder = new Border(0, 0, 1280, 20, 2, "#c8c8c8", 'v', "#010081");
-    app.stage.addChild(playerSprite);
-    playerSprite.x = screenWidth / 2 - 600;
-    playerSprite.y = 640;
-    playerSprite.height = 40;
     playLevel = new Level(currentLevel.toString(), 0);
     levelBlocks = []
     playLevel.generate();
     blocks.push(topBorder, bottomBorder, leftBorder, rightBorder)
     app.stage.addChild(folderSprite)
+    playerSprite.x = screenWidth / 2 - 600;
+    playerSprite.y = 640;
+    playerSprite.ySpeed = 0;
+    playerSprite.height = 40;
+    app.stage.addChild(playerSprite);
 }
