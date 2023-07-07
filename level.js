@@ -83,9 +83,7 @@ class Level{
 
   }
   Level4(delta){
-    if (levelBlocks[4]) {
-        levelBlocks[4].positionX = Math.max(playerSprite.x - 100, levelBlocks[3].positionX + levelBlocks[3].width);
-    }
+    
   }
 }
 
