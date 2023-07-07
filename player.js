@@ -260,7 +260,7 @@ function setLevel(level) {
     playLevel.generate();
     blocks.push(topBorder, bottomBorder, leftBorder, rightBorder)
     app.stage.addChild(folderSprite)
-    folderSprite.texture = PIXI.Texture.from('/media/folder.png')
+    folderSprite.texture = PIXI.Texture.from('media/folder.png')
     playerSprite.x = screenWidth / 2 - 600;
     playerSprite.y = 640;
     playerSprite.ySpeed = 0;
