@@ -124,7 +124,6 @@ function gameLoop(delta) {
     
     eval(`playLevel.Level${currentLevel}(delta);`);
     
-    
     blocks.forEach(block => {
         block.drawBlock();
     });

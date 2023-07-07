@@ -1,15 +1,11 @@
 const gravity = 0.5;
-const terminalVelocity = 1000000;
+const terminalVelocity = 100;
 let isOnGround = true;
 const playerJumpForce = 12;
 let lost = false;
+let won = false;
 const explosionTextures = [];
-
-for (let i = 0; i < 11; i++)
-{
-    const texture = PIXI.Texture.from(`media/file_crumble_large_png_sequence/File Crumble Large${i + 1}.png`);
-    explosionTextures.push(texture);
-}
+const winTextures = [];
 
 const zeroTexture = PIXI.Texture.from('media/internet.png')
 const oneTexture = PIXI.Texture.from('media/computer.png')
@@ -17,14 +13,34 @@ const oneTexture = PIXI.Texture.from('media/computer.png')
 let zeroParticleGenerator = new Particles(zeroTexture, -20, 20, -20, 20, 0.9, 0.2, 3, 0.005, 0.01);
 let oneParticleGenerator = new Particles(oneTexture, -20, 20, -20, 20, 0.9, 0.2, 3, 0.005, 0.01);
 
+for (let i = 0; i < 11; i++)
+{
+    const texture = PIXI.Texture.from(`media/file_crumble_large_png_sequence/File Crumble Large${i + 1}.png`);
+    explosionTextures.push(texture);
+}
+
+for (let i = 0; i < 14; i++)
+{
+    const texture = PIXI.Texture.from(`media/Folder_Win_Image_Sequence/Folder_Win${i + 1}.png`);
+    winTextures.push(texture);
+}
+
 const playerSprite = PIXI.Sprite.from('media/sprite.png');
 playerSprite.anchor.set(0.5);
 playerSprite.x = screenWidth / 2 - 600;
-playerSprite.y = 500;
+playerSprite.y = screenHeight - 30;
 playerSprite.xSpeed = 0;
 playerSprite.ySpeed = 0;
 playerSprite.width = 36;
 playerSprite.height = 40;
+
+const folderSprite = PIXI.Sprite.from('media/folder.png');
+folderSprite.anchor.set(0.5);
+folderSprite.x = screenWidth - 50;
+folderSprite.y = 40;
+folderSprite.width = 60;
+folderSprite.height = 70;
+
 
 playerSprite.topCollision = false;
 playerSprite.bottomCollision = false;
@@ -32,6 +48,7 @@ playerSprite.leftCollision = false;
 playerSprite.rightCollision = false;
 
 app.stage.addChild(playerSprite);
+app.stage.addChild(folderSprite);
 
 const keys = {
     32: false,
@@ -83,7 +100,7 @@ document.onkeydown = function (e) {
 };
 
 var deltaTime = 0
-function gameLoop(delta) {
+function gameLoop(delta) { 
     playerSprite.ySpeed += gravity * delta * 0.5;
     playerSprite.xSpeed = 0;
     if (playerSprite.ySpeed > terminalVelocity) {
@@ -105,22 +122,32 @@ function gameLoop(delta) {
     playerSprite.bottomCollision = false;
     playerSprite.leftCollision = false;
     playerSprite.rightCollision = false;
+    
     for (let i = 0; i < blocks.length; i++) {
         if (isColliding(playerSprite, blocks[i].graphic)) {
             resolveCollision(playerSprite, blocks[i].graphic);
             colliding = true;
         }
     }
-    if (playerSprite.y + playerSprite.height/2 < topBorder.positionY && !lost ||
+
+    if (playerSprite.getBounds().x >= 1200 && playerSprite.getBounds().y <= 24 && !won && !lost) {
+        won = true;
+        win();
+    }
+
+    if (!won) {
+        if (playerSprite.y + playerSprite.height/2 < topBorder.positionY && !lost ||
         playerSprite.y - playerSprite.height/2 > bottomBorder.positionY + bottomBorder.height && !lost||
         playerSprite.x + playerSprite.width/2 < leftBorder.positionX && !lost || 
         playerSprite.x - playerSprite.width/2 > rightBorder.positionX + rightBorder.width && !lost) {
-          lose();
-          lost = true;
+            lost = true;
+            lose();
         }
-    if (playerSprite.topCollision && playerSprite.bottomCollision && !lost || playerSprite.leftCollision && playerSprite.rightCollision && !lost){
-      lose();
-      lost = true;
+
+        if (playerSprite.topCollision && playerSprite.bottomCollision && !lost && !won || playerSprite.leftCollision && playerSprite.rightCollision && !lost){
+            lost = true;
+            lose();
+        }
     }
     
     if (!colliding) {
@@ -139,6 +166,7 @@ function lose() {
     oneParticleGenerator.createParticles(Math.random() * 10, playerSprite.x, playerSprite.y);
     explosion.x = playerSprite.x;
     explosion.y = playerSprite.y;
+    explosion.animationSpeed = 0.2;
     explosion.width = 60;
     explosion.height = 45;
     explosion.anchor.set(0.5);
@@ -148,8 +176,33 @@ function lose() {
     explosion.onComplete = () => {
         setTimeout(setLevel(currentLevel), 1500);
         app.stage.removeChild(explosion);
+        lost = false;
     };
 }
+
+function win() { 
+    playerSprite.ySpeed = 0;
+    playerSprite.height = 0;
+    const winAnimation = new PIXI.AnimatedSprite(winTextures);
+    winAnimation.x = folderSprite.x;
+    winAnimation.y = folderSprite.y;
+    winAnimation.width = folderSprite.width;
+    winAnimation.height = folderSprite.height;
+    winAnimation.animationSpeed = 0.2;
+    winAnimation.anchor.set(0.5);
+    winAnimation.gotoAndPlay(0);
+    app.stage.addChild(winAnimation);
+    winAnimation.loop = false;
+    currentLevel++;
+    winAnimation.onComplete = () => {
+        if (currentLevel < 3) {
+            setTimeout(setLevel(currentLevel), 1500);
+        }
+        app.stage.removeChild(winAnimation);
+        won = false;
+    };
+}
+
 function setLevel(level) {
     blocks = [];
     bottomBorder.onDragEnd();
@@ -165,11 +218,12 @@ function setLevel(level) {
     topBorder = new Border(0, 0, 1280, 20, 2, "#c8c8c8", 'v', "#010081");
     app.stage.addChild(playerSprite);
     playerSprite.x = screenWidth / 2 - 600;
-    playerSprite.y = 500;
+    playerSprite.y = screenHeight - 30;
     playerSprite.height = 40;
     lost = false;
     playLevel = new Level(currentLevel.toString(), 0);
     levelBlocks = []
     playLevel.generate();
     blocks.push(topBorder, bottomBorder, leftBorder, rightBorder)
+    app.stage.addChild(folderSprite)
 }

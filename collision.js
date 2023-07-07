@@ -1,7 +1,7 @@
 
 function isColliding(obj1, obj2) {
   const { x, y, width, height } = obj1.getBounds();
-  const { x: obj2X, y: obj2Y, width: obj2Width, height: obj2Height } = obj2.getLocalBounds();
+  const { x: obj2X, y: obj2Y, width: obj2Width, height: obj2Height } = obj2.getBounds();
 
   return (
       x + width >= obj2X &&
