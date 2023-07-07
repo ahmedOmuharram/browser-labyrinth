@@ -233,13 +233,14 @@ function win() {
     text.y = folderSprite.y + 50;
     app.stage.addChild(text);
     winAnimation.onComplete = () => {
-        setTimeout(() => setLevel(currentLevel++), 1500);
-        folderSprite.texture = PIXI.Texture.from('media/full-folder.png')
+        setTimeout(() => setLevel(++currentLevel), 1500);
+        folderSprite.texture = PIXI.Texture.from('/media/full-folder.png')
         app.stage.removeChild(winAnimation);
     };
 }
 
 function setLevel(level) {
+    currentLevel = level;
     lost = false;
     won = false;
     blocks = [];
@@ -265,4 +266,5 @@ function setLevel(level) {
     playerSprite.ySpeed = 0;
     playerSprite.height = 40;
     app.stage.addChild(playerSprite);
+    document.getElementsByClassName("taskbar")[0].getElementsByClassName("level-button")[currentLevel].style.display = "inline-block"
 }
