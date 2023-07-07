@@ -473,7 +473,7 @@
             "thickness": 2,
             "color": "#c8c8c8",
             "fillColor": "#c8c8c8",
-            "borders": "tb"
+            "borders": "tbr"
         },
         {
             "x": "1000",
@@ -483,7 +483,7 @@
             "thickness": 2,
             "color": "#c8c8c8",
             "fillColor": "#c8c8c8",
-            "borders": "tb"
+            "borders": "tbr"
         },
         {
             "x": "500",
@@ -493,7 +493,7 @@
             "thickness": 2,
             "color": "#c8c8c8",
             "fillColor": "#c8c8c8",
-            "borders": "tb"
+            "borders": "tbr"
         },
         {
             "x": "500",
@@ -503,7 +503,7 @@
             "thickness": 2,
             "color": "#c8c8c8",
             "fillColor": "#c8c8c8",
-            "borders": "tb"
+            "borders": "tbr"
         }
     ]
 }
