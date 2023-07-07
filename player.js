@@ -11,6 +11,12 @@ for (let i = 0; i < 11; i++)
     explosionTextures.push(texture);
 }
 
+const zeroTexture = PIXI.Texture.from('media/internet.png')
+const oneTexture = PIXI.Texture.from('media/computer.png')
+
+let zeroParticleGenerator = new Particles(zeroTexture, -20, 20, -20, 20, 0.9, 0.2, 3, 0.005, 0.01);
+let oneParticleGenerator = new Particles(oneTexture, -20, 20, -20, 20, 0.9, 0.2, 3, 0.005, 0.01);
+
 const playerSprite = PIXI.Sprite.from('media/sprite.png');
 playerSprite.anchor.set(0.5);
 playerSprite.x = screenWidth / 2 - 600;
@@ -120,12 +126,17 @@ function gameLoop(delta) {
     if (!colliding) {
         isOnGround = false;
     }
+
+    zeroParticleGenerator.renderParticles();
+    oneParticleGenerator.renderParticles();
 }
 
 function lose() { 
     playerSprite.ySpeed = 0;
     playerSprite.height = 0;
     const explosion = new PIXI.AnimatedSprite(explosionTextures);
+    zeroParticleGenerator.createParticles(Math.random() * 10, playerSprite.x, playerSprite.y);
+    oneParticleGenerator.createParticles(Math.random() * 10, playerSprite.x, playerSprite.y);
     explosion.x = playerSprite.x;
     explosion.y = playerSprite.y;
     explosion.width = 60;
