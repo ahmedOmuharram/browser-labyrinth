@@ -3,12 +3,20 @@ const terminalVelocity = 1000000;
 let isOnGround = true;
 const playerJumpForce = 5;
 let lost = false;
+let won = false;
 const explosionTextures = [];
+const winTextures = [];
 
 for (let i = 0; i < 11; i++)
 {
     const texture = PIXI.Texture.from(`media/file_crumble_large_png_sequence/File Crumble Large${i + 1}.png`);
     explosionTextures.push(texture);
+}
+
+for (let i = 0; i < 14; i++)
+{
+    const texture = PIXI.Texture.from(`media/Folder_Win_Image_Sequence/Folder_Win${i + 1}.png`);
+    winTextures.push(texture);
 }
 
 const playerSprite = PIXI.Sprite.from('media/sprite.png');
@@ -20,12 +28,21 @@ playerSprite.ySpeed = 0;
 playerSprite.width = 36;
 playerSprite.height = 40;
 
+const folderSprite = PIXI.Sprite.from('media/folder.png');
+folderSprite.anchor.set(0.5);
+folderSprite.x = screenWidth - 50;
+folderSprite.y = 40;
+folderSprite.width = 60;
+folderSprite.height = 70;
+
+
 playerSprite.topCollision = false;
 playerSprite.bottomCollision = false;
 playerSprite.leftCollision = false;
 playerSprite.rightCollision = false;
 
 app.stage.addChild(playerSprite);
+app.stage.addChild(folderSprite);
 
 const keys = {
     32: false,
@@ -77,7 +94,7 @@ document.onkeydown = function (e) {
 };
 
 var deltaTime = 0
-function gameLoop(delta) {
+function gameLoop(delta) { 
     playerSprite.ySpeed += gravity;
     playerSprite.xSpeed = 0;
     if (playerSprite.ySpeed > terminalVelocity) {
@@ -98,6 +115,7 @@ function gameLoop(delta) {
     playerSprite.bottomCollision = false;
     playerSprite.leftCollision = false;
     playerSprite.rightCollision = false;
+    
     for (let i = 0; i < blocks.length; i++) {
         if (isColliding(playerSprite, blocks[i].graphic)) {
             resolveCollision(playerSprite, blocks[i].graphic);
@@ -111,9 +129,15 @@ function gameLoop(delta) {
           lose();
           lost = true;
         }
+
     if (playerSprite.topCollision && playerSprite.bottomCollision && !lost || playerSprite.leftCollision && playerSprite.rightCollision && !lost){
       lose();
       lost = true;
+    }
+
+    if (playerSprite.getBounds().x >= 1200 && playerSprite.getBounds().y <= 24 && !won) {
+        won = true;
+        win();
     }
     
     if (!colliding) {
@@ -127,6 +151,7 @@ function lose() {
     const explosion = new PIXI.AnimatedSprite(explosionTextures);
     explosion.x = playerSprite.x;
     explosion.y = playerSprite.y;
+    explosion.animationSpeed = 0.2;
     explosion.width = 60;
     explosion.height = 45;
     explosion.anchor.set(0.5);
@@ -138,6 +163,29 @@ function lose() {
         app.stage.removeChild(explosion);
     };
 }
+
+function win() { 
+    playerSprite.ySpeed = 0;
+    playerSprite.height = 0;
+    const winAnimation = new PIXI.AnimatedSprite(winTextures);
+    winAnimation.x = folderSprite.x;
+    winAnimation.y = folderSprite.y;
+    winAnimation.width = folderSprite.width;
+    winAnimation.height = folderSprite.height;
+    winAnimation.animationSpeed = 0.2;
+    winAnimation.anchor.set(0.5);
+    winAnimation.gotoAndPlay(0);
+    app.stage.addChild(winAnimation);
+    winAnimation.loop = false;
+    won = false;
+    winAnimation.onComplete = () => {
+        if (currentLevel < 3) {
+            setTimeout(setLevel(currentLevel++), 1500);
+        }
+        app.stage.removeChild(winAnimation);
+    };
+}
+
 function setLevel(level) {
     blocks = [];
     bottomBorder.onDragEnd();
@@ -160,4 +208,5 @@ function setLevel(level) {
     levelBlocks = []
     playLevel.generate();
     blocks.push(topBorder, bottomBorder, leftBorder, rightBorder)
+    app.stage.addChild(folderSprite)
 }
