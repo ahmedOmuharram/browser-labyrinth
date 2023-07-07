@@ -1,7 +1,7 @@
-const gravity = 1;
+const gravity = 0.1;
 const terminalVelocity = 1000000;
 let isOnGround = true;
-const playerJumpForce = 30;
+const playerJumpForce = 5;
 let lost = false;
 const explosionTextures = [];
 
@@ -39,7 +39,7 @@ const keys = {
     87: false
 };
 
-const speed = 20;
+const speed = 5;
 
 document.addEventListener('keydown', onKeyDown);
 document.addEventListener('keyup', onKeyUp);
@@ -76,22 +76,23 @@ document.onkeydown = function (e) {
     }
 };
 
+var deltaTime = 0
 function gameLoop(delta) {
-    playerSprite.ySpeed += gravity * delta;
+    playerSprite.ySpeed += gravity;
     playerSprite.xSpeed = 0;
-    if (playerSprite.ySpeed > terminalVelocity * delta) {
-        playerSprite.ySpeed = terminalVelocity * delta;
+    if (playerSprite.ySpeed > terminalVelocity) {
+        playerSprite.ySpeed = terminalVelocity;
     }
     
     if ((keys[32] || keys[38] || keys[87]) && isOnGround) {
-        playerSprite.ySpeed = -playerJumpForce * delta;
+        playerSprite.ySpeed = -playerJumpForce;
         isOnGround = false;
     }
-    playerSprite.xSpeed -= (keys[37] || keys[65]) * speed * delta;
-    playerSprite.xSpeed += (keys[39] || keys[68]) * speed * delta;
+    playerSprite.xSpeed -= (keys[37] || keys[65]) * speed;
+    playerSprite.xSpeed += (keys[39] || keys[68]) * speed;
 
-    playerSprite.x += playerSprite.xSpeed * delta;
-    playerSprite.y += playerSprite.ySpeed * delta;
+    playerSprite.x += playerSprite.xSpeed;
+    playerSprite.y += playerSprite.ySpeed;
     colliding = false;
     playerSprite.topCollision = false;
     playerSprite.bottomCollision = false;
