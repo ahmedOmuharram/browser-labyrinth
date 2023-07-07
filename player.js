@@ -1,5 +1,5 @@
 const gravity = 0.5;
-const terminalVelocity = 1000000;
+const terminalVelocity = 100;
 let isOnGround = true;
 const playerJumpForce = 12;
 let lost = false;
@@ -22,7 +22,7 @@ for (let i = 0; i < 14; i++)
 const playerSprite = PIXI.Sprite.from('media/sprite.png');
 playerSprite.anchor.set(0.5);
 playerSprite.x = screenWidth / 2 - 600;
-playerSprite.y = 500;
+playerSprite.y = screenHeight - 30;
 playerSprite.xSpeed = 0;
 playerSprite.ySpeed = 0;
 playerSprite.width = 36;
@@ -205,7 +205,7 @@ function setLevel(level) {
     topBorder = new Border(0, 0, 1280, 20, 2, "#c8c8c8", 'v', "#010081");
     app.stage.addChild(playerSprite);
     playerSprite.x = screenWidth / 2 - 600;
-    playerSprite.y = 500;
+    playerSprite.y = screenHeight - 30;
     playerSprite.height = 40;
     lost = false;
     playLevel = new Level(currentLevel.toString(), 0);
