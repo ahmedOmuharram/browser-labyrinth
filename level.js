@@ -110,6 +110,16 @@ class Level{
         levelBlocks[4].positionY -= 0.7 * delta;
     }
   }
+
+  Level6(delta){
+    elapsed += delta;
+    for (let i = 0; i < 24; i++) {
+        if (levelBlocks[i]) {
+            levelBlocks[i].positionX = screenWidth/2 + i * 20.0 * Math.cos((elapsed * i/100.0))
+            levelBlocks[i].positionY = screenHeight/2  + i * 20.0 * Math.sin((elapsed * i/100.0))
+        }  
+    }
+  }
 }
 
 window.Level = Level;
