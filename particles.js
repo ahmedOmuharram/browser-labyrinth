@@ -33,13 +33,13 @@ class Particles{
             app.stage.addChild(newParticle);
         }
     }
-    renderParticles(){
+    renderParticles(delta){
         this.particles.forEach(particle => {
-            particle.speedY += particle.gravity;
-            particle.x += particle.speedX;
-            particle.y += particle.speedY;
-            particle.rotation += particle.speedRotation;
-            particle.alpha -= particle.speedAlpha;
+            particle.speedY += particle.gravity * delta * 0.5;
+            particle.x += particle.speedX * delta;
+            particle.y += particle.speedY * delta;
+            particle.rotation += particle.speedRotation * delta;
+            particle.alpha -= particle.speedAlpha * delta;
             if (particle.alpha <= 0)
                 app.stage.removeChild(particle);
         });
