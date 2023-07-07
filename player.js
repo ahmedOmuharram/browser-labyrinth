@@ -124,7 +124,7 @@ function gameLoop(delta) {
         }
     }
 
-    if (playerSprite.getBounds().x >= 1200 && playerSprite.getBounds().y <= 24 && !won) {
+    if (playerSprite.getBounds().x >= 1200 && playerSprite.getBounds().y <= 24 && !won && !lost) {
         won = true;
         win();
     }
@@ -134,13 +134,13 @@ function gameLoop(delta) {
         playerSprite.y - playerSprite.height/2 > bottomBorder.positionY + bottomBorder.height && !lost||
         playerSprite.x + playerSprite.width/2 < leftBorder.positionX && !lost || 
         playerSprite.x - playerSprite.width/2 > rightBorder.positionX + rightBorder.width && !lost) {
-            lose();
             lost = true;
+            lose();
         }
 
         if (playerSprite.topCollision && playerSprite.bottomCollision && !lost && !won || playerSprite.leftCollision && playerSprite.rightCollision && !lost){
-            lose();
             lost = true;
+            lose();
         }
     }
     
@@ -165,6 +165,7 @@ function lose() {
     explosion.onComplete = () => {
         setTimeout(setLevel(currentLevel), 1500);
         app.stage.removeChild(explosion);
+        lost = false;
     };
 }
 
@@ -181,12 +182,13 @@ function win() {
     winAnimation.gotoAndPlay(0);
     app.stage.addChild(winAnimation);
     winAnimation.loop = false;
-    won = false;
+    currentLevel++;
     winAnimation.onComplete = () => {
         if (currentLevel < 3) {
-            setTimeout(setLevel(currentLevel++), 1500);
+            setTimeout(setLevel(currentLevel), 1500);
         }
         app.stage.removeChild(winAnimation);
+        won = false;
     };
 }
 
