@@ -309,14 +309,16 @@
                 let index = 0;
 
                 function changeRectangleColor() {
-                    const currentRectangle = rectangles[index];
-                    currentRectangle.style.backgroundColor = '#010081';
-                    blueRectanglesCount++;
+                    if (index < 15) {
+                        const currentRectangle = rectangles[index];
+                        currentRectangle.style.backgroundColor = '#010081';
+                        blueRectanglesCount++;
 
-                    const percentage = (blueRectanglesCount / rectangles.length) * 100;
-                    loadingText.innerText = `${percentage.toFixed(0)}%`;
+                        const percentage = (blueRectanglesCount / rectangles.length) * 100;
+                        loadingText.innerText = `${percentage.toFixed(0)}%`;
 
-                    index++;
+                        index++;
+                    }
                 }
 
                 function setRandomInterval() {
