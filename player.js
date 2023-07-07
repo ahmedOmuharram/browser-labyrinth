@@ -234,6 +234,7 @@ function win() {
     app.stage.addChild(text);
     winAnimation.onComplete = () => {
         setTimeout(() => setLevel(currentLevel++), 1500);
+        folderSprite.texture = PIXI.Texture.from('/media/Folder_Win_Image_Sequence/Folder_Win14.png')
         app.stage.removeChild(winAnimation);
     };
 }
@@ -258,6 +259,7 @@ function setLevel(level) {
     playLevel.generate();
     blocks.push(topBorder, bottomBorder, leftBorder, rightBorder)
     app.stage.addChild(folderSprite)
+    folderSprite.texture = PIXI.Texture.from('/media/folder.png')
     playerSprite.x = screenWidth / 2 - 600;
     playerSprite.y = 640;
     playerSprite.ySpeed = 0;
