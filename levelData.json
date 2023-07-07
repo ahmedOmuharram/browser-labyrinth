@@ -556,8 +556,8 @@
             "width": "1280",
             "height": "50",
             "thickness": 2,
-            "color": "#c8c8c8",
-            "fillColor": "#c8c8c8",
+            "color": "#ff0081",
+            "fillColor": "#ff0081",
             "borders": ""
         }
     ]
