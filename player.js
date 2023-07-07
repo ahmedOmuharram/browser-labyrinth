@@ -28,7 +28,7 @@ for (let i = 0; i < 14; i++)
 const playerSprite = PIXI.Sprite.from('media/sprite.png');
 playerSprite.anchor.set(0.5);
 playerSprite.x = screenWidth / 2 - 600;
-playerSprite.y = screenHeight - 30;
+playerSprite.y = 640;
 playerSprite.xSpeed = 0;
 playerSprite.ySpeed = 0;
 playerSprite.width = 36;
@@ -197,9 +197,8 @@ function lose() {
     }
     app.stage.addChild(text);
     explosion.onComplete = () => {
-        setTimeout(setLevel(currentLevel), 1500);
+        setTimeout(() => setLevel(currentLevel), 1500);
         app.stage.removeChild(explosion);
-        lost = false;
     };
 }
 
@@ -216,7 +215,6 @@ function win() {
     winAnimation.gotoAndPlay(0);
     app.stage.addChild(winAnimation);
     winAnimation.loop = false;
-    currentLevel++;
     const text = new PIXI.Text("64 bytes from 8.8.8.8", {
         fontFamily: 'Levi Windows',
         fontSize: 24,
@@ -235,15 +233,14 @@ function win() {
     text.y = folderSprite.y + 50;
     app.stage.addChild(text);
     winAnimation.onComplete = () => {
-        if (currentLevel < 3) {
-            setTimeout(() => setLevel(currentLevel), 1500);
-        }
+        setTimeout(() => setLevel(currentLevel++), 1500);
         app.stage.removeChild(winAnimation);
-        won = false;
     };
 }
 
 function setLevel(level) {
+    lost = false;
+    won = false;
     blocks = [];
     bottomBorder.onDragEnd();
     leftBorder.onDragEnd();
@@ -258,9 +255,8 @@ function setLevel(level) {
     topBorder = new Border(0, 0, 1280, 20, 2, "#c8c8c8", 'v', "#010081");
     app.stage.addChild(playerSprite);
     playerSprite.x = screenWidth / 2 - 600;
-    playerSprite.y = screenHeight - 70;
+    playerSprite.y = 640;
     playerSprite.height = 40;
-    lost = false;
     playLevel = new Level(currentLevel.toString(), 0);
     levelBlocks = []
     playLevel.generate();
