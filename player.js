@@ -234,7 +234,7 @@ function win() {
     app.stage.addChild(text);
     winAnimation.onComplete = () => {
         setTimeout(() => setLevel(currentLevel++), 1500);
-        folderSprite.texture = PIXI.Texture.from('/media/Folder_Win_Image_Sequence/Folder_Win14.png')
+        folderSprite.texture = PIXI.Texture.from('/media/full-folder.png')
         app.stage.removeChild(winAnimation);
     };
 }
