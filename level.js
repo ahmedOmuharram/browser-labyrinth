@@ -86,6 +86,12 @@ class Level{
     if (levelBlocks[4]) {
         levelBlocks[4].positionX = Math.max(playerSprite.x - 100, 400)
     }
+    if (levelBlocks[10]) {
+        if(levelBlocks[10].positionX < 200 - 1280)
+            levelBlocks[10].positionX += 0.3 * delta;
+        else
+            levelBlocks[10].positionX += 5 * delta;
+    }
   }
 
   Level5(delta){

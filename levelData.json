@@ -504,6 +504,16 @@
             "color": "#c8c8c8",
             "fillColor": "#c8c8c8",
             "borders": "tbr"
+        },
+        {
+            "x": "-1280",
+            "y": "0",
+            "width": "1280",
+            "height": "720",
+            "thickness": 2,
+            "color": "#ff0081",
+            "fillColor": "#ff0081",
+            "borders": ""
         }
     ],
 
