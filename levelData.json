@@ -1,44 +1,44 @@
 {
     "0": [
         {
-            "x": "leftBorder.positionX + 150",
-            "y": "leftBorder.positionY + 20",
-            "width": "2 * leftBorder.width",
-            "height": "Math.min(leftBorder.height, 3 * bottomBorder.width/4) - 20",
+            "x": "325",
+            "y": "160",
+            "width": "70",
+            "height": "640",
             "thickness": 2,
             "color": "#c8c8c8",
             "fillColor": "#c8c8c8",
-            "borders": "tl"
+            "borders": "t"
         },
         {
-            "x": "screenWidth/2 - 10",
-            "y": "screenHeight/2 - 10",
-            "width": "screenWidth/2",
-            "height": "screenHeight/2",
+            "x": "0",
+            "y": "325",
+            "width": "600",
+            "height": "70",
             "thickness": 2,
             "color": "#c8c8c8",
             "fillColor": "#c8c8c8",
-            "borders": "br"
+            "borders": "r"
         },
         {
-            "x": "screenWidth/2 + 50",
-            "y": "screenHeight/2 + 50",
-            "width": "leftBorder.positionX/2",
-            "height": "topBorder.positionY/2",
+            "x": "955",
+            "y": "20",
+            "width": "70",
+            "height": "640",
             "thickness": 2,
             "color": "#c8c8c8",
             "fillColor": "#c8c8c8",
-            "borders": "bl"
+            "borders": "b"
         },
         {
-            "x": "screenWidth/2 + 50",
-            "y": "screenHeight/2 + 50",
-            "width": "leftBorder.positionX/2",
-            "height": "topBorder.positionY/2",
+            "x": "680",
+            "y": "325",
+            "width": "600",
+            "height": "70",
             "thickness": 2,
             "color": "#c8c8c8",
             "fillColor": "#c8c8c8",
-            "borders": "br"
+            "borders": "l"
         }
     ],
 
@@ -145,7 +145,7 @@
             "thickness": 2,
             "color": "#c8c8c8",
             "fillColor": "#c8c8c8",
-            "borders": "l"
+            "borders": "tl"
         },
         {
             "x": "leftBorder.positionX + 200",
@@ -155,7 +155,7 @@
             "thickness": 2,
             "color": "#c8c8c8",
             "fillColor": "#c8c8c8",
-            "borders": "b"
+            "borders": "t"
         },
         {
             "x": "leftBorder.positionX + 300",
@@ -165,7 +165,7 @@
             "thickness": 2,
             "color": "#c8c8c8",
             "fillColor": "#c8c8c8",
-            "borders": "r"
+            "borders": "tr"
         },    
         {
             "x": "rightBorder.positionX - 300",
@@ -185,7 +185,7 @@
             "thickness": 2,
             "color": "#c8c8c8",
             "fillColor": "#c8c8c8",
-            "borders": "b"
+            "borders": "t"
         },
 
         {
@@ -196,7 +196,7 @@
             "thickness": 2,
             "color": "#c8c8c8",
             "fillColor": "#c8c8c8",
-            "borders": "r"
+            "borders": "tr"
         }
         
     ],
