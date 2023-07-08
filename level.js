@@ -416,7 +416,23 @@ class Level{
     }
 
     Level8(delta){
-
+        elapsed += delta;
+        for (let i = 0; i < 64; i++) {
+            if (levelBlocks[i]) {
+                var spiralIndex = Math.floor(i / 16);
+                var rotationAngle = spiralIndex * (Math.PI / 2);
+                
+                var basePositionX = screenWidth / 2 + (i % 16) * 20.0 * Math.cos((elapsed * (i % 16) / 100.0));
+                var basePositionY = screenHeight / 2 + (i % 16) * 20.0 * Math.sin((elapsed * (i % 16) / 100.0));
+                
+                var rotatedPositionX = basePositionX * Math.cos(rotationAngle) - basePositionY * Math.sin(rotationAngle);
+                var rotatedPositionY = basePositionX * Math.sin(rotationAngle) + basePositionY * Math.cos(rotationAngle);
+                
+                levelBlocks[i].positionX = rotatedPositionX;
+                levelBlocks[i].positionY = rotatedPositionY;
+            }
+            
+        }
     }
 
     Level9(delta){
