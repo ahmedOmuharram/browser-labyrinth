@@ -51,19 +51,19 @@ class Level{
                 this.blocks.push(block);       
             });
         });
-        if (currentLevel == 8)
+        if (currentLevel == 9)
             eval(`playLevel.InitiateLevel${currentLevel}();`);
     }).catch(error => {
         console.error('Error:', error);
     });
   }
-  Level0(delta){
+  Level1(delta){
 
    }
-  Level1(delta){
+  Level2(delta){
     
   }
-  Level2(delta){
+  Level3(delta){
     for (let i = 0; i < 7; i++) {
         if (levelBlocks[i]) {
             if (i == 0) {
@@ -79,10 +79,10 @@ class Level{
         }
     }
   }
-  Level3(delta){
+  Level4(delta){
 
   }
-  Level4(delta){
+  Level5(delta){
     if (levelBlocks[4]) {
         levelBlocks[4].positionX = Math.max(playerSprite.x - 100, 400)
     }
@@ -94,7 +94,7 @@ class Level{
     }
   }
 
-  Level5(delta){
+  Level6(delta){
     if (levelBlocks[0]) {
         levelBlocks[0].positionY = Math.max(playerSprite.y + 10, 0)
         levelBlocks[0].positionX = Math.max(playerSprite.x - 100, 400)
@@ -370,7 +370,7 @@ class Level{
     }
   }*/
 
-    Level6(delta){
+    Level7(delta){
         for (let i = 0; i < 6; i++) {
             if (levelBlocks[i]) {
                 levelBlocks[i].positionX += 5 * delta;
@@ -383,7 +383,7 @@ class Level{
         }
     }
 
-    Level7(delta){
+    Level8(delta){
         elapsed += delta;
         for (let i = 0; i < 52; i++) {
             if (levelBlocks[i]) {
@@ -405,12 +405,12 @@ class Level{
         leftBorder.graphic.interactive = false;
         bottomBorder.graphic.interactive = false;
     }
-    InitiateLevel8(){
+    InitiateLevel9(){
         new Cannon(630, 350, 20, 20, 2, "#ff0081", "v", "#ff0081", 10, 20, -90, 90);
         cannonInterval = 0;
         spinDirection = 1;
     }
-    Level8(delta){
+    Level9(delta){
         if (elapsed > 200)
             spinDirection = -1;
         elapsed += spinDirection * delta;
@@ -442,7 +442,7 @@ class Level{
         }
     }
 
-    Level9(delta){
+    Level10(delta){
         backgroundScreen.fillColor = "#000000";
         topBorder.color = "#00ff00"; 
         topBorder.fillColor = "#00ff00";
@@ -509,7 +509,7 @@ function setLevel(level) {
     playLevel = new Level(currentLevel.toString(), 0);
     levelBlocks = []
     playLevel.generate();
-    if (currentLevel != 9) {
+    if (currentLevel != 10) {
         document.getElementById("body").style.backgroundColor = "#008080";
         app.renderer.backgroundColor = "#008080";
         document.getElementById("body").style.removeProperty("background-image");
@@ -535,6 +535,6 @@ function setLevel(level) {
     playerSprite.ySpeed = 0;
     playerSprite.height = 40;
     app.stage.addChild(playerSprite);
-    document.getElementsByClassName("taskbar")[0].getElementsByClassName("level-button")[currentLevel].style.display = "inline-block"
+    document.getElementsByClassName("taskbar")[0].getElementsByClassName("level-button")[currentLevel-1].style.display = "inline-block"
 }
 window.Level = Level;

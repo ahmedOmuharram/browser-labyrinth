@@ -4,7 +4,7 @@ let elapsed = 0;
 let spinDirection = 1;
 let cannonInterval = 0;
 
-let currentLevel = 0;
+let currentLevel = 1;
 
 const app = new PIXI.Application({ 
     antialias: true,
@@ -38,13 +38,13 @@ blocks.push(topBorder, bottomBorder, leftBorder, rightBorder)
 
 document.onkeydown = function (e) {
     if (e.key == "n" || e.key == "N") {
-        if (currentLevel < 9) {
+        if (currentLevel < 10) {
             setLevel(++currentLevel);
         }
     }
 
     if (e.key == "p" || e.key == "P") {
-        if (currentLevel > 0){
+        if (currentLevel > 1){
             setLevel(--currentLevel);
         }
     }

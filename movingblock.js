@@ -6,7 +6,7 @@ class MovingBlock extends Block{
         this.gravity = gravity;
     }
     drawBlock(delta) {
-        if (this.positionX > 1280 || this.positionX < -1 * this.width || this.positionY > 720 || this.positionY < -1 * this.height){
+        if (this.positionX > screenWidth || this.positionX < -1 * this.width || this.positionY > screenHeight || this.positionY < -1 * this.height){
             app.stage.removeChild(this);
             blocks.splice(blocks.indexOf(this), 1);
             delete this;

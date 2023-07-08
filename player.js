@@ -148,7 +148,7 @@ function lose() {
         dropShadowDistance: 2,
     })
     const explosion = new PIXI.AnimatedSprite(explosionTextures);
-    if (currentLevel == 9) {
+    if (currentLevel == 10) {
         text.tint = "#00ff00";
         explosion.tint = "#00ff00";
     }
@@ -196,7 +196,7 @@ function win() {
         dropShadowDistance: 2,
     })
     const winAnimation = new PIXI.AnimatedSprite(winTextures);
-    if (currentLevel == 9) {
+    if (currentLevel == 10) {
         text.tint = "#00ff00";
         winAnimation.tint = "#00ff00";
     }
