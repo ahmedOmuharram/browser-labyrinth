@@ -51,24 +51,30 @@ class Level{
                 this.blocks.push(block);       
             });
         });
-        eval(`playLevel.InitiateLevel${currentLevel}();`);
+        if (currentLevel == 0)
+            eval(`playLevel.InitiateLevel${currentLevel}();`);
     }).catch(error => {
         console.error('Error:', error);
     });
   }
   InitiateLevel0(){
-    new Cannon(640, 360, 20, 20, 2, null, "v", null, 20, 30, -90, 90);
+    new Cannon(640, 360, 20, 20, 2, null, "v", null, 20, 20, -90, 90);
   }
   Level0(delta){
-    if (playerSprite.x > screenWidth/2) {
         elapsed += delta;
         if (elapsed > 100) {
-            if (levelBlocks[4])
-                levelBlocks[4].shoot(100,20,20,2,null,null,0.1);
+            if (levelBlocks[4]) {
+                let angle = Math.atan2(playerSprite.y - levelBlocks[4].positionY, playerSprite.x - levelBlocks[4].positionX) * (180 / Math.PI)
+                levelBlocks[4].minAngle = angle-10;
+                levelBlocks[4].maxAngle = angle+10;
+                levelBlocks[4].shoot(100,20,20,2,null,null,0);
+            }
             elapsed -= 100;
         }
-    }
    }
+   InitiateLevel1(){
+    new Cannon(640, 360, 20, 20, 2, null, "v", null, 20, 30, -90, 90);
+  }
   Level1(delta){
     
   }
