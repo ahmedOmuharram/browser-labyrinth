@@ -87,7 +87,7 @@ class Level{
         levelBlocks[4].positionX = Math.max(playerSprite.x - 100, 400)
     }
     if (levelBlocks[10]) {
-        if (playerSprite.positionY < 100)
+        if (playerSprite.positionY > 100)
             levelBlocks[10].positionX += 0.2 * delta;
         else
             levelBlocks[10].positionX += 4 * delta;
