@@ -401,7 +401,8 @@ class Level{
         }
         if (isColliding(playerSprite, rightBorder.graphic)) {
             isOnGround = false;
-        } 
+        }
+        leftBorder.graphic.interactive = false;
         bottomBorder.graphic.interactive = false;
     }
 }

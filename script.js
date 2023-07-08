@@ -35,16 +35,13 @@ blocks.push(topBorder, bottomBorder, leftBorder, rightBorder)
 
 
 document.onkeydown = function (e) {
-    console.log(e.key)
     if (e.key == "n" || e.key == "N") {
-        console.log("WHY")
-        if (currentLevel < 6) {
+        if (currentLevel < 7) {
             setLevel(++currentLevel);
         }
     }
 
     if (e.key == "p" || e.key == "P") {
-        console.log("HOW")
         if (currentLevel > 0){
             setLevel(--currentLevel);
         }
