@@ -51,13 +51,22 @@ class Level{
                 this.blocks.push(block);       
             });
         });
+        eval(`playLevel.InitiateLevel${currentLevel}();`);
     }).catch(error => {
         console.error('Error:', error);
     });
   }
+  InitiateLevel0(){
+    new Cannon(640, 360, 20, 20, 2, null, "v", null, 20, 30, -90, 90);
+  }
   Level0(delta){
-    if (levelBlocks[0]) {
-        levelBlocks[0].height = Math.min(leftBorder.height, 3 * bottomBorder.width/4) - 20;
+    if (playerSprite.x > screenWidth/2) {
+        elapsed += delta;
+        if (elapsed > 100) {
+            if (levelBlocks[4])
+                levelBlocks[4].shoot(100,20,20,2,null,null,0.1);
+            elapsed -= 100;
+        }
     }
    }
   Level1(delta){
