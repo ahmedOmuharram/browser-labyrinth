@@ -36,7 +36,7 @@ blocks.push(topBorder, bottomBorder, leftBorder, rightBorder)
 
 document.onkeydown = function (e) {
     if (e.key == "n" || e.key == "N") {
-        if (currentLevel < 7) {
+        if (currentLevel < 9) {
             setLevel(++currentLevel);
         }
     }

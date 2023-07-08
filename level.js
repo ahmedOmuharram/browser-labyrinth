@@ -405,6 +405,14 @@ class Level{
         leftBorder.graphic.interactive = false;
         bottomBorder.graphic.interactive = false;
     }
+
+    Level8(delta){
+        
+    }
+
+    Level9(delta){
+        
+    }
 }
 function setLevel(level) {
     currentLevel = level;
