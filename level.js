@@ -382,6 +382,28 @@ class Level{
             }
         }
     }
+
+    Level7(delta){
+        elapsed += delta;
+        for (let i = 0; i < 52; i++) {
+            if (levelBlocks[i]) {
+                if (i < 16) {
+                    levelBlocks[i].positionX = i * 20.0 * Math.cos((elapsed * i/100.0))
+                    levelBlocks[i].positionY = i * 20.0 * Math.sin((elapsed * i/100.0))
+                } else if (i < 32) {
+                    levelBlocks[i].positionX = screenWidth + (i - 16) * 20.0 * Math.cos((elapsed * (i - 16)/100.0))
+                    levelBlocks[i].positionY = screenHeight + (i - 16) * 20.0 * Math.sin((elapsed * (i - 16)/100.0))
+                } else if (i < 52) {
+                    levelBlocks[i].positionX = screenWidth/2 + (i - 32) * 12.0 * Math.cos((elapsed * (i - 32)/100.0))
+                    levelBlocks[i].positionY = screenHeight/2 + (i - 32) * 12.0 * Math.sin((elapsed * (i - 32)/100.0))
+                }
+            } 
+        }
+        if (isColliding(playerSprite, rightBorder.graphic)) {
+            isOnGround = false;
+        } 
+        bottomBorder.graphic.interactive = false;
+    }
 }
 
 window.Level = Level;
