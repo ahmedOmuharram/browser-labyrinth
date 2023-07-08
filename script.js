@@ -151,7 +151,7 @@ function gameLoop(delta) {
     oneParticleGenerator.renderParticles(delta);
 
     blocks.forEach(block => {
-        block.drawBlock();
+        block.drawBlock(delta);
     });
     backgroundScreen.drawBlock();
 }
