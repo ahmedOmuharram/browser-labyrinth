@@ -139,7 +139,7 @@ function gameLoop(delta) {
     } else {
         document.getElementById("main").style.borderRightColor = "#ff0081";
     }
-    
+
     backgroundScreen.positionX = leftBorder.positionX;
     backgroundScreen.width = rightBorder.positionX - leftBorder.positionX + rightBorder.width;
     backgroundScreen.positionY = topBorder.positionY;

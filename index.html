@@ -144,20 +144,20 @@
             background-color: #0000bb;
         }
 
-        .grid-container, .grid-container-bottom {
+        #grid-container, #grid-container-bottom {
             display: grid;
             grid-template-columns: repeat(1, 50px);
             grid-gap: 10px;
             position: absolute;
         }
 
-        .grid-container {
+        #grid-container {
             top: 20px;
             left: 20px;
             z-index: -1;
         }
 
-        .grid-container-bottom {
+        #grid-container-bottom {
             display: grid;
             grid-template-columns: repeat(1, 50px);
             grid-gap: 10px;
@@ -241,7 +241,7 @@
         }
     </style>
     </head>
-<body>
+<body id="body">
     <!-- <div class="object solid" id="info" style="position:absolute; background-color: #c3c3c3; top: calc(50vh - 360px); right: calc(50vw - 640px); width: 50px; height: 50px"></div>
     <div class="text">
         Welcome to Browser's Labyrinth
@@ -283,9 +283,9 @@
         </div>
     </div>
     <center id="canvas" style="display: none;">
-        <span class="animated-text" style="display: flex;">Browser's Labyrinth</span>
+        <span class="animated-text" id="top-text" style="display: flex;">Browser's Labyrinth</span>
         <!-- Icons -->
-        <div class="grid-container">
+        <div id="grid-container">
             <div class="grid-item">
                 <img src="media/computer.png" alt="my computer img" width="50" height="50">
                 <div>My Computer</div>
@@ -299,7 +299,7 @@
                 <div>Internet</div>
             </div>
         </div>
-        <div class="grid-container-bottom">
+        <div id="grid-container-bottom">
             <button class="grid-item-bottom">
                 <img src="media/info.png" style="bottom: 20px; right: 20px" alt="info img" width="50" height="50">
                 <div>Info</div>

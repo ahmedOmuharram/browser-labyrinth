@@ -135,18 +135,6 @@ function gameLoop(delta) {
 function lose() { 
     playerSprite.ySpeed = 0;
     playerSprite.height = 0;
-    const explosion = new PIXI.AnimatedSprite(explosionTextures);
-    zeroParticleGenerator.createParticles(Math.random() * 10, playerSprite.x, playerSprite.y);
-    oneParticleGenerator.createParticles(Math.random() * 10, playerSprite.x, playerSprite.y);
-    explosion.x = playerSprite.x;
-    explosion.y = playerSprite.y;
-    explosion.animationSpeed = 0.2;
-    explosion.width = 60;
-    explosion.height = 45;
-    explosion.anchor.set(0.5);
-    explosion.gotoAndPlay(0);
-    app.stage.addChild(explosion);
-    explosion.loop = false;
     const text = new PIXI.Text("Request timed out.", {
         fontFamily: 'Levi Windows',
         fontSize: 24,
@@ -159,6 +147,22 @@ function lose() {
         dropShadowBlur: 2,
         dropShadowDistance: 2,
     })
+    const explosion = new PIXI.AnimatedSprite(explosionTextures);
+    if (currentLevel == 9) {
+        text.tint = "#00ff00";
+        explosion.tint = "#00ff00";
+    }
+    zeroParticleGenerator.createParticles(Math.random() * 10, playerSprite.x, playerSprite.y);
+    oneParticleGenerator.createParticles(Math.random() * 10, playerSprite.x, playerSprite.y);
+    explosion.x = playerSprite.x;
+    explosion.y = playerSprite.y;
+    explosion.animationSpeed = 0.2;
+    explosion.width = 60;
+    explosion.height = 45;
+    explosion.anchor.set(0.5);
+    explosion.gotoAndPlay(0);
+    app.stage.addChild(explosion);
+    explosion.loop = false;
     text.anchor.set(0.5);
     text.resolution = 1;
     text.x = Math.max(playerSprite.x, 100);
@@ -179,16 +183,6 @@ function lose() {
 function win() { 
     playerSprite.ySpeed = 0;
     playerSprite.height = 0;
-    const winAnimation = new PIXI.AnimatedSprite(winTextures);
-    winAnimation.x = folderSprite.x;
-    winAnimation.y = folderSprite.y;
-    winAnimation.width = folderSprite.width;
-    winAnimation.height = folderSprite.height;
-    winAnimation.animationSpeed = 0.2;
-    winAnimation.anchor.set(0.5);
-    winAnimation.gotoAndPlay(0);
-    app.stage.addChild(winAnimation);
-    winAnimation.loop = false;
     const text = new PIXI.Text("64 bytes from 8.8.8.8", {
         fontFamily: 'Levi Windows',
         fontSize: 24,
@@ -201,6 +195,20 @@ function win() {
         dropShadowBlur: 2,
         dropShadowDistance: 2,
     })
+    const winAnimation = new PIXI.AnimatedSprite(winTextures);
+    if (currentLevel == 9) {
+        text.tint = "#00ff00";
+        winAnimation.tint = "#00ff00";
+    }
+    winAnimation.x = folderSprite.x;
+    winAnimation.y = folderSprite.y;
+    winAnimation.width = folderSprite.width;
+    winAnimation.height = folderSprite.height;
+    winAnimation.animationSpeed = 0.2;
+    winAnimation.anchor.set(0.5);
+    winAnimation.gotoAndPlay(0);
+    app.stage.addChild(winAnimation);
+    winAnimation.loop = false;
     text.anchor.set(0.5);
     text.resolution = 1;
     text.x = folderSprite.x - 70;

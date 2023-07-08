@@ -407,11 +407,55 @@ class Level{
     }
 
     Level8(delta){
-        
+
     }
 
     Level9(delta){
-        
+        backgroundScreen.fillColor = "#000000";
+        topBorder.color = "#00ff00"; 
+        topBorder.fillColor = "#00ff00";
+        bottomBorder.color = "#005a00"
+        bottomBorder.fillColor = "#005a00";
+        leftBorder.color = "#005a00";
+        leftBorder.fillColor = "#005a00";
+        rightBorder.color = "#005a00";
+        rightBorder.fillColor = "#005a00";
+        document.getElementsByClassName("taskbar")[0].style.backgroundColor = "#37ff37";
+        for (let i = 0; i < document.getElementsByClassName("level-button").length; i++) {
+            document.getElementsByClassName("level-button")[i].style.backgroundColor = "#37ff37";         
+        }
+        document.getElementsByClassName("start-button")[0].style.backgroundColor = "#37ff37";
+        document.getElementById("top-text").style.color = "#00ff00";
+        playerSprite.tint = "#00ff00";
+        folderSprite.tint = "#00ff00";
+        document.getElementById("body").style.removeProperty("background-color")
+        document.getElementById("body").style.backgroundImage = 'url("media/moving-glitch.gif")';
+        document.getElementById("body").style.backgroundRepeat = "no-repeat";
+        document.getElementById("body").style.backgroundSize = "cover";
+        document.getElementById("grid-container").style.display = "none";
+        document.getElementById("grid-container-bottom").style.display = "none";
+        app.renderer.backgroundColor = "#000000";
+
+        if (topBorder.rechanging) {
+            document.getElementById("main").style.borderTop = "5px dashed #000000";
+        } else {
+            document.getElementById("main").style.borderTopColor = "#ff0000";
+        }
+        if (bottomBorder.rechanging) {
+            document.getElementById("main").style.borderBottom = "5px dashed #000000";
+        } else {
+            document.getElementById("main").style.borderBottomColor = "#ff0000";
+        }
+        if (leftBorder.rechanging) {
+            document.getElementById("main").style.borderLeft = "5px dashed #000000";
+        } else {
+            document.getElementById("main").style.borderLeftColor = "#ff0000";
+        }
+        if (rightBorder.rechanging) {
+            document.getElementById("main").style.borderRight = "5px dashed #000000";
+        } else {
+            document.getElementById("main").style.borderRightColor = "#ff0000";
+        }    
     }
 }
 function setLevel(level) {
@@ -433,6 +477,24 @@ function setLevel(level) {
     playLevel = new Level(currentLevel.toString(), 0);
     levelBlocks = []
     playLevel.generate();
+    if (currentLevel != 9) {
+        document.getElementById("body").style.backgroundColor = "#008080";
+        app.renderer.backgroundColor = "#008080";
+        document.getElementById("body").style.removeProperty("background-image");
+        document.getElementById("body").style.removeProperty("background-repeat");
+        document.getElementById("body").style.removeProperty("background-size");
+        document.getElementById("grid-container").style.display = "grid";
+        document.getElementById("grid-container-bottom").style.display = "grid";
+        playerSprite.tint = "#ffffff";
+        folderSprite.tint = "#ffffff";
+        document.getElementById("top-text").style.color = "#ffffff";
+        document.getElementById("top-text").style.color = "#ffffff";
+        document.getElementsByClassName("taskbar")[0].style.backgroundColor = "#c8c8c8";
+        for (let i = 0; i < document.getElementsByClassName("level-button").length; i++) {
+            document.getElementsByClassName("level-button")[i].style.backgroundColor = "#c8c8c8";         
+        }
+        document.getElementsByClassName("start-button")[0].style.backgroundColor = "#c8c8c8";
+    }
     blocks.push(topBorder, bottomBorder, leftBorder, rightBorder)
     app.stage.addChild(folderSprite)
     folderSprite.texture = PIXI.Texture.from('media/folder.png')
