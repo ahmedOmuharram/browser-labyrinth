@@ -1232,6 +1232,46 @@
 
     "8": [
         {
+            "x": "screenWidth/2 - 25",
+            "y": "-1040",
+            "width": "50",
+            "height": "1400",
+            "thickness": 2,
+            "color": "#c8c8c8",
+            "fillColor": "#c8c8c8",
+            "borders": "tlbr"
+        },
+        {
+            "x": "screenWidth/2 - 25",
+            "y": "600",
+            "width": "50",
+            "height": "1440",
+            "thickness": 2,
+            "color": "#c8c8c8",
+            "fillColor": "#c8c8c8",
+            "borders": "tlbr"
+        },
+        {
+            "x": "-1280",
+            "y": "screenHeight/2 - 25",
+            "width": "1600",
+            "height": "50",
+            "thickness": 2,
+            "color": "#c8c8c8",
+            "fillColor": "#c8c8c8",
+            "borders": "tlbr"
+        },
+        {
+            "x": "960",
+            "y": "screenHeight/2 - 25",
+            "width": "1600",
+            "height": "50",
+            "thickness": 2,
+            "color": "#c8c8c8",
+            "fillColor": "#c8c8c8",
+            "borders": "tlbr"
+        },
+        {
             "x": "0",
             "y": "0",
             "width": "50",

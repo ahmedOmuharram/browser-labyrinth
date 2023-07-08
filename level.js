@@ -416,7 +416,7 @@ class Level{
         elapsed += spinDirection * delta;
         cannonInterval += delta;
         for (let i = 0; i < 64; i++) {
-            if (levelBlocks[i]) {
+            if (levelBlocks[i+4]) {
                 var spiralIndex = Math.floor(i / 16);
                 var rotationAngle = spiralIndex * (Math.PI / 2);
                 
@@ -426,17 +426,17 @@ class Level{
                 var rotatedPositionX = basePositionX * Math.cos(rotationAngle) - basePositionY * Math.sin(rotationAngle);
                 var rotatedPositionY = basePositionX * Math.sin(rotationAngle) + basePositionY * Math.cos(rotationAngle);
 
-                levelBlocks[i].positionX = rotatedPositionX + screenWidth/2 - 25;
-                levelBlocks[i].positionY = rotatedPositionY + screenHeight/2 - 25;
+                levelBlocks[i+4].positionX = rotatedPositionX + screenWidth/2 - 25;
+                levelBlocks[i+4].positionY = rotatedPositionY + screenHeight/2 - 25;
             }
             
         }
         if (cannonInterval > 100) {
-            if (levelBlocks[64]) {
-                let angle = Math.atan2(playerSprite.y - levelBlocks[64].positionY, playerSprite.x - levelBlocks[64].positionX) * (180 / Math.PI)
-                levelBlocks[64].minAngle = angle-22.5;
-                levelBlocks[64].maxAngle = angle+22.5;
-                levelBlocks[64].shoot(100,20,20,2,"#ff0081","#ff0081",0);
+            if (levelBlocks[68]) {
+                let angle = Math.atan2(playerSprite.y - levelBlocks[68].positionY, playerSprite.x - levelBlocks[68].positionX) * (180 / Math.PI)
+                levelBlocks[68].minAngle = angle-22.5;
+                levelBlocks[68].maxAngle = angle+22.5;
+                levelBlocks[68].shoot(100,20,20,2,"#ff0081","#ff0081",0);
             }
             cannonInterval -= 100;
         }
