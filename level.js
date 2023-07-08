@@ -406,7 +406,7 @@ class Level{
         bottomBorder.graphic.interactive = false;
     }
     InitiateLevel8(){
-        new Cannon(640, 360, 20, 20, 2, null, "v", null, 1, 20, -90, 90);
+        new Cannon(630, 350, 20, 20, 2, "#ff0081", "v", "#ff0081", 10, 20, -90, 90);
         cannonInterval = 0;
         spinDirection = 1;
     }
@@ -426,8 +426,8 @@ class Level{
                 var rotatedPositionX = basePositionX * Math.cos(rotationAngle) - basePositionY * Math.sin(rotationAngle);
                 var rotatedPositionY = basePositionX * Math.sin(rotationAngle) + basePositionY * Math.cos(rotationAngle);
 
-                levelBlocks[i].positionX = rotatedPositionX + screenWidth/2;
-                levelBlocks[i].positionY = rotatedPositionY + screenHeight/2;
+                levelBlocks[i].positionX = rotatedPositionX + screenWidth/2 - 25;
+                levelBlocks[i].positionY = rotatedPositionY + screenHeight/2 - 25;
             }
             
         }
@@ -436,7 +436,7 @@ class Level{
                 let angle = Math.atan2(playerSprite.y - levelBlocks[64].positionY, playerSprite.x - levelBlocks[64].positionX) * (180 / Math.PI)
                 levelBlocks[64].minAngle = angle-22.5;
                 levelBlocks[64].maxAngle = angle+22.5;
-                levelBlocks[64].shoot(100,20,20,2,null,null,0);
+                levelBlocks[64].shoot(100,20,20,2,"#ff0081","#ff0081",0);
             }
             cannonInterval -= 100;
         }
