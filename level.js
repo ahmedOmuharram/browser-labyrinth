@@ -111,7 +111,250 @@ class Level{
     }
   }
 
-  Level6(delta){
+      /*"6": [
+        {
+            "x": "0",
+            "y": "0",
+            "width": "50",
+            "height": "50",
+            "thickness": 2,
+            "color": "#ff0081",
+            "fillColor": "#ff0081",
+            "borders": "r"
+        }, 
+        {
+            "x": "0",
+            "y": "0",
+            "width": "50",
+            "height": "50",
+            "thickness": 2,
+            "color": "#ff0081",
+            "fillColor": "#ff0081",
+            "borders": "l"
+        },
+        {
+            "x": "0",
+            "y": "0",
+            "width": "50",
+            "height": "50",
+            "thickness": 2,
+            "color": "#ff0081",
+            "fillColor": "#ff0081",
+            "borders": "r"
+        },
+        {
+            "x": "0",
+            "y": "0",
+            "width": "50",
+            "height": "50",
+            "thickness": 2,
+            "color": "#ff0081",
+            "fillColor": "#ff0081",
+            "borders": "l"
+        }, 
+        {
+            "x": "0",
+            "y": "0",
+            "width": "50",
+            "height": "50",
+            "thickness": 2,
+            "color": "#ff0081",
+            "fillColor": "#ff0081",
+            "borders": "r"
+        },
+        {
+            "x": "0",
+            "y": "0",
+            "width": "50",
+            "height": "50",
+            "thickness": 2,
+            "color": "#ff0081",
+            "fillColor": "#ff0081",
+            "borders": "l"
+        },
+        {
+            "x": "0",
+            "y": "0",
+            "width": "50",
+            "height": "50",
+            "thickness": 2,
+            "color": "#ff0081",
+            "fillColor": "#ff0081",
+            "borders": "r"
+        }, 
+        {
+            "x": "0",
+            "y": "0",
+            "width": "50",
+            "height": "50",
+            "thickness": 2,
+            "color": "#ff0081",
+            "fillColor": "#ff0081",
+            "borders": "l"
+        },
+        {
+            "x": "0",
+            "y": "0",
+            "width": "50",
+            "height": "50",
+            "thickness": 2,
+            "color": "#ff0081",
+            "fillColor": "#ff0081",
+            "borders": "r"
+        },
+        {
+            "x": "0",
+            "y": "0",
+            "width": "50",
+            "height": "50",
+            "thickness": 2,
+            "color": "#ff0081",
+            "fillColor": "#ff0081",
+            "borders": "l"
+        }, 
+        {
+            "x": "0",
+            "y": "0",
+            "width": "50",
+            "height": "50",
+            "thickness": 2,
+            "color": "#ff0081",
+            "fillColor": "#ff0081",
+            "borders": "r"
+        },
+        {
+            "x": "0",
+            "y": "0",
+            "width": "50",
+            "height": "50",
+            "thickness": 2,
+            "color": "#ff0081",
+            "fillColor": "#ff0081",
+            "borders": "l"
+        },
+        {
+            "x": "0",
+            "y": "0",
+            "width": "50",
+            "height": "50",
+            "thickness": 2,
+            "color": "#ff0081",
+            "fillColor": "#ff0081",
+            "borders": "r"
+        }, 
+        {
+            "x": "0",
+            "y": "0",
+            "width": "50",
+            "height": "50",
+            "thickness": 2,
+            "color": "#ff0081",
+            "fillColor": "#ff0081",
+            "borders": "l"
+        },
+        {
+            "x": "0",
+            "y": "0",
+            "width": "50",
+            "height": "50",
+            "thickness": 2,
+            "color": "#ff0081",
+            "fillColor": "#ff0081",
+            "borders": "r"
+        },
+        {
+            "x": "0",
+            "y": "0",
+            "width": "50",
+            "height": "50",
+            "thickness": 2,
+            "color": "#ff0081",
+            "fillColor": "#ff0081",
+            "borders": "l"
+        }, 
+        {
+            "x": "0",
+            "y": "0",
+            "width": "50",
+            "height": "50",
+            "thickness": 2,
+            "color": "#ff0081",
+            "fillColor": "#ff0081",
+            "borders": "r"
+        },
+        {
+            "x": "0",
+            "y": "0",
+            "width": "50",
+            "height": "50",
+            "thickness": 2,
+            "color": "#ff0081",
+            "fillColor": "#ff0081",
+            "borders": "l"
+        },
+        {
+            "x": "0",
+            "y": "0",
+            "width": "50",
+            "height": "50",
+            "thickness": 2,
+            "color": "#ff0081",
+            "fillColor": "#ff0081",
+            "borders": "r"
+        }, 
+        {
+            "x": "0",
+            "y": "0",
+            "width": "50",
+            "height": "50",
+            "thickness": 2,
+            "color": "#ff0081",
+            "fillColor": "#ff0081",
+            "borders": "l"
+        },
+        {
+            "x": "0",
+            "y": "0",
+            "width": "50",
+            "height": "50",
+            "thickness": 2,
+            "color": "#ff0081",
+            "fillColor": "#ff0081",
+            "borders": "r"
+        },
+        {
+            "x": "0",
+            "y": "0",
+            "width": "50",
+            "height": "50",
+            "thickness": 2,
+            "color": "#ff0081",
+            "fillColor": "#ff0081",
+            "borders": "l"
+        }, 
+        {
+            "x": "0",
+            "y": "0",
+            "width": "50",
+            "height": "50",
+            "thickness": 2,
+            "color": "#ff0081",
+            "fillColor": "#ff0081",
+            "borders": "r"
+        },
+        {
+            "x": "0",
+            "y": "0",
+            "width": "50",
+            "height": "50",
+            "thickness": 2,
+            "color": "#ff0081",
+            "fillColor": "#ff0081",
+            "borders": "l"
+        }
+    ]*/
+
+  /*Level6(delta){
     elapsed += delta;
     for (let i = 0; i < 24; i++) {
         if (levelBlocks[i]) {
@@ -119,7 +362,20 @@ class Level{
             levelBlocks[i].positionY = screenHeight/2  + i * 20.0 * Math.sin((elapsed * i/100.0))
         }  
     }
-  }
+  }*/
+
+    Level6(delta){
+        for (let i = 0; i < 6; i++) {
+            if (levelBlocks[i]) {
+                levelBlocks[i].positionX += 5 * delta;
+            }
+        }
+        for (let i = 6; i < 12; i++) {
+            if (levelBlocks[i]) {
+                levelBlocks[i].positionX -= 5 * delta;
+            }
+        }
+    }
 }
 
 window.Level = Level;
