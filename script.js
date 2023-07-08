@@ -1,6 +1,8 @@
 const screenWidth = 1280;
 const screenHeight = 720;
 let elapsed = 0;
+let spinDirection = 1;
+let cannonInterval = 0;
 
 let currentLevel = 0;
 

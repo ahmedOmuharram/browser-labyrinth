@@ -51,30 +51,15 @@ class Level{
                 this.blocks.push(block);       
             });
         });
-        if (currentLevel == 0)
+        if (currentLevel == 8)
             eval(`playLevel.InitiateLevel${currentLevel}();`);
     }).catch(error => {
         console.error('Error:', error);
     });
   }
-  InitiateLevel0(){
-    new Cannon(640, 360, 20, 20, 2, null, "v", null, 20, 20, -90, 90);
-  }
   Level0(delta){
-        elapsed += delta;
-        if (elapsed > 100) {
-            if (levelBlocks[4]) {
-                let angle = Math.atan2(playerSprite.y - levelBlocks[4].positionY, playerSprite.x - levelBlocks[4].positionX) * (180 / Math.PI)
-                levelBlocks[4].minAngle = angle-10;
-                levelBlocks[4].maxAngle = angle+10;
-                levelBlocks[4].shoot(100,20,20,2,null,null,0);
-            }
-            elapsed -= 100;
-        }
+
    }
-   InitiateLevel1(){
-    new Cannon(640, 360, 20, 20, 2, null, "v", null, 20, 30, -90, 90);
-  }
   Level1(delta){
     
   }
@@ -420,24 +405,40 @@ class Level{
         leftBorder.graphic.interactive = false;
         bottomBorder.graphic.interactive = false;
     }
-
+    InitiateLevel8(){
+        new Cannon(640, 360, 20, 20, 2, null, "v", null, 1, 20, -90, 90);
+        cannonInterval = 0;
+        spinDirection = 1;
+    }
     Level8(delta){
-        elapsed += delta;
+        if (elapsed > 200)
+            spinDirection = -1;
+        elapsed += spinDirection * delta;
+        cannonInterval += delta;
         for (let i = 0; i < 64; i++) {
             if (levelBlocks[i]) {
                 var spiralIndex = Math.floor(i / 16);
                 var rotationAngle = spiralIndex * (Math.PI / 2);
                 
-                var basePositionX = screenWidth / 2 + (i % 16) * 20.0 * Math.cos((elapsed * (i % 16) / 100.0));
-                var basePositionY = screenHeight / 2 + (i % 16) * 20.0 * Math.sin((elapsed * (i % 16) / 100.0));
+                var basePositionX = (i % 16) * -50.0 * Math.cos((elapsed / 100.0));
+                var basePositionY = (i % 16) * 50.0 * Math.sin((elapsed / 100.0));
                 
                 var rotatedPositionX = basePositionX * Math.cos(rotationAngle) - basePositionY * Math.sin(rotationAngle);
                 var rotatedPositionY = basePositionX * Math.sin(rotationAngle) + basePositionY * Math.cos(rotationAngle);
-                
-                levelBlocks[i].positionX = rotatedPositionX;
-                levelBlocks[i].positionY = rotatedPositionY;
+
+                levelBlocks[i].positionX = rotatedPositionX + screenWidth/2;
+                levelBlocks[i].positionY = rotatedPositionY + screenHeight/2;
             }
             
+        }
+        if (cannonInterval > 100) {
+            if (levelBlocks[64]) {
+                let angle = Math.atan2(playerSprite.y - levelBlocks[64].positionY, playerSprite.x - levelBlocks[64].positionX) * (180 / Math.PI)
+                levelBlocks[64].minAngle = angle-22.5;
+                levelBlocks[64].maxAngle = angle+22.5;
+                levelBlocks[64].shoot(100,20,20,2,null,null,0);
+            }
+            cannonInterval -= 100;
         }
     }
 
