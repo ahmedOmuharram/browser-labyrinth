@@ -405,5 +405,33 @@ class Level{
         bottomBorder.graphic.interactive = false;
     }
 }
-
+function setLevel(level) {
+    currentLevel = level;
+    lost = false;
+    won = false;
+    blocks = [];
+    bottomBorder.onDragEnd();
+    leftBorder.onDragEnd();
+    rightBorder.onDragEnd();
+    topBorder.onDragEnd();
+    app.stage.removeChildren();
+    elapsed = 0;
+    backgroundScreen = new Block(0, 0, screenWidth, screenHeight, 2, "#ffffff", 'v', "#ffffff");
+    bottomBorder = new Border(0, 710, 1300, 10, 2, "#c8c8c8", 'v', "#c8c8c8");
+    leftBorder = new Border(0, 0, 10, 720, 2, "#c8c8c8", 'h', "#c8c8c8");
+    rightBorder = new Border(1270, 0, 10, 740, 2, "#c8c8c8", 'h', "#c8c8c8");
+    topBorder = new Border(0, 0, 1280, 20, 2, "#c8c8c8", 'v', "#010081");
+    playLevel = new Level(currentLevel.toString(), 0);
+    levelBlocks = []
+    playLevel.generate();
+    blocks.push(topBorder, bottomBorder, leftBorder, rightBorder)
+    app.stage.addChild(folderSprite)
+    folderSprite.texture = PIXI.Texture.from('media/folder.png')
+    playerSprite.x = screenWidth / 2 - 600;
+    playerSprite.y = 640;
+    playerSprite.ySpeed = 0;
+    playerSprite.height = 40;
+    app.stage.addChild(playerSprite);
+    document.getElementsByClassName("taskbar")[0].getElementsByClassName("level-button")[currentLevel].style.display = "inline-block"
+}
 window.Level = Level;

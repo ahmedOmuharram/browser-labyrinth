@@ -7,11 +7,6 @@ let won = false;
 const explosionTextures = [];
 const winTextures = [];
 
-const zeroTexture = PIXI.Texture.from('media/zero.png')
-const oneTexture = PIXI.Texture.from('media/one.png')
-
-let zeroParticleGenerator = new Particles(zeroTexture, -12, 12, -12, 12, 0.5, -0.09, 0.09, 0.015, 0.03, 0.1, 0.2, "#00FF00");
-let oneParticleGenerator = new Particles(oneTexture, -12, 12, -12, 12, 0.5, -0.09, 0.09, 0.015, 0.03, 0.1, 0.2, "#00FF00");
 
 for (let i = 0; i < 11; i++)
 {
@@ -57,8 +52,6 @@ const keys = {
     39: false,
     65: false,
     68: false,
-    78: false,
-    80: false,
     87: false
 };
 
@@ -82,22 +75,6 @@ function onKeyUp(event) {
 }
 
 app.ticker.add(gameLoop);
-
-document.onkeydown = function (e) {
-    if (keys[78]) {
-        if (currentLevel < 7) {
-            currentLevel++;
-            setLevel(currentLevel);
-        }
-    }
-
-    if (keys[80]) {
-        if (currentLevel > 0){
-            currentLevel--;
-            setLevel(currentLevel);
-        }
-    }
-};
 
 var deltaTime = 0
 function gameLoop(delta) { 
@@ -153,9 +130,6 @@ function gameLoop(delta) {
     if (!colliding) {
         isOnGround = false;
     }
-
-    zeroParticleGenerator.renderParticles(delta);
-    oneParticleGenerator.renderParticles(delta);
 }
 
 function lose() { 
@@ -237,34 +211,4 @@ function win() {
         folderSprite.texture = PIXI.Texture.from('/media/full-folder.png')
         app.stage.removeChild(winAnimation);
     };
-}
-
-function setLevel(level) {
-    currentLevel = level;
-    lost = false;
-    won = false;
-    blocks = [];
-    bottomBorder.onDragEnd();
-    leftBorder.onDragEnd();
-    rightBorder.onDragEnd();
-    topBorder.onDragEnd();
-    app.stage.removeChildren();
-    elapsed = 0;
-    backgroundScreen = new Block(0, 0, screenWidth, screenHeight, 2, "#ffffff", 'v', "#ffffff");
-    bottomBorder = new Border(0, 710, 1300, 10, 2, "#c8c8c8", 'v', "#c8c8c8");
-    leftBorder = new Border(0, 0, 10, 720, 2, "#c8c8c8", 'h', "#c8c8c8");
-    rightBorder = new Border(1270, 0, 10, 740, 2, "#c8c8c8", 'h', "#c8c8c8");
-    topBorder = new Border(0, 0, 1280, 20, 2, "#c8c8c8", 'v', "#010081");
-    playLevel = new Level(currentLevel.toString(), 0);
-    levelBlocks = []
-    playLevel.generate();
-    blocks.push(topBorder, bottomBorder, leftBorder, rightBorder)
-    app.stage.addChild(folderSprite)
-    folderSprite.texture = PIXI.Texture.from('media/folder.png')
-    playerSprite.x = screenWidth / 2 - 600;
-    playerSprite.y = 640;
-    playerSprite.ySpeed = 0;
-    playerSprite.height = 40;
-    app.stage.addChild(playerSprite);
-    document.getElementsByClassName("taskbar")[0].getElementsByClassName("level-button")[currentLevel].style.display = "inline-block"
 }
