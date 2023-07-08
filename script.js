@@ -15,6 +15,12 @@ const app = new PIXI.Application({
 app.stage.interactive = true;
 app.stage.hitArea = app.screen;
 
+const zeroTexture = PIXI.Texture.from('media/zero.png')
+const oneTexture = PIXI.Texture.from('media/one.png')
+
+let zeroParticleGenerator = new Particles(zeroTexture, -12, 12, -12, 12, 0.5, -0.09, 0.09, 0.015, 0.03, 0.1, 0.2, "#00FF00");
+let oneParticleGenerator = new Particles(oneTexture, -12, 12, -12, 12, 0.5, -0.09, 0.09, 0.015, 0.03, 0.1, 0.2, "#00FF00");
+
 let backgroundScreen = new Block(screenWidth, screenHeight, 1280, 720, 2, "#ffffff", 'v', "#ffffff");
 
 let bottomBorder = new Border(0, 710, 1300, 10, 2, "#c8c8c8", 'v', "#c8c8c8");
@@ -26,6 +32,26 @@ let playLevel = new Level(currentLevel.toString(), 0);
 levelBlocks = []
 playLevel.generate()
 blocks.push(topBorder, bottomBorder, leftBorder, rightBorder)
+
+
+document.onkeydown = function (e) {
+    console.log(e.key)
+    if (e.key == "n" || e.key == "N") {
+        console.log("WHY")
+        if (currentLevel < 6) {
+            setLevel(++currentLevel);
+        }
+    }
+
+    if (e.key == "p" || e.key == "P") {
+        console.log("HOW")
+        if (currentLevel > 0){
+            setLevel(--currentLevel);
+        }
+    }
+};
+
+
 
 app.ticker.add(gameLoop);
 
@@ -123,7 +149,10 @@ function gameLoop(delta) {
     backgroundScreen.height = bottomBorder.positionY - topBorder.positionY + bottomBorder.height;
     
     eval(`playLevel.Level${currentLevel}(delta);`);
-    
+
+    zeroParticleGenerator.renderParticles(delta);
+    oneParticleGenerator.renderParticles(delta);
+
     blocks.forEach(block => {
         block.drawBlock();
     });

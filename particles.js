@@ -45,3 +45,5 @@ class Particles{
         });
     }
 }
+
+window.Particles = Particles;
