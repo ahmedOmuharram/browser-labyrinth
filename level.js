@@ -305,7 +305,6 @@ function setLevel(level) {
         document.getElementById("body").style.removeProperty("background-size");
         document.getElementById("grid-container").style.display = "grid";
         document.getElementById("grid-container-bottom").style.display = "grid";
-        document.getElementById("top-text").style.textShadow = "5px 5px #000";
         playerSprite.tint = "#ffffff";
         folderSprite.tint = "#ffffff";
         zeroParticleGenerator.color = "#00ff00";
@@ -318,6 +317,7 @@ function setLevel(level) {
         }
         document.getElementsByClassName("start-button")[0].style.backgroundColor = "#c8c8c8";
     }
+    document.getElementById("top-text").style.textShadow = "5px 5px #000";
     blocks.push(topBorder, bottomBorder, leftBorder, rightBorder)
     app.stage.addChild(folderSprite)
     folderSprite.texture = PIXI.Texture.from('media/folder.png')
