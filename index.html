@@ -239,6 +239,17 @@
             background-repeat: no-repeat;
             background-size: cover;
         }
+
+        #animation-pointer img {
+            width: 25px;
+            height: 25px;
+        }
+
+        #animation-pointer.animated {
+            top: 250px !important;
+            left: 35px !important;
+            transition: all 1s;
+        }
     </style>
     </head>
 <body id="body">
@@ -341,6 +352,9 @@
                 Level 10
             </button>
         </div>
+        <div id="animation-pointer" style="display: none; position: absolute;">
+            <img src="media/pointer.png">
+        </div>
     </center>
     <script>
         function start() {
@@ -385,13 +399,37 @@
 
             changeColor();
             setTimeout(() => {
-                elapsed = 0;
-                animationStarted = true;
                 document.getElementById("loading").style.display = "none";
                 document.getElementById("canvas").style.display = "block";
-                document.getElementById("main").appendChild(app.view);
+                document.body.style.cursor = "none";
+                pointerAnimation();
+                let mouseClick = new Audio("media/mouse-click.mp3");
+                mouseClick.volume = 0.6;
+                setTimeout(() => {
+                    mouseClick.play();
+                }, 1500)
+                setTimeout(() => {
+                    mouseClick.play();
+                }, 1750)
+                setTimeout(() => {
+                    document.getElementById("animation-pointer").style.display = "none";
+                    elapsed = 0;
+                    animationStarted = true;
+                    document.getElementById("main").appendChild(app.view);
+                    document.body.style.cursor = "default";
+                }, 2000) 
             }, 4500);
 
+        }
+
+        function pointerAnimation(){
+            let pointer = document.getElementById("animation-pointer");
+            pointer.style.top = window.innerHeight/2 + "px";
+            pointer.style.left = window.innerWidth/2 + "px";
+            pointer.style.display = "block";
+            setTimeout(() => {
+                pointer.classList.add("animated");
+            }, 500)
         }
 
         function onInfoClick() {
