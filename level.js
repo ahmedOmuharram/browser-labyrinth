@@ -426,7 +426,7 @@ class Level{
     }
     Level9(delta){
         if (elapsed > 200) {
-            spinDirection = -1;
+            spinDirection = -1; 
             document.getElementById("body").style.backgroundColor = "#0000ff";
             document.getElementById("top-text").innerText = "STOP: c000021a {Fatal System Error}";
             document.getElementById("top-text").style.textShadow = "5px 5px #0000ff";
@@ -434,10 +434,6 @@ class Level{
             document.getElementById("grid-container").style.display = "none";
             document.getElementById("grid-container-bottom").style.display = "none";
             backgroundScreen.fillColor = "#0000ff";
-            document.getElementById("main").style.borderTopColor = "#0000ff";
-            document.getElementById("main").style.borderBottomColor = "#0000ff";
-            document.getElementById("main").style.borderLeftColor = "#0000ff";
-            document.getElementById("main").style.borderRightColor = "#0000ff";
             document.getElementById("top-text").style.color = "#c8c8c8";
             for (let i = 0; i < levelBlocks.length; i++) { 
                 levelBlocks[i].color = "#0000ff";
@@ -498,7 +494,7 @@ class Level{
         }
         document.getElementsByClassName("start-button")[0].style.backgroundColor = "#37ff37";
         document.getElementById("top-text").style.color = "#00ff00";
-        document.getElementById("top-text").innerText = "MEMORY_MANAGEMENT"
+        document.getElementById("top-text").innerText = "MEMORY_MANAGEMENT";
         playerSprite.tint = "#00ff00";
         folderSprite.tint = "#00ff00";
         document.getElementById("body").style.removeProperty("background-color")

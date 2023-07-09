@@ -148,6 +148,14 @@ function gameLoop(delta) {
         document.getElementById("main").style.borderRightColor = "#ff0081";
     }
 
+    console.log(elapsed)
+    if (currentLevel == 9 && spinDirection == -1) {
+        document.getElementById("main").style.borderTopColor = "#0000ff";
+        document.getElementById("main").style.borderBottomColor = "#0000ff";
+        document.getElementById("main").style.borderLeftColor = "#0000ff";
+        document.getElementById("main").style.borderRightColor = "#0000ff";
+    }
+
     backgroundScreen.positionX = leftBorder.positionX;
     backgroundScreen.width = rightBorder.positionX - leftBorder.positionX + rightBorder.width;
     backgroundScreen.positionY = topBorder.positionY;
