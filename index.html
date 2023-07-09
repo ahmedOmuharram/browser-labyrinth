@@ -266,8 +266,9 @@
         <div class="rotated-bin" onclick="onBinClick(this)" width="256" height="256"></div>
         <span class="animated-text" style="z-index: -1">Welcome to Browser's Labyrinth</span>
         <button onclick="start()" class="button">Turn On Your Computer</button>
+        <button onclick="togglePlay(this)" class="button">Music: OFF</button>
         <span class="grid-item" style="position: absolute; bottom: 5px; right: 5px; text-align: right">
-            Version 0.0.1 (Alpha)<br>
+            Version 0.0.2 (Alpha)<br>
             Made by Ahmed Muharram & Youssef Saleh<br>
             Art by Anas Muharram<br>
             Use Google Chrome for optimal experience</span>
@@ -357,7 +358,22 @@
         </div>
     </center>
     <script>
+        let menuMusic = new Audio("media/menu.ogg");
+        menuMusic.loop = true;
+        let mainMusic = new Audio("media/main.ogg");
+        mainMusic.loop = true;
+        mainMusic.volume = 0.4;
+        function togglePlay(button) {
+            if (menuMusic.paused) {
+                button.innerText = "Music: ON";
+                menuMusic.play();
+            } else {
+                button.innerText = "Music: OFF";
+                menuMusic.pause();
+            }
+        };
         function start() {
+            menuMusic.pause();
             document.getElementById("welcome").style.display = "none";
             const rectangles = document.querySelectorAll('.loading-rectangle');
             document.getElementById("loading").style.display = "flex";
@@ -417,7 +433,8 @@
                     animationStarted = true;
                     document.getElementById("main").appendChild(app.view);
                     document.body.style.cursor = "default";
-                }, 2000) 
+                    mainMusic.play();
+                }, 2000);
             }, 4500);
 
         }
