@@ -60,6 +60,7 @@ class Level{
     });
   }
   Level0(delta){
+    if (animationStarted)
     elapsed += delta;
     if (elapsed > 50)
         elapsed = 50;
@@ -67,7 +68,7 @@ class Level{
     bottomBorder.positionY = 20 + Math.sin(elapsed/(100/Math.PI)) * 690;
     rightBorder.positionX = 10 + Math.sin(elapsed/(100/Math.PI)) * 1260;
     //leftBorder.positionX = 630 - Math.sin(elapsed/(200/Math.PI)) * 630;
-    if (elapsed >= 50 && animationStarted)
+    if (elapsed >= 50)
         setLevel(1);
   }
   Level1(delta){
