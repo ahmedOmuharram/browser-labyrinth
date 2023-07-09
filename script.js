@@ -3,8 +3,9 @@ const screenHeight = 720;
 let elapsed = 0;
 let spinDirection = 1;
 let cannonInterval = 0;
+let animationStarted = false;
 
-let currentLevel = 1;
+let currentLevel = 0;
 
 const app = new PIXI.Application({ 
     antialias: true,
@@ -25,14 +26,19 @@ let oneParticleGenerator = new Particles(oneTexture, -12, 12, -12, 12, 0.5, -0.0
 
 let backgroundScreen = new Block(screenWidth, screenHeight, 1280, 720, 2, "#ffffff", 'v', "#ffffff");
 
-let bottomBorder = new Border(0, 710, 1300, 10, 2, "#c8c8c8", 'v', "#c8c8c8");
-let leftBorder = new Border(0, 0, 10, 720, 2, "#c8c8c8", 'h', "#c8c8c8");
-let rightBorder = new Border(1270, 0, 10, 740, 2, "#c8c8c8", 'h', "#c8c8c8");
-let topBorder = new Border(0, 0, 1280, 20, 2, "#c8c8c8", 'v', "#010081");
+let bottomBorder = new Border(0, 20, 20, 10, 2, "#c8c8c8", 'v', "#c8c8c8");
+let leftBorder = new Border(0, 0, 10, 30, 2, "#c8c8c8", 'h', "#c8c8c8");
+let rightBorder = new Border(10, 0, 10, 30, 2, "#c8c8c8", 'h', "#c8c8c8");
+let topBorder = new Border(0, 0, 20, 20, 2, "#c8c8c8", 'v', "#010081");
+
+bottomBorder.graphic.interactive = false;
+leftBorder.graphic.interactive = false;
+rightBorder.graphic.interactive = false;
+topBorder.graphic.interactive = false;
+
 let blocks = []
 let playLevel = new Level(currentLevel.toString(), 0);
 levelBlocks = []
-playLevel.generate()
 blocks.push(topBorder, bottomBorder, leftBorder, rightBorder)
 
 

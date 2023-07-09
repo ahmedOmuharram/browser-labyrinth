@@ -2,8 +2,8 @@ const gravity = 0.5;
 const terminalVelocity = 100;
 let isOnGround = true;
 const playerJumpForce = 12;
-let lost = false;
-let won = false;
+let lost = true;
+let won = true;
 const explosionTextures = [];
 const winTextures = [];
 
@@ -42,8 +42,6 @@ playerSprite.bottomCollision = false;
 playerSprite.leftCollision = false;
 playerSprite.rightCollision = false;
 
-app.stage.addChild(playerSprite);
-app.stage.addChild(folderSprite);
 
 const keys = {
     32: false,
