@@ -1,3 +1,5 @@
+var cannon;
+
 class Level{
   constructor(name, index) {
     this.name = name;
@@ -406,13 +408,31 @@ class Level{
         bottomBorder.graphic.interactive = false;
     }
     InitiateLevel9(){
-        new Cannon(630, 350, 20, 20, 2, "#ff0081", "v", "#ff0081", 10, 20, -90, 90);
+        cannon = new Cannon(630, 350, 20, 20, 2, "#ff0081", "v", "#ff0081", 10, 20, -90, 90);
         cannonInterval = 0;
         spinDirection = 1;
     }
     Level9(delta){
-        if (elapsed > 200)
+        if (elapsed > 200) {
             spinDirection = -1;
+            document.getElementById("body").style.backgroundColor = "#0000ff";
+            document.getElementById("top-text").innerText = "STOP: c000021a {Fatal System Error}";
+            document.getElementById("top-text").style.textShadow = "5px 5px #0000ff";
+            document.getElementsByClassName("taskbar")[0].style.display = "none";
+            document.getElementById("grid-container").style.display = "none";
+            document.getElementById("grid-container-bottom").style.display = "none";
+            backgroundScreen.fillColor = "#0000ff";
+            document.getElementById("main").style.borderTopColor = "#0000ff";
+            document.getElementById("main").style.borderBottomColor = "#0000ff";
+            document.getElementById("main").style.borderLeftColor = "#0000ff";
+            document.getElementById("main").style.borderRightColor = "#0000ff";
+            document.getElementById("top-text").style.color = "#c8c8c8";
+            for (let i = 0; i < levelBlocks.length; i++) { 
+                levelBlocks[i].color = "#0000ff";
+            }
+            cannon.color = "#0000ff";
+            cannon.fillColor = "#0000ff";
+        }
         elapsed += spinDirection * delta;
         cannonInterval += delta;
         for (let i = 0; i < 64; i++) {
@@ -436,7 +456,11 @@ class Level{
                 let angle = Math.atan2(playerSprite.y - levelBlocks[68].positionY, playerSprite.x - levelBlocks[68].positionX) * (180 / Math.PI)
                 levelBlocks[68].minAngle = angle-22.5;
                 levelBlocks[68].maxAngle = angle+22.5;
-                levelBlocks[68].shoot(100,20,20,2,"#ff0081","#ff0081",0);
+                if (spinDirection == 1) {
+                    levelBlocks[68].shoot(100,20,20,2,"#ff0081","#ff0081",0);
+                } else {
+                    levelBlocks[68].shoot(100,20,20,2,"#c8c8c8","#c8c8c8",0);
+                }
             }
             cannonInterval -= 100;
         }
@@ -452,12 +476,14 @@ class Level{
         leftBorder.fillColor = "#005a00";
         rightBorder.color = "#005a00";
         rightBorder.fillColor = "#005a00";
+        document.getElementsByClassName("taskbar")[0].style.display = "block";
         document.getElementsByClassName("taskbar")[0].style.backgroundColor = "#37ff37";
         for (let i = 0; i < document.getElementsByClassName("level-button").length; i++) {
             document.getElementsByClassName("level-button")[i].style.backgroundColor = "#37ff37";         
         }
         document.getElementsByClassName("start-button")[0].style.backgroundColor = "#37ff37";
         document.getElementById("top-text").style.color = "#00ff00";
+        document.getElementById("top-text").innerText = "MEMORY_MANAGEMENT"
         playerSprite.tint = "#00ff00";
         folderSprite.tint = "#00ff00";
         document.getElementById("body").style.removeProperty("background-color")
@@ -512,15 +538,18 @@ function setLevel(level) {
     if (currentLevel != 10) {
         document.getElementById("body").style.backgroundColor = "#008080";
         app.renderer.backgroundColor = "#008080";
+        document.getElementsByClassName("taskbar")[0].style.display = "block";
+        document.getElementById("top-text").style.removeProperty("background-color");
         document.getElementById("body").style.removeProperty("background-image");
         document.getElementById("body").style.removeProperty("background-repeat");
         document.getElementById("body").style.removeProperty("background-size");
         document.getElementById("grid-container").style.display = "grid";
         document.getElementById("grid-container-bottom").style.display = "grid";
+        document.getElementById("top-text").style.textShadow = "5px 5px #000";
         playerSprite.tint = "#ffffff";
         folderSprite.tint = "#ffffff";
         document.getElementById("top-text").style.color = "#ffffff";
-        document.getElementById("top-text").style.color = "#ffffff";
+        document.getElementById("top-text").innerText = "Browser's Labyrinth";
         document.getElementsByClassName("taskbar")[0].style.backgroundColor = "#c8c8c8";
         for (let i = 0; i < document.getElementsByClassName("level-button").length; i++) {
             document.getElementsByClassName("level-button")[i].style.backgroundColor = "#c8c8c8";         
