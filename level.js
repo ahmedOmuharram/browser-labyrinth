@@ -59,34 +59,34 @@ class Level{
         console.error('Error:', error);
     });
   }
-Level0(delta){
-    if (animationStarted)
-        elapsed += delta;
-    if (elapsed > 50)
-        elapsed = 50;
-    bottomBorder.positionY = 20 + Math.sin(elapsed/(100/Math.PI)) * 690;
-    rightBorder.positionX = 10 + Math.sin(elapsed/(100/Math.PI)) * 1260;
-    if (elapsed >= 50)
-        setLevel(1);
-}
-Level1(delta){
+    Level0(delta){
+        if (animationStarted)
+            elapsed += delta;
+        if (elapsed > 50)
+            elapsed = 50;
+        bottomBorder.positionY = 20 + Math.sin(elapsed/(100/Math.PI)) * 690;
+        rightBorder.positionX = 10 + Math.sin(elapsed/(100/Math.PI)) * 1260;
+        if (elapsed >= 50)
+            setLevel(1);
+    }
+    Level1(delta){
 
-}
-Level2(delta){
-    
-}
-Level3(delta){
-    for (let i = 0; i < 6; i++) {
-        if (levelBlocks[i]) {
-            levelBlocks[i].positionX += 5 * delta;
+    }
+    Level2(delta){
+        
+    }
+    Level3(delta){
+        for (let i = 0; i < 6; i++) {
+            if (levelBlocks[i]) {
+                levelBlocks[i].positionX += 5 * delta;
+            }
+        }
+        for (let i = 6; i < 12; i++) {
+            if (levelBlocks[i]) {
+                levelBlocks[i].positionX -= 5 * delta;
+            }
         }
     }
-    for (let i = 6; i < 12; i++) {
-        if (levelBlocks[i]) {
-            levelBlocks[i].positionX -= 5 * delta;
-        }
-    }
-}
 
 Level4(delta){
     elapsed += delta;
@@ -110,9 +110,11 @@ Level4(delta){
     leftBorder.graphic.interactive = false;
     bottomBorder.graphic.interactive = false;
 }
+
 Level5(delta){
 
 }
+
 Level6(delta){
     for (let i = 0; i < 7; i++) {
         if (levelBlocks[i]) {
@@ -129,6 +131,7 @@ Level6(delta){
         }
     }
 }
+
 Level7(delta){
     if (levelBlocks[4]) {
         levelBlocks[4].positionX = Math.max(playerSprite.x - 100, 400)
@@ -164,258 +167,6 @@ Level8(delta){
     }
 }
 
-      /*"6": [
-        {
-            "x": "0",
-            "y": "0",
-            "width": "50",
-            "height": "50",
-            "thickness": 2,
-            "color": "#ff0081",
-            "fillColor": "#ff0081",
-            "borders": "r"
-        }, 
-        {
-            "x": "0",
-            "y": "0",
-            "width": "50",
-            "height": "50",
-            "thickness": 2,
-            "color": "#ff0081",
-            "fillColor": "#ff0081",
-            "borders": "l"
-        },
-        {
-            "x": "0",
-            "y": "0",
-            "width": "50",
-            "height": "50",
-            "thickness": 2,
-            "color": "#ff0081",
-            "fillColor": "#ff0081",
-            "borders": "r"
-        },
-        {
-            "x": "0",
-            "y": "0",
-            "width": "50",
-            "height": "50",
-            "thickness": 2,
-            "color": "#ff0081",
-            "fillColor": "#ff0081",
-            "borders": "l"
-        }, 
-        {
-            "x": "0",
-            "y": "0",
-            "width": "50",
-            "height": "50",
-            "thickness": 2,
-            "color": "#ff0081",
-            "fillColor": "#ff0081",
-            "borders": "r"
-        },
-        {
-            "x": "0",
-            "y": "0",
-            "width": "50",
-            "height": "50",
-            "thickness": 2,
-            "color": "#ff0081",
-            "fillColor": "#ff0081",
-            "borders": "l"
-        },
-        {
-            "x": "0",
-            "y": "0",
-            "width": "50",
-            "height": "50",
-            "thickness": 2,
-            "color": "#ff0081",
-            "fillColor": "#ff0081",
-            "borders": "r"
-        }, 
-        {
-            "x": "0",
-            "y": "0",
-            "width": "50",
-            "height": "50",
-            "thickness": 2,
-            "color": "#ff0081",
-            "fillColor": "#ff0081",
-            "borders": "l"
-        },
-        {
-            "x": "0",
-            "y": "0",
-            "width": "50",
-            "height": "50",
-            "thickness": 2,
-            "color": "#ff0081",
-            "fillColor": "#ff0081",
-            "borders": "r"
-        },
-        {
-            "x": "0",
-            "y": "0",
-            "width": "50",
-            "height": "50",
-            "thickness": 2,
-            "color": "#ff0081",
-            "fillColor": "#ff0081",
-            "borders": "l"
-        }, 
-        {
-            "x": "0",
-            "y": "0",
-            "width": "50",
-            "height": "50",
-            "thickness": 2,
-            "color": "#ff0081",
-            "fillColor": "#ff0081",
-            "borders": "r"
-        },
-        {
-            "x": "0",
-            "y": "0",
-            "width": "50",
-            "height": "50",
-            "thickness": 2,
-            "color": "#ff0081",
-            "fillColor": "#ff0081",
-            "borders": "l"
-        },
-        {
-            "x": "0",
-            "y": "0",
-            "width": "50",
-            "height": "50",
-            "thickness": 2,
-            "color": "#ff0081",
-            "fillColor": "#ff0081",
-            "borders": "r"
-        }, 
-        {
-            "x": "0",
-            "y": "0",
-            "width": "50",
-            "height": "50",
-            "thickness": 2,
-            "color": "#ff0081",
-            "fillColor": "#ff0081",
-            "borders": "l"
-        },
-        {
-            "x": "0",
-            "y": "0",
-            "width": "50",
-            "height": "50",
-            "thickness": 2,
-            "color": "#ff0081",
-            "fillColor": "#ff0081",
-            "borders": "r"
-        },
-        {
-            "x": "0",
-            "y": "0",
-            "width": "50",
-            "height": "50",
-            "thickness": 2,
-            "color": "#ff0081",
-            "fillColor": "#ff0081",
-            "borders": "l"
-        }, 
-        {
-            "x": "0",
-            "y": "0",
-            "width": "50",
-            "height": "50",
-            "thickness": 2,
-            "color": "#ff0081",
-            "fillColor": "#ff0081",
-            "borders": "r"
-        },
-        {
-            "x": "0",
-            "y": "0",
-            "width": "50",
-            "height": "50",
-            "thickness": 2,
-            "color": "#ff0081",
-            "fillColor": "#ff0081",
-            "borders": "l"
-        },
-        {
-            "x": "0",
-            "y": "0",
-            "width": "50",
-            "height": "50",
-            "thickness": 2,
-            "color": "#ff0081",
-            "fillColor": "#ff0081",
-            "borders": "r"
-        }, 
-        {
-            "x": "0",
-            "y": "0",
-            "width": "50",
-            "height": "50",
-            "thickness": 2,
-            "color": "#ff0081",
-            "fillColor": "#ff0081",
-            "borders": "l"
-        },
-        {
-            "x": "0",
-            "y": "0",
-            "width": "50",
-            "height": "50",
-            "thickness": 2,
-            "color": "#ff0081",
-            "fillColor": "#ff0081",
-            "borders": "r"
-        },
-        {
-            "x": "0",
-            "y": "0",
-            "width": "50",
-            "height": "50",
-            "thickness": 2,
-            "color": "#ff0081",
-            "fillColor": "#ff0081",
-            "borders": "l"
-        }, 
-        {
-            "x": "0",
-            "y": "0",
-            "width": "50",
-            "height": "50",
-            "thickness": 2,
-            "color": "#ff0081",
-            "fillColor": "#ff0081",
-            "borders": "r"
-        },
-        {
-            "x": "0",
-            "y": "0",
-            "width": "50",
-            "height": "50",
-            "thickness": 2,
-            "color": "#ff0081",
-            "fillColor": "#ff0081",
-            "borders": "l"
-        }
-    ]*/
-
-  /*Level6(delta){
-    elapsed += delta;
-    for (let i = 0; i < 24; i++) {
-        if (levelBlocks[i]) {
-            levelBlocks[i].positionX = screenWidth/2 + i * 20.0 * Math.cos((elapsed * i/100.0))
-            levelBlocks[i].positionY = screenHeight/2  + i * 20.0 * Math.sin((elapsed * i/100.0))
-        }  
-    }
-  }*/
     InitiateLevel9(){
         cannon = new Cannon(630, 350, 20, 20, 2, "#ff0081", "v", "#ff0081", 10, 20, -90, 90);
         cannonInterval = 0;
@@ -524,6 +275,7 @@ Level8(delta){
         }    
     }
 }
+
 function setLevel(level) {
     currentLevel = level;
     lost = false;
