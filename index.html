@@ -276,6 +276,10 @@
             cursor: pointer;
             border: none;
         }
+        
+        #speaker-img {
+            cursor: pointer;
+        }
     </style>
     </head>
 <body id="body">
@@ -502,6 +506,9 @@
             audio.play()
         }
         document.getElementById("volume-slider").oninput = function() {
+            if (mainMusic.paused) {
+                mainMusic.play();
+            }
             if (this.value != 0) {
                 document.getElementById("speaker-img").src = "media/Speaker.png";
             }
@@ -509,7 +516,17 @@
                 document.getElementById("speaker-img").src = "media/Speaker_Muted.png";
             }
             mainMusic.volume = this.value/100;
-        } 
+        }
+        document.getElementById("speaker-img").onclick = function() {
+            if (mainMusic.paused) {
+                document.getElementById("speaker-img").src = "media/Speaker.png";
+                mainMusic.play();
+            } else {
+                document.getElementById("speaker-img").src = "media/Speaker_Muted.png";
+                mainMusic.pause();
+            }
+            
+        }
 
     </script>
     <script src="node_modules/pixi.js/dist/pixi.min.js"></script>
