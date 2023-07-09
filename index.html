@@ -384,7 +384,9 @@
             }
 
             changeColor();
-            setInterval(() => {
+            setTimeout(() => {
+                elapsed = 0;
+                animationStarted = true;
                 document.getElementById("loading").style.display = "none";
                 document.getElementById("canvas").style.display = "block";
                 document.getElementById("main").appendChild(app.view);
