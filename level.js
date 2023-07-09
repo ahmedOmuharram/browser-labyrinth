@@ -443,6 +443,9 @@ class Level{
             }
             cannon.color = "#0000ff";
             cannon.fillColor = "#0000ff";
+            zeroParticleGenerator.color = "#c8c8c8";
+            oneParticleGenerator.color = "#c8c8c8";
+            app.renderer.backgroundColor = "#0000ff";
         }
         elapsed += spinDirection * delta;
         cannonInterval += delta;
@@ -467,7 +470,7 @@ class Level{
                 let angle = Math.atan2(playerSprite.y - levelBlocks[68].positionY, playerSprite.x - levelBlocks[68].positionX) * (180 / Math.PI)
                 levelBlocks[68].minAngle = angle-22.5;
                 levelBlocks[68].maxAngle = angle+22.5;
-                if (spinDirection == 1) {
+                if (spinDirection == 1 && elapsed < 199) {
                     levelBlocks[68].shoot(100,20,20,2,"#ff0081","#ff0081",0);
                 } else {
                     levelBlocks[68].shoot(100,20,20,2,"#c8c8c8","#c8c8c8",0);
@@ -559,6 +562,8 @@ function setLevel(level) {
         document.getElementById("top-text").style.textShadow = "5px 5px #000";
         playerSprite.tint = "#ffffff";
         folderSprite.tint = "#ffffff";
+        zeroParticleGenerator.color = "#00ff00";
+        oneParticleGenerator.color = "#00ff00"
         document.getElementById("top-text").style.color = "#ffffff";
         document.getElementById("top-text").innerText = "Browser's Labyrinth";
         document.getElementsByClassName("taskbar")[0].style.backgroundColor = "#c8c8c8";
