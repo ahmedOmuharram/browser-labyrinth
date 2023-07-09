@@ -6,7 +6,13 @@ let lost = true;
 let won = true;
 const explosionTextures = [];
 const winTextures = [];
-
+let winSound = new Audio("media/win.mp3");
+winSound.volume = 0.6;
+winSound.loop = false;
+let loseSound = new Audio("media/lose.mp3");
+loseSound.volume = 0.6;
+loseSound.loop = false;
+loseSound.playbackRate = 1.3;
 
 for (let i = 0; i < 11; i++)
 {
@@ -161,6 +167,7 @@ function lose() {
     explosion.gotoAndPlay(0);
     app.stage.addChild(explosion);
     explosion.loop = false;
+    loseSound.play();
     text.anchor.set(0.5);
     text.resolution = 1;
     text.x = Math.max(playerSprite.x, 100);
@@ -205,6 +212,7 @@ function win() {
     winAnimation.animationSpeed = 0.2;
     winAnimation.anchor.set(0.5);
     winAnimation.gotoAndPlay(0);
+    winSound.play();
     app.stage.addChild(winAnimation);
     winAnimation.loop = false;
     text.anchor.set(0.5);
