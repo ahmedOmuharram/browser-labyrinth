@@ -250,6 +250,32 @@
             left: 35px !important;
             transition: all 1s;
         }
+        
+        #volume-slider {
+            appearance: none;
+            height: 10px;
+            outline: none;
+            background-color: #9c9c9c;
+            border-radius: 5px;
+        }
+        
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 12px;
+            height: 12px;
+            background: #ff0081;
+            cursor: pointer;
+            border: none;
+        }
+
+        #volume-slider::-moz-range-thumb {
+            width: 12px;
+            height: 12px;
+            background: #ff0081;
+            cursor: pointer;
+            border: none;
+        }
     </style>
     </head>
 <body id="body">
@@ -352,6 +378,11 @@
             <button class="level-button"  style="display: none;" onclick="setLevel(10)">
                 Level 10
             </button>
+            <div style="position: absolute; right: 3px; bottom: 5px;">
+                <img id="speaker-img" src="media/Speaker.png" width="15px" height="15px">
+                <input type="range" min="0" max="100" value="50" id="volume-slider">
+            </div>
+            
         </div>
         <div id="animation-pointer" style="display: none; position: absolute;">
             <img src="media/pointer.png">
@@ -373,6 +404,7 @@
             }
         };
         function start() {
+            document.getElementById("volume-slider").value = 50;
             menuMusic.pause();
             document.getElementById("welcome").style.display = "none";
             const rectangles = document.querySelectorAll('.loading-rectangle');
@@ -469,6 +501,15 @@
             audio.volume = 0.5;
             audio.play()
         }
+        document.getElementById("volume-slider").oninput = function() {
+            if (this.value != 0) {
+                document.getElementById("speaker-img").src = "media/Speaker.png";
+            }
+            else {
+                document.getElementById("speaker-img").src = "media/Speaker_Muted.png";
+            }
+            mainMusic.volume = this.value/100;
+        } 
 
     </script>
     <script src="node_modules/pixi.js/dist/pixi.min.js"></script>
