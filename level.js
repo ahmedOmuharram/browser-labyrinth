@@ -289,12 +289,7 @@ class Level{
         leftBorder.fillColor = "#005a00";
         rightBorder.color = "#005a00";
         rightBorder.fillColor = "#005a00";
-        document.getElementsByClassName("taskbar")[0].style.display = "block";
-        document.getElementsByClassName("taskbar")[0].style.backgroundColor = "#37ff37";
-        for (let i = 0; i < document.getElementsByClassName("level-button").length; i++) {
-            document.getElementsByClassName("level-button")[i].style.backgroundColor = "#37ff37";         
-        }
-        document.getElementsByClassName("start-button")[0].style.backgroundColor = "#37ff37";
+        document.getElementsByClassName("taskbar")[0].style.display = "none";
         document.getElementById("top-text").style.color = "#00ff00";
         document.getElementById("top-text").innerText = "MEMORY_MANAGEMENT";
         playerSprite.tint = "#00ff00";
