@@ -75,8 +75,10 @@ class Level{
             elapsed = 50;
         bottomBorder.positionY = 20 + Math.sin(elapsed/(100/Math.PI)) * 690;
         rightBorder.positionX = 10 + Math.sin(elapsed/(100/Math.PI)) * 1260;
-        if (elapsed >= 50)
+        if (elapsed >= 50) {
             setLevel(1);
+            mainMusic.play();
+        }
     }
 
     Level1(delta){
