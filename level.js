@@ -1,5 +1,11 @@
 var cannon;
 let cannonNumber = 0;
+let cannonAudio = new Audio("media/cannon.ogg");
+let errorAudio = new Audio("media/error.ogg");
+cannonAudio.loop = false;
+cannonAudio.volume = 0.4;
+errorAudio.loop = false;
+errorAudio.volume = 0.7;
 
 class Level{
     constructor(name, index) {
@@ -191,12 +197,16 @@ class Level{
             for (let i = 0; i < levelBlocks.length; i++) { 
                 levelBlocks[i].color = "#0000ff";
             }
+            cannonAudio.volume = 0;
+            errorAudio.play(); 
+            mainMusic.pause();
             cannon.color = "#0000ff";
             cannon.fillColor = "#0000ff";
             zeroParticleGenerator.color = "#c8c8c8";
             oneParticleGenerator.color = "#c8c8c8";
             app.renderer.backgroundColor = "#0000ff";
         }
+        errorAudio.addEventListener('ended', () => cannonAudio.volume = 0.4);
         elapsed += spinDirection * delta;
         cannonInterval += delta;
         for (let i = 0; i < 64; i++) {
@@ -222,8 +232,10 @@ class Level{
                 levelBlocks[68].maxAngle = angle+22.5;
                 if (spinDirection == 1 && elapsed < 199) {
                     levelBlocks[68].shoot(100,20,20,2,"#ff0081","#ff0081",0);
+                    cannonAudio.play();
                 } else {
                     levelBlocks[68].shoot(100,20,20,2,"#c8c8c8","#c8c8c8",0);
+                    cannonAudio.play();
                     setTimeout(() => {
                         levelBlocks[68].positionX += 2;
                         levelBlocks[68].color = "#ff0000";
@@ -351,6 +363,7 @@ class Level{
                     levelBlocks[cannonNumber].minAngle = angle;
                     levelBlocks[cannonNumber].maxAngle = angle;
                     levelBlocks[cannonNumber].shoot(100,20,20,2,"#ff0000","#ff0000",0);
+                    cannonAudio.play();
                 } 
             }, 250);
             cannonInterval -= 50;
@@ -388,6 +401,12 @@ function setLevel(level) {
     levelBlocks = [];
     cannonNumber = 0;
     playLevel.generate();
+    if (currentLevel < 10) { 
+        mainMusic.play();
+    }
+    if (currentLevel == 10) {
+        mainMusic.pause();
+    }
     if (currentLevel != 10) {
         document.getElementById("body").style.backgroundColor = "#008080";
         app.renderer.backgroundColor = "#008080";
