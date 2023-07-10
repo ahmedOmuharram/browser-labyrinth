@@ -1914,15 +1914,5 @@
 
 
     "10": [
-        {
-            "x": "0",
-            "y": "300",
-            "width": "1200",
-            "height": "100",
-            "thickness": 2,
-            "color": "#00ff00",
-            "fillColor": "#00ff00",
-            "borders": "rl"
-        }
     ]
 }

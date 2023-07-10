@@ -1,4 +1,5 @@
 var cannon;
+let cannonNumber = 0;
 
 class Level{
     constructor(name, index) {
@@ -53,7 +54,7 @@ class Level{
                     this.blocks.push(block);       
                 });
             });
-            if (currentLevel == 9)
+            if (currentLevel == 9 || currentLevel == 10)
                 eval(`playLevel.InitiateLevel${currentLevel}();`);
         }).catch(error => {
             console.error('Error:', error);
@@ -223,10 +224,44 @@ class Level{
                     levelBlocks[68].shoot(100,20,20,2,"#ff0081","#ff0081",0);
                 } else {
                     levelBlocks[68].shoot(100,20,20,2,"#c8c8c8","#c8c8c8",0);
+                    setTimeout(() => {
+                        levelBlocks[68].positionX += 2;
+                        levelBlocks[68].color = "#ff0000";
+                        levelBlocks[68].fillColor = "#ff0000";
+                    }, 50);
+                    setTimeout(() => {
+                        levelBlocks[68].positionY += 2;
+                        levelBlocks[68].color = "#00ff00";
+                        levelBlocks[68].fillColor = "#00ff00";
+                    }, 100);
+                    setTimeout(() => {
+                        levelBlocks[68].positionX += 1;
+                        levelBlocks[68].positionY += 1;
+                        levelBlocks[68].color = "#0000ff";
+                        levelBlocks[68].fillColor = "#0000ff";
+                    }, 150);
+                    setTimeout(() => {
+                        levelBlocks[68].positionY -= 3;
+                        levelBlocks[68].color = "#ff0000";
+                        levelBlocks[68].fillColor = "#ff0000";
+                    }, 200);
+                    setTimeout(() => {
+                        levelBlocks[68].positionX -= 3;
+                        levelBlocks[68].color = "#0000ff";
+                        levelBlocks[68].fillColor = "#0000ff";
+                    }, 250);
                 }
             }
             cannonInterval -= 100;
         }
+    }
+
+    InitiateLevel10(){
+        new Cannon(screenWidth/2, 0, 20, 60, 2, "#c8c8c8", "v", "#c8c8c8", 15, 20, -90, 90);
+        new Cannon(screenWidth/2, screenHeight - 60, 20, 60, 2, "#c8c8c8", "v", "#c8c8c8", 15, 20, -90, 90);
+        new Cannon(0, screenHeight/2, 60, 20, 2, "#c8c8c8", "v", "#c8c8c8", 15, 20, -90, 90);
+        new Cannon(screenWidth - 60, screenHeight/2, 60, 20, 2, "#c8c8c8", "v", "#c8c8c8", 15, 20, -90, 90);
+        cannonInterval = 0;
     }
 
     Level10(delta){
@@ -278,9 +313,58 @@ class Level{
             document.getElementById("main").style.borderRightColor = "#ff0000";
         }    
 
+        bottomBorder.graphic.interactive = false;
+        topBorder.graphic.interactive = false;
+        leftBorder.graphic.interactive = false;
+        rightBorder.graphic.interactive = false;
+
         elapsed += delta; 
-        bottomBorder.positionY = 720 - Math.sin(elapsed/(10000/Math.PI)) * 690;
-        rightBorder.positionX = 1280 - Math.sin(elapsed/(10000/Math.PI)) * 1260;
+        cannonInterval += delta;
+        if (cannonInterval > 50) {
+            setTimeout(() => {
+                levelBlocks[cannonNumber].positionX += 2;
+                levelBlocks[cannonNumber].color = "#ff0000";
+                levelBlocks[cannonNumber].fillColor = "#ff0000";
+            }, 50);
+            setTimeout(() => {
+                levelBlocks[cannonNumber].positionY += 2;
+                levelBlocks[cannonNumber].color = "#00ff00";
+                levelBlocks[cannonNumber].fillColor = "#00ff00";
+            }, 100);
+            setTimeout(() => {
+                levelBlocks[cannonNumber].positionX += 1;
+                levelBlocks[cannonNumber].positionY += 1;
+                levelBlocks[cannonNumber].color = "#0000ff";
+                levelBlocks[cannonNumber].fillColor = "#0000ff";
+            }, 150);
+            setTimeout(() => {
+                levelBlocks[cannonNumber].positionY -= 3;
+                levelBlocks[cannonNumber].color = "#ff0000";
+                levelBlocks[cannonNumber].fillColor = "#ff0000";
+            }, 200);
+            setTimeout(() => {
+                levelBlocks[cannonNumber].positionX -= 3;
+                levelBlocks[cannonNumber].color = "#c8c8c8";
+                levelBlocks[cannonNumber].fillColor = "#c8c8c8";
+                if (levelBlocks[cannonNumber]) {
+                    let angle = Math.atan2(playerSprite.y - levelBlocks[cannonNumber].positionY, playerSprite.x - levelBlocks[cannonNumber].positionX) * (180 / Math.PI)
+                    levelBlocks[cannonNumber].minAngle = angle;
+                    levelBlocks[cannonNumber].maxAngle = angle;
+                    levelBlocks[cannonNumber].shoot(100,20,20,2,"#ff0000","#ff0000",0);
+                } 
+            }, 250);
+            cannonInterval -= 50;
+            cannonNumber++;
+            if (cannonNumber > 3) {
+                cannonNumber = 0;
+            }
+        }
+        
+        bottomBorder.positionY = 720 - Math.sin(elapsed/(15000/Math.PI)) * 690;
+        if (rightBorder.height < 100) {
+            rightBorder.height = 0;
+        }
+        rightBorder.positionX = 1280 - Math.sin(elapsed/(15000/Math.PI)) * 1260;
     }
 }
 
@@ -301,7 +385,8 @@ function setLevel(level) {
     rightBorder = new Border(1270, 0, 10, 740, 2, "#c8c8c8", 'h', "#c8c8c8");
     topBorder = new Border(0, 0, 1280, 20, 2, "#c8c8c8", 'v', "#010081");
     playLevel = new Level(currentLevel.toString(), 0);
-    levelBlocks = []
+    levelBlocks = [];
+    cannonNumber = 0;
     playLevel.generate();
     if (currentLevel != 10) {
         document.getElementById("body").style.backgroundColor = "#008080";
