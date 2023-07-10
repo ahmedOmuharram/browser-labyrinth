@@ -373,11 +373,13 @@ class Level{
             }
         }
         
-        bottomBorder.positionY = 720 - Math.sin(elapsed/(15000/Math.PI)) * 690;
-        if (rightBorder.height < 100) {
+        topBorder.positionY = Math.sin(elapsed/(20000/Math.PI)) * 690;
+        leftBorder.positionX = Math.sin(elapsed/(20000/Math.PI)) * 1260;
+        bottomBorder.positionY = 705 - Math.sin(elapsed/(20000/Math.PI)) * 690;
+        if (rightBorder.height < 150) {
             rightBorder.height = 0;
         }
-        rightBorder.positionX = 1280 - Math.sin(elapsed/(15000/Math.PI)) * 1260;
+        rightBorder.positionX = 1270 - Math.sin(elapsed/(20000/Math.PI)) * 1260;
     }
 }
 
