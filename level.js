@@ -1,4 +1,5 @@
 var cannon;
+let lostAfterCrash;
 let cannonNumber = 0;
 let cannonAudio = new Audio("media/cannon.ogg");
 let errorAudio = new Audio("media/error.ogg");
@@ -205,6 +206,7 @@ class Level{
             zeroParticleGenerator.color = "#c8c8c8";
             oneParticleGenerator.color = "#c8c8c8";
             app.renderer.backgroundColor = "#0000ff";
+            lostAfterCrash = true;
         }
         errorAudio.addEventListener('ended', () => cannonAudio.volume = 0.4);
         elapsed += spinDirection * delta;
@@ -402,6 +404,7 @@ function setLevel(level) {
     topBorder = new Border(0, 0, 1280, 20, 2, "#c8c8c8", 'v', "#010081");
     playLevel = new Level(currentLevel.toString(), 0);
     levelBlocks = [];
+    lostAfterCrash = false;
     cannonNumber = 0;
     playLevel.generate();
     if (currentLevel < 10) { 

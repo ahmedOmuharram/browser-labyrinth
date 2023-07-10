@@ -150,11 +150,15 @@ function lose() {
         dropShadowColor: '#000000',
         dropShadowBlur: 2,
         dropShadowDistance: 2,
-    })
+    });
     const explosion = new PIXI.AnimatedSprite(explosionTextures);
     if (currentLevel == 10) {
+        text.text = "Eliminated by Computer";
         text.tint = "#00ff00";
         explosion.tint = "#00ff00";
+    }
+    if (currentLevel == 9 && lostAfterCrash) {
+        text.text = "Eliminated by Computer";
     }
     zeroParticleGenerator.createParticles(Math.random() * 10, playerSprite.x, playerSprite.y);
     oneParticleGenerator.createParticles(Math.random() * 10, playerSprite.x, playerSprite.y);
