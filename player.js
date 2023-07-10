@@ -193,11 +193,9 @@ function win() {
     if (currentLevel == 9) {
         app.ticker.stop();
         setTimeout(() => {
-            document.getElementById("top-text").style.display = "none";
             document.getElementById("main").style.display = "none";
         }, 3000)
         setTimeout(() => {
-            document.getElementById("top-text").style.display = "block";
             document.getElementById("main").style.display = "block";
             app.ticker.start();
             setLevel(++currentLevel);
