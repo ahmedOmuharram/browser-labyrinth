@@ -382,6 +382,10 @@ class Level{
         if (rightBorder.height < 150) {
             rightBorder.height = 0;
         }
+        if (rightBorder.height == 0 && playerSprite.x >= rightBorder) {
+            document.getElementById("main").style.display = "none";
+            console.log("test");
+        }
         rightBorder.positionX = 1270 - Math.sin(elapsed/(20000/Math.PI)) * 1260;
     }
 }
