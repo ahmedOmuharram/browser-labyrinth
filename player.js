@@ -111,7 +111,7 @@ function gameLoop(delta) {
         }
     }
 
-    if (playerSprite.getBounds().x >= 1200 && playerSprite.getBounds().y <= 24 && !won && !lost) {
+    if (playerSprite.getBounds().x >= 1200 && playerSprite.getBounds().y <= 24 && !won && !lost && currentLevel != 10) {
         won = true;
         win();
     }

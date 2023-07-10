@@ -277,6 +277,7 @@ class Level{
     }
 
     Level10(delta){
+        folderSprite.height = 0;
         backgroundScreen.fillColor = "#000000";
         topBorder.color = "#00ff00"; 
         topBorder.fillColor = "#00ff00";
@@ -405,6 +406,7 @@ function setLevel(level) {
     playLevel.generate();
     if (currentLevel < 10) { 
         mainMusic.play();
+        folderSprite.height = 70;
     }
     if (currentLevel == 10) {
         mainMusic.pause();
