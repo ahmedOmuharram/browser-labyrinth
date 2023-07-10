@@ -190,43 +190,55 @@ function lose() {
 }
 
 function win() { 
-    playerSprite.ySpeed = 0;
-    playerSprite.height = 0;
-    const text = new PIXI.Text("64 bytes from 8.8.8.8", {
-        fontFamily: 'Levi Windows',
-        fontSize: 24,
-        lineHeight: 28,
-        letterSpacing: 0,
-        fill: "#ffffff",
-        align: "center",
-        dropShadow: true,
-        dropShadowColor: '#000000',
-        dropShadowBlur: 2,
-        dropShadowDistance: 2,
-    })
-    const winAnimation = new PIXI.AnimatedSprite(winTextures);
-    if (currentLevel == 10) {
-        text.tint = "#00ff00";
-        winAnimation.tint = "#00ff00";
+    if (currentLevel == 9) {
+        app.ticker.stop();
+        setTimeout(() => {
+            document.getElementById("main").style.display = "none";
+        }, 3000)
+        setTimeout(() => {
+            document.getElementById("main").style.display = "block";
+            app.ticker.start();
+            setLevel(++currentLevel);
+        }, 8000)
+    } else {
+        playerSprite.ySpeed = 0;
+        playerSprite.height = 0;
+        const text = new PIXI.Text("64 bytes from 8.8.8.8", {
+            fontFamily: 'Levi Windows',
+            fontSize: 24,
+            lineHeight: 28,
+            letterSpacing: 0,
+            fill: "#ffffff",
+            align: "center",
+            dropShadow: true,
+            dropShadowColor: '#000000',
+            dropShadowBlur: 2,
+            dropShadowDistance: 2,
+        })
+        const winAnimation = new PIXI.AnimatedSprite(winTextures);
+        if (currentLevel == 10) {
+            text.tint = "#00ff00";
+            winAnimation.tint = "#00ff00";
+        }
+        winAnimation.x = folderSprite.x;
+        winAnimation.y = folderSprite.y;
+        winAnimation.width = folderSprite.width;
+        winAnimation.height = folderSprite.height;
+        winAnimation.animationSpeed = 0.2;
+        winAnimation.anchor.set(0.5);
+        winAnimation.gotoAndPlay(0);
+        winSound.play();
+        app.stage.addChild(winAnimation);
+        winAnimation.loop = false;
+        text.anchor.set(0.5);
+        text.resolution = 1;
+        text.x = folderSprite.x - 70;
+        text.y = folderSprite.y + 50;
+        app.stage.addChild(text);
+        winAnimation.onComplete = () => {
+            setTimeout(() => setLevel(++currentLevel), 1500);
+            folderSprite.texture = PIXI.Texture.from('media/full-folder.png')
+            app.stage.removeChild(winAnimation);
+        };
     }
-    winAnimation.x = folderSprite.x;
-    winAnimation.y = folderSprite.y;
-    winAnimation.width = folderSprite.width;
-    winAnimation.height = folderSprite.height;
-    winAnimation.animationSpeed = 0.2;
-    winAnimation.anchor.set(0.5);
-    winAnimation.gotoAndPlay(0);
-    winSound.play();
-    app.stage.addChild(winAnimation);
-    winAnimation.loop = false;
-    text.anchor.set(0.5);
-    text.resolution = 1;
-    text.x = folderSprite.x - 70;
-    text.y = folderSprite.y + 50;
-    app.stage.addChild(text);
-    winAnimation.onComplete = () => {
-        setTimeout(() => setLevel(++currentLevel), 1500);
-        folderSprite.texture = PIXI.Texture.from('/media/full-folder.png')
-        app.stage.removeChild(winAnimation);
-    };
 }

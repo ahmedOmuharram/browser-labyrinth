@@ -209,6 +209,8 @@ class Level{
             oneParticleGenerator.color = "#c8c8c8";
             app.renderer.backgroundColor = "#0000ff";
             lostAfterCrash = true;
+            folderSprite.texture = PIXI.Texture.from('media/ram.png')
+            folderSprite.positionY += 10
         }
         errorAudio.addEventListener('ended', () => cannonAudio.volume = 0.4);
         elapsed += spinDirection * delta;
