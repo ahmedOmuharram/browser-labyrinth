@@ -280,6 +280,7 @@ class Level{
 
     Level10(delta){
         folderSprite.height = 0;
+        backgroundScreen.color = "#000000";
         backgroundScreen.fillColor = "#000000";
         topBorder.color = "#00ff00"; 
         topBorder.fillColor = "#00ff00";
