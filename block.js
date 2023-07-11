@@ -11,7 +11,10 @@ class Block{
     this.direction = direction;
     this.fillColor = fillColor;
     this.graphic = new PIXI.Graphics();
-    app.stage.addChild(this.graphic);
+    if (app.stage)
+      app.stage.addChild(this.graphic);
+    else
+      endApp.stage.addChild(this.graphic);
   }
 
   drawBlock() {
