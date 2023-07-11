@@ -393,7 +393,7 @@ class Level{
                 document.getElementById("body").style.removeProperty("background-image");
                 document.getElementById("body").style.removeProperty("background-repeat");
                 document.getElementById("body").style.removeProperty("background-size");
-                THEEND();
+                Finale();
             }, 5000)
             
         }

@@ -6,7 +6,7 @@ let startTimer = -9.000;
 let timer = 0;
 let backgroundStartTimer = -9.000;
 let backgroundTimer = 0;
-function THEEND(){
+function Finale(){
     finale.volume = 0.1;
     elapsed = 0;
     endScreenWidth = window.innerWidth;
