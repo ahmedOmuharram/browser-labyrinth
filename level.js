@@ -376,17 +376,28 @@ class Level{
             }
         }
         
-        topBorder.positionY = Math.sin(elapsed/(20000/Math.PI)) * 690;
-        leftBorder.positionX = Math.sin(elapsed/(20000/Math.PI)) * 1260;
-        bottomBorder.positionY = 705 - Math.sin(elapsed/(20000/Math.PI)) * 690;
+        topBorder.positionY = Math.sin(elapsed/(1000/Math.PI)) * 690;
+        leftBorder.positionX = Math.sin(elapsed/(1000/Math.PI)) * 1260;
+        bottomBorder.positionY = 705 - Math.sin(elapsed/(1000/Math.PI)) * 690;
         if (rightBorder.height < 150) {
             rightBorder.height = 0;
         }
-        if (rightBorder.height == 0 && playerSprite.x >= rightBorder) {
+        if (rightBorder.height == 0 && playerSprite.x >= rightBorder.positionX) {
             document.getElementById("main").style.display = "none";
-            console.log("test");
+            app.ticker.stop();
+            app.destroy();
+            setTimeout(() => {
+                console.log("test");
+                document.getElementById("top-text").style.display = "none";
+                document.getElementById("body").style.backgroundColor = "#008080";
+                document.getElementById("body").style.removeProperty("background-image");
+                document.getElementById("body").style.removeProperty("background-repeat");
+                document.getElementById("body").style.removeProperty("background-size");
+                Finale();
+            }, 5000)
+            
         }
-        rightBorder.positionX = 1270 - Math.sin(elapsed/(20000/Math.PI)) * 1260;
+        rightBorder.positionX = 1270 - Math.sin(elapsed/(1000/Math.PI)) * 1260;
     }
 }
 
