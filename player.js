@@ -54,8 +54,10 @@ const keys = {
     37: false,
     38: false,
     39: false,
+    40: false,
     65: false,
     68: false,
+    83: false,
     87: false
 };
 
