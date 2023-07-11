@@ -12,6 +12,18 @@ let quarterTimerBeats = 0;
 let startQuarterTimer = -9.000;
 let quartertimer = 0;
 function Finale(){
+    endScreenWidth = window.innerWidth;
+    endScreenHeight = window.innerHeight;
+    finale.currentTime = 0;
+    fullTimerBeats = 0;
+    startTimer = -9.000;
+    timer = 0;
+    halfTimerBeats = 0;
+    startHalfTimer = -9.000;
+    halfTimer = 0;
+    quarterTimerBeats = 0;
+    startQuarterTimer = -9.000;
+    quartertimer = 0;
     finale.volume = 0.1;
     elapsed = 0;
     endScreenWidth = window.innerWidth;
@@ -31,7 +43,7 @@ function Finale(){
 
     document.getElementById("canvas").appendChild(endApp.view);
     playerSprite.tint = "#ffffff";
-    playerSprite.x = 100;
+    playerSprite.x = endScreenWidth/2;
     playerSprite.y = endScreenHeight/2;
     playerSprite.xSpeed = 0;
     playerSprite.ySpeed = 0;
@@ -40,6 +52,11 @@ function Finale(){
 
     blocks = [];
     blocks.push(new Block(500, innerHeight/2, 50, 50, 2, "#00FF00", "v", "#00FF00"))
+    new Cannon(endScreenWidth - 100, Math.random() * (endScreenHeight - 100) + 50, 1, 1, 1, null, "v", null, 5, 20, 90, 270);
+    new Cannon(endScreenWidth - 100, Math.random() * (endScreenHeight - 100) + 50, 1, 1, 1, null, "v", null, 5, 20, 90, 270);
+    new Cannon(endScreenWidth - 100, Math.random() * (endScreenHeight - 100) + 50, 1, 1, 1, null, "v", null, 5, 20, 90, 270);
+    new Cannon(endScreenWidth - 100, Math.random() * (endScreenHeight - 100) + 50, 1, 1, 1, null, "v", null, 5, 20, 90, 270);
+    new Cannon(endScreenWidth - 100, Math.random() * (endScreenHeight - 100) + 50, 1, 1, 1, null, "v", null, 5, 20, 90, 270);
 
     endApp.stage.addChild(playerSprite)
     finale.play();
@@ -52,6 +69,8 @@ function endGameLoop(delta){
     quarterTimer = startQuarterTimer + finale.currentTime;
     playerSprite.xSpeed = 0;
     playerSprite.ySpeed = 0;
+    playerSprite.xSpeed -= (keys[37] || keys[65]) * speed;
+    playerSprite.xSpeed += (keys[39] || keys[68]) * speed;
     playerSprite.ySpeed -= (keys[38] || keys[87]) * speed;
     playerSprite.ySpeed += (keys[40] || keys[83]) * speed;
 
@@ -327,8 +346,15 @@ function endGameLoop(delta){
     playerSprite.y += playerSprite.ySpeed * delta;
 
     blocks.forEach(block => {
-        block.drawBlock();
+        block.drawBlock(delta);
     });
+    for (let i = 0; i < blocks.length; i++) {
+        if (isColliding(playerSprite, blocks[i].graphic)) {
+            document.getElementById("canvas").removeChild(endApp.view);
+            endApp.destroy();
+            Finale();
+        }
+    }
 }
 function testBeat(){
     playerSprite.tint = "#00FF00"
@@ -338,6 +364,15 @@ function testBeat(){
 }
 
 function mainBeat(){
+    blocks[1].positionY = Math.random() * (endScreenHeight - 100) + 50;
+    blocks[1].shoot(5,20,20,2,"#ff0081","#ff0081",0);
+    blocks[2].positionY = Math.random() * (endScreenHeight - 100) + 50;
+    blocks[2].shoot(5,20,20,2,"#ff0081","#ff0081",0);
+    blocks[3].positionY = Math.random() * (endScreenHeight - 100) + 50;
+    blocks[3].shoot(5,20,20,2,"#ff0081","#ff0081",0);
+    blocks[4].positionY = Math.random() * (endScreenHeight - 100) + 50;
+    blocks[4].shoot(5,20,20,2,"#ff0081","#ff0081",0);
+
     endApp.renderer.background.color = "#111111";
     setTimeout(() => {
         endApp.renderer.background.color = "#000000";
@@ -371,12 +406,22 @@ function BBeat(){
 }
 
 function S1quarterBeat(){
+    blocks[5].positionY = Math.random() * (endScreenHeight - 100) + 50;
+    let angle = Math.atan2(playerSprite.y - blocks[5].positionY, playerSprite.x - blocks[5].positionX) * (180 / Math.PI)
+    blocks[5].minAngle = angle;
+    blocks[5].maxAngle = angle;
+    blocks[5].shoot(20,20,20,2,"#ff0000","#ff0000",0);
     playerSprite.tint = "#FF0000"
     setTimeout(() => {
         playerSprite.tint = "#FFFFFF"
     }, 70)
 }
 function S2quarterBeat(){
+    blocks[5].positionY = Math.random() * (endScreenHeight - 100) + 50;
+    let angle = Math.atan2(playerSprite.y - blocks[5].positionY, playerSprite.x - blocks[5].positionX) * (180 / Math.PI)
+    blocks[5].minAngle = angle;
+    blocks[5].maxAngle = angle;
+    blocks[5].shoot(20,20,20,2,"#0000ff","#0000ff",0);
     playerSprite.tint = "#0000FF"
     setTimeout(() => {
         playerSprite.tint = "#FFFFFF"
