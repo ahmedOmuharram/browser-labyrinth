@@ -98,7 +98,12 @@ function endGameLoop(delta){
             } 
         }
         if (fullTimerBeats >= 69 && fullTimerBeats <= 80){
-            mainBeat();
+            if (fullTimerBeats % 2){
+                mainBeat();
+            }
+            else {
+                LoudmainBeat();
+            } 
         }
         if (fullTimerBeats >= 97 && fullTimerBeats <= 104){
             mainBeat();
@@ -345,6 +350,28 @@ function endGameLoop(delta){
             blocks[0].fillColor = "#000000"
             blocks[0].color = "#000000"
         }
+        if (quarterTimerBeats == 448) {
+            blocks[1].minAngle = 180;
+            blocks[1].maxAngle = 180;
+            blocks[1].minSpeed = 60;
+            blocks[1].maxSpeed = 70;
+            blocks[2].minAngle = 180;
+            blocks[2].maxAngle = 180;
+            blocks[2].minSpeed = 60;
+            blocks[2].maxSpeed = 70;
+            blocks[4].minAngle = 180;
+            blocks[4].maxAngle = 180;
+            blocks[4].minSpeed = 60;
+            blocks[4].maxSpeed = 70;
+            blocks[5].minAngle = 180;
+            blocks[5].maxAngle = 180;
+            blocks[5].minSpeed = 60;
+            blocks[5].maxSpeed = 70;
+            blocks[6].minAngle = 180;
+            blocks[6].maxAngle = 180;
+            blocks[6].minSpeed = 60;
+            blocks[6].maxSpeed = 70;
+        }
     }
 
     playerSprite.x += playerSprite.xSpeed * delta;
@@ -381,24 +408,31 @@ function testBeat(){
 }
 
 function mainBeat(){
-    blocks[0].positionY += 10;
-    setTimeout(() => {
-        blocks[0].positionY -= 10;
-    }, 50)
-    blocks[1].shoot(1,20,20,2,"#ff0081","#ff0081",0);
-    blocks[2].shoot(1,20,20,2,"#8100ff","#8100ff",0);
-    blocks[5].shoot(1,20,20,2,"#00ff81","#00ff81",0);
-    blocks[6].shoot(1,20,20,2,"#81ff00","#81ff00",0);
-    blocks[1].positionX += 10;
-    blocks[2].positionX += 10;
-    blocks[5].positionX += 10;
-    blocks[6].positionX += 10;
-    setTimeout(() => {
-        blocks[1].positionX -= 10;
-        blocks[2].positionX -= 10;
-        blocks[5].positionX -= 10;
-        blocks[6].positionX -= 10;
-    }, 100)
+    if (!((quarterTimerBeats >= 267 && quarterTimerBeats <= 272) || (quarterTimerBeats >= 587 && quarterTimerBeats <= 593) || 
+        (quarterTimerBeats >= 651 && quarterTimerBeats <= 656) || (quarterTimerBeats >= 467 && quarterTimerBeats <= 480) || 
+        (quarterTimerBeats >= 499 && quarterTimerBeats <= 512) || (quarterTimerBeats >= 531 && quarterTimerBeats <= 544) || 
+        (quarterTimerBeats >= 563 && quarterTimerBeats <= 576) || (quarterTimerBeats >= 611 && quarterTimerBeats <= 624) || 
+        (quarterTimerBeats >= 643 && quarterTimerBeats <= 649) || (quarterTimerBeats >= 675 && quarterTimerBeats <= 688))) {
+        blocks[0].positionY += 10;
+        setTimeout(() => {
+            blocks[0].positionY -= 10;
+        }, 50)
+        console.log(blocks[1].minSpeed + " " + blocks[1].maxSpeed);
+        blocks[1].shoot(1,20,20,2,"#ff0081","#ff0081",0);
+        blocks[2].shoot(1,20,20,2,"#8100ff","#8100ff",0);
+        blocks[5].shoot(1,20,20,2,"#00ff81","#00ff81",0);
+        blocks[6].shoot(1,20,20,2,"#81ff00","#81ff00",0);
+        blocks[1].positionX += 10;
+        blocks[2].positionX += 10;
+        blocks[5].positionX += 10;
+        blocks[6].positionX += 10;
+        setTimeout(() => {
+            blocks[1].positionX -= 10;
+            blocks[2].positionX -= 10;
+            blocks[5].positionX -= 10;
+            blocks[6].positionX -= 10;
+        }, 100)
+    }
 
     endApp.renderer.background.color = "#111111";
     setTimeout(() => {
@@ -406,22 +440,28 @@ function mainBeat(){
     }, 100)
 }
 function LoudmainBeat(){
-    blocks[1].shoot(2,30,30,2,"#ff0081","#ff0081",0);
-    blocks[2].shoot(2,30,30,2,"#8100ff","#8100ff",0);
-    blocks[5].shoot(2,30,30,2,"#00ff81","#00ff81",0);
-    blocks[6].shoot(2,30,30,2,"#81ff00","#81ff00",0);
+    if (!((quarterTimerBeats >= 267 && quarterTimerBeats <= 272) || (quarterTimerBeats >= 587 && quarterTimerBeats <= 593) || 
+        (quarterTimerBeats >= 651 && quarterTimerBeats <= 656) || (quarterTimerBeats >= 467 && quarterTimerBeats <= 480) || 
+        (quarterTimerBeats >= 499 && quarterTimerBeats <= 512) || (quarterTimerBeats >= 531 && quarterTimerBeats <= 544) || 
+        (quarterTimerBeats >= 563 && quarterTimerBeats <= 576) || (quarterTimerBeats >= 611 && quarterTimerBeats <= 624) || 
+        (quarterTimerBeats >= 643 && quarterTimerBeats <= 649) || (quarterTimerBeats >= 675 && quarterTimerBeats <= 688)))  {
+        console.log(blocks[1].minSpeed + " " + blocks[1].maxSpeed);
+        blocks[1].shoot(2,30,30,2,"#ff0081","#ff0081",0);
+        blocks[2].shoot(2,30,30,2,"#8100ff","#8100ff",0);
+        blocks[5].shoot(2,30,30,2,"#00ff81","#00ff81",0);
+        blocks[6].shoot(2,30,30,2,"#81ff00","#81ff00",0);
 
-    blocks[1].positionX += 10;
-    blocks[2].positionX += 10;
-    blocks[5].positionX += 10;
-    blocks[6].positionX += 10;
-    setTimeout(() => {
-        blocks[1].positionX -= 10;
-        blocks[2].positionX -= 10;
-        blocks[5].positionX -= 10;
-        blocks[6].positionX -= 10;
+        blocks[1].positionX += 10;
+        blocks[2].positionX += 10;
+        blocks[5].positionX += 10;
+        blocks[6].positionX += 10;
+        setTimeout(() => {
+            blocks[1].positionX -= 10;
+            blocks[2].positionX -= 10;
+            blocks[5].positionX -= 10;
+            blocks[6].positionX -= 10;
     }, 100)
-
+    }
     endApp.renderer.background.color = "#222222";
     setTimeout(() => {
         endApp.renderer.background.color = "#000000";
@@ -524,15 +564,21 @@ function S2quarterBeat(){
     let angle = 225 - 90 * blocks[can].positionY/innerHeight;
     let oldColor = blocks[can].color;
     let oldFillColor = blocks[can].fillColor;
+    let oldMinSpeed = blocks[can].minSpeed;
+    let oldMaxSpeed = blocks[can].maxSpeed;
     blocks[can].color = "#ff0000";
     blocks[can].fillColor = "#ff0000";
     blocks[can].minAngle = angle;
     blocks[can].maxAngle = angle;
+    blocks[can].minSpeed = 25;
+    blocks[can].maxSpeed = 30;
     blocks[can].shoot(20,20,20,2,blocks[can].color,blocks[can].fillColor,0);
     if (can == 1 || can == 2 || can == 5 || can == 6) {
-        blocks[can].minAngle = 90;
-        blocks[can].maxAngle = 270;
+        blocks[can].minAngle = 180;
+        blocks[can].maxAngle = 180;
     }
+    blocks[can].minSpeed = oldMinSpeed;
+    blocks[can].maxSpeed = oldMaxSpeed;
 
     blocks[can].positionX += 10;
     setTimeout(() => {
