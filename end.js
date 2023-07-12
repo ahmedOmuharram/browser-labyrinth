@@ -101,6 +101,8 @@ function endGameLoop(delta){
     playerSprite.ySpeed += (keys[40] || keys[83]) * speed;
     if ((finale.currentTime/finale.duration * 100) < 49) {
         text.text = `// SEARCHING FOR VULNERABILITIES... STATUS: ${(finale.currentTime/finale.duration * 100).toFixed(2)}% COMPLETED`;
+    } else if ((finale.currentTime/finale.duration * 100) < 65){
+        text.text = `// ACCESSING USER DATA... STATUS: ${(finale.currentTime/finale.duration * 100).toFixed(2)}% COMPLETED`;
     } else {
         text.text = `// HACK IN PROGRESS... STATUS: ${(finale.currentTime/finale.duration * 100).toFixed(2)}% COMPLETED`;
     }
