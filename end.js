@@ -92,9 +92,9 @@ function endGameLoop(delta){
     playerSprite.xSpeed += (keys[39] || keys[68]) * speed;
     playerSprite.ySpeed -= (keys[38] || keys[87]) * speed;
     playerSprite.ySpeed += (keys[40] || keys[83]) * speed;
-    text.text = `HACK IN PROGRESS... STATUS: ${(finale.currentTime/finale.duration * 100).toFixed(2)}% COMPLETED`;
+    text.text = `// HACK IN PROGRESS... STATUS: ${(finale.currentTime/finale.duration * 100).toFixed(2)}% COMPLETED`;
     if ((finale.currentTime/finale.duration * 100) >= 98) {
-        text.text = "HACKED"
+        text.text = "// HACKED"
     }
     if (timer > 0) {
         fullTimerBeats++;
