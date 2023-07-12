@@ -521,7 +521,7 @@ function GBeat(){
     blocks[4].color = "#14CC14"
     blocks[4].fillColor = "#14CC14"
     let angle = Math.atan2(playerSprite.y - blocks[4].positionY, playerSprite.x - blocks[4].positionX) * (180 / Math.PI)
-    let line = new PIXI.Graphics().lineStyle(2, "#FFFFFF").moveTo(blocks[4].positionX + blocks[4].width/2, blocks[4].positionY + blocks[4].height/2).lineTo(blocks[4].positionX + blocks[4].width/2 + Math.cos(angle / (180 / Math.PI)) * 2203, blocks[4].positionY + blocks[4].height/2 + Math.sin(angle / (180 / Math.PI)) * 2203);
+    let line = new PIXI.Graphics().lineStyle(2, "#282828").moveTo(blocks[4].positionX + blocks[4].width/2, blocks[4].positionY + blocks[4].height/2).lineTo(blocks[4].positionX + blocks[4].width/2 + Math.cos(angle / (180 / Math.PI)) * 2203, blocks[4].positionY + blocks[4].height/2 + Math.sin(angle / (180 / Math.PI)) * 2203);
     endApp.stage.addChild(line);
     setTimeout(() => {
         endApp.stage.removeChild(line);
@@ -544,7 +544,7 @@ function BBeat(){
     blocks[4].color = "#0000FF"
     blocks[4].fillColor = "#0000FF"
     let angle = Math.atan2(playerSprite.y - blocks[4].positionY, playerSprite.x - blocks[4].positionX) * (180 / Math.PI)
-    let line = new PIXI.Graphics().lineStyle(2, "#FFFFFF").moveTo(blocks[4].positionX + blocks[4].width/2, blocks[4].positionY + blocks[4].height/2).lineTo(blocks[4].positionX + blocks[4].width/2 + Math.cos(angle / (180 / Math.PI)) * 2203, blocks[4].positionY + blocks[4].height/2 + Math.sin(angle / (180 / Math.PI)) * 2203);
+    let line = new PIXI.Graphics().lineStyle(2, "#282828").moveTo(blocks[4].positionX + blocks[4].width/2, blocks[4].positionY + blocks[4].height/2).lineTo(blocks[4].positionX + blocks[4].width/2 + Math.cos(angle / (180 / Math.PI)) * 2203, blocks[4].positionY + blocks[4].height/2 + Math.sin(angle / (180 / Math.PI)) * 2203);
     endApp.stage.addChild(line);
     setTimeout(() => {
         endApp.stage.removeChild(line);
@@ -588,7 +588,7 @@ function S2quarterBeat(){
     let oldFillColor = blocks[can].fillColor;
     let oldMinSpeed = blocks[can].minSpeed;
     let oldMaxSpeed = blocks[can].maxSpeed;
-    let line = new PIXI.Graphics().lineStyle(2, "#FFFFFF").moveTo(blocks[can].positionX + blocks[can].width/2, blocks[can].positionY + blocks[can].height/2).lineTo(blocks[can].positionX + blocks[can].width/2 + Math.cos(angle / (180 / Math.PI)) * 2203, blocks[can].positionY + blocks[can].height/2 + Math.sin(angle / (180 / Math.PI)) * 2203);
+    let line = new PIXI.Graphics().lineStyle(2, "#282828").moveTo(blocks[can].positionX + blocks[can].width/2, blocks[can].positionY + blocks[can].height/2).lineTo(blocks[can].positionX + blocks[can].width/2 + Math.cos(angle / (180 / Math.PI)) * 2203, blocks[can].positionY + blocks[can].height/2 + Math.sin(angle / (180 / Math.PI)) * 2203);
     endApp.stage.addChild(line);
     setTimeout(() => {
         endApp.stage.removeChild(line);
