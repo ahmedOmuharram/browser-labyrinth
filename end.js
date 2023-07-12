@@ -1,4 +1,5 @@
 let endApp = null;
+let text;
 let endScreenWidth = window.innerWidth;
 let endScreenHeight = window.innerHeight;
 let lives = 3;
@@ -69,7 +70,19 @@ function Finale(){
     new Cannon(endScreenWidth - 110, 3 * (endScreenHeight-100)/5 + 50, 30, 30, 2, "#0000FF", "v", "#000000", 35, 40, 90, 270);
     new Cannon(endScreenWidth - 110, 4 * (endScreenHeight-100)/5 + 50, 30, 30, 2, "#008000", "v", "#008000", 10, 15, 90, 270);
     new Cannon(endScreenWidth - 110, 5 * (endScreenHeight-100)/5 + 50, 30, 30, 2, "#008000", "v", "#008000", 10, 15, 90, 270);
-
+    text = new PIXI.Text("HACK IN PROGRESS... STATUS: 0% COMPLETED", {
+        fontFamily: 'Levi Windows',
+        fontSize: 48,
+        lineHeight: 28,
+        letterSpacing: 0,
+        fill: "#00ff00",
+        align: "center",
+    });
+    text.anchor.set(0);
+    text.resolution = 1;
+    text.x = 10;
+    text.y = 10;
+    endApp.stage.addChild(text);
     endApp.stage.addChild(playerSprite)
     finale.play();
     endApp.ticker.add(endGameLoop);
@@ -86,7 +99,10 @@ function endGameLoop(delta){
     playerSprite.xSpeed += (keys[39] || keys[68]) * speed;
     playerSprite.ySpeed -= (keys[38] || keys[87]) * speed;
     playerSprite.ySpeed += (keys[40] || keys[83]) * speed;
-
+    text.text = `HACK IN PROGRESS... STATUS: ${(finale.currentTime/finale.duration * 100).toFixed(2)}% COMPLETED`;
+    if ((finale.currentTime/finale.duration * 100) >= 98) {
+        text.text = "HACKED"
+    }
     if (timer > 0) {
         fullTimerBeats++;
         startTimer -= 1/(105/60);
@@ -357,26 +373,14 @@ function endGameLoop(delta){
             }
         }
         if (quarterTimerBeats == 448) {
-            blocks[1].minAngle = 180;
-            blocks[1].maxAngle = 180;
-            blocks[1].minSpeed = 60;
-            blocks[1].maxSpeed = 70;
-            blocks[2].minAngle = 180;
-            blocks[2].maxAngle = 180;
-            blocks[2].minSpeed = 60;
-            blocks[2].maxSpeed = 70;
-            blocks[4].minAngle = 180;
-            blocks[4].maxAngle = 180;
-            blocks[4].minSpeed = 60;
-            blocks[4].maxSpeed = 70;
-            blocks[5].minAngle = 180;
-            blocks[5].maxAngle = 180;
-            blocks[5].minSpeed = 60;
-            blocks[5].maxSpeed = 70;
-            blocks[6].minAngle = 180;
-            blocks[6].maxAngle = 180;
-            blocks[6].minSpeed = 60;
-            blocks[6].maxSpeed = 70;
+            for (let i = 1; i < 7; i++) {
+                if (i != 3) {
+                    blocks[i].minAngle = 180;
+                    blocks[i].maxAngle = 180;
+                    blocks[i].minSpeed = 60;
+                    blocks[i].maxSpeed = 70;
+                }
+            }
         }
     }
 
