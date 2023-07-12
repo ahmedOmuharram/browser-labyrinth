@@ -30,7 +30,10 @@ class Particles{
             newParticle.scale.set((Math.random() * (this.maxScale - this.minScale)) + this.minScale);
             newParticle.tint = this.color;
             this.particles.push(newParticle);
-            app.stage.addChild(newParticle);
+            if (app.stage)
+                app.stage.addChild(newParticle);
+            else
+                endApp.stage.addChild(newParticle);
         }
     }
     renderParticles(delta){
@@ -40,8 +43,12 @@ class Particles{
             particle.y += particle.speedY * delta;
             particle.rotation += particle.speedRotation * delta;
             particle.alpha -= particle.speedAlpha * delta;
-            if (particle.alpha <= 0)
-                app.stage.removeChild(particle);
+            if (particle.alpha <= 0) {
+                if (app.stage)
+                    app.stage.addChild(particle);
+                else
+                    endApp.stage.addChild(particle);
+            }
         });
     }
 }

@@ -32,6 +32,8 @@ function Finale(){
     quarterTimer = 0;
     finale.volume = 0.1;
     elapsed = 0;
+    zeroParticleGenerator = new Particles(zeroTexture, -12, -8, -12, 12, 0, -0.09, 0.09, 0.015, 0.03, 0.1, 0.2, "#00FF00");
+    oneParticleGenerator = new Particles(oneTexture, -12, -8, -12, 12, 0, -0.09, 0.09, 0.015, 0.03, 0.1, 0.2, "#00FF00");
     endScreenWidth = window.innerWidth;
     endScreenHeight = window.innerHeight;
     endApp = new PIXI.Application({ 
@@ -394,13 +396,34 @@ function endGameLoop(delta){
     playerSprite.x += playerSprite.xSpeed * delta;
     playerSprite.y += playerSprite.ySpeed * delta;
 
+    if (playerSprite.x < playerSprite.width/2)
+        playerSprite.x = playerSprite.width/2;
+    if (playerSprite.x > innerWidth - playerSprite.width/2)
+        playerSprite.x = innerWidth - playerSprite.width/2;
+    if (playerSprite.y < playerSprite.height/2)
+        playerSprite.y = playerSprite.height/2;
+    if (playerSprite.y > innerHeight - playerSprite.height/2)
+        playerSprite.y = innerHeight - playerSprite.height/2;
+
     blocks.forEach(block => {
         block.drawBlock(delta);
     });
+    zeroParticleGenerator.renderParticles(delta);
+    oneParticleGenerator.renderParticles(delta);
     for (let i = 7; i < blocks.length; i++) {
         if (isColliding(playerSprite, blocks[i].graphic)) {
+            zeroParticleGenerator.minSpeedX = blocks[i].speedX - 2;
+            oneParticleGenerator.minSpeedX = blocks[i].speedX - 2;
+            zeroParticleGenerator.maxSpeedX = blocks[i].speedX + 2;
+            oneParticleGenerator.maxSpeedX = blocks[i].speedX + 2;
+            zeroParticleGenerator.minSpeedY = blocks[i].speedY - 2;
+            oneParticleGenerator.minSpeedY = blocks[i].speedY - 2;
+            zeroParticleGenerator.maxSpeedY = blocks[i].speedY + 2;
+            oneParticleGenerator.maxSpeedY = blocks[i].speedY + 2;
             endApp.stage.removeChild(blocks[i].graphic);
             blocks.splice(blocks.indexOf(blocks[i]), 1);
+            zeroParticleGenerator.createParticles(Math.random() * 10, playerSprite.x, playerSprite.y);
+            oneParticleGenerator.createParticles(Math.random() * 10, playerSprite.x, playerSprite.y);
             endApp.renderer.background.color = "#550000";
             setTimeout(() => {
                 endApp.renderer.background.color = "#000000";
@@ -627,18 +650,85 @@ function S2quarterBeat(){
     }, 70)
 }
 function LowquarterBeat(){
+    for (let i = 1; i <= 6; i++) {
+        if(i!=3&&i!=4){
+    let angle = 190 - 20 * blocks[i].positionY/innerHeight;
+    let oldMinSpeed = blocks[i].minSpeed;
+    let oldMaxSpeed = blocks[i].maxSpeed;
+    let oldMinAngle = blocks[i].minAngle;
+    let oldMaxAngle = blocks[i].maxAngle;
+    blocks[i].minAngle = angle;
+    blocks[i].maxAngle = angle;
+    blocks[i].minSpeed = 5;
+    blocks[i].maxSpeed = 5;
+    blocks[i].shoot(1,20,20,2,blocks[i].color,blocks[i].fillColor,0);
+    
+    blocks[i].minSpeed = oldMinSpeed;
+    blocks[i].maxSpeed = oldMaxSpeed;
+    blocks[i].minAngle = oldMinAngle;
+    blocks[i].maxAngle = oldMaxAngle;
+    blocks[i].positionX += 10;
+    setTimeout(() => {
+        blocks[i].positionX -= 10;
+    }, 100)
+    }}
     playerSprite.tint = "#ADFFBB"
     setTimeout(() => {
         playerSprite.tint = "#FFFFFF"
     }, 70)
 }
 function HighquarterBeat(){
+    for (let i = 1; i <= 6; i++) {
+        if(i!=3&&i!=4){
+    let angle = 195 - 30 * blocks[i].positionY/innerHeight;
+    let oldMinSpeed = blocks[i].minSpeed;
+    let oldMaxSpeed = blocks[i].maxSpeed;
+    let oldMinAngle = blocks[i].minAngle;
+    let oldMaxAngle = blocks[i].maxAngle;
+    blocks[i].minAngle = angle;
+    blocks[i].maxAngle = angle;
+    blocks[i].minSpeed = 20;
+    blocks[i].maxSpeed = 20;
+    blocks[i].shoot(1,20,20,2,blocks[i].color,blocks[i].fillColor,0);
+    
+    blocks[i].minSpeed = oldMinSpeed;
+    blocks[i].maxSpeed = oldMaxSpeed;
+    blocks[i].minAngle = oldMinAngle;
+    blocks[i].maxAngle = oldMaxAngle;
+    blocks[i].positionX += 10;
+    setTimeout(() => {
+        blocks[i].positionX -= 10;
+    }, 100)
+    }}
     playerSprite.tint = "#C2C2FF"
     setTimeout(() => {
         playerSprite.tint = "#FFFFFF"
     }, 70)
 }
 function HighestquarterBeat(){
+    for (let i = 1; i <= 6; i++) {
+        if(i!=3&&i!=4){
+    let angle = 200 - 40 * blocks[i].positionY/innerHeight;
+    let oldMinSpeed = blocks[i].minSpeed;
+    let oldMaxSpeed = blocks[i].maxSpeed;
+    let oldMinAngle = blocks[i].minAngle;
+    let oldMaxAngle = blocks[i].maxAngle;
+    blocks[i].minAngle = angle;
+    blocks[i].maxAngle = angle;
+    blocks[i].minSpeed = 30;
+    blocks[i].maxSpeed = 30;
+    blocks[i].shoot(1,20,20,2,blocks[i].color,blocks[i].fillColor,0);
+    
+    blocks[i].minSpeed = oldMinSpeed;
+    blocks[i].maxSpeed = oldMaxSpeed;
+    blocks[i].minAngle = oldMinAngle;
+    blocks[i].maxAngle = oldMaxAngle;
+    blocks[i].positionX += 10;
+    setTimeout(() => {
+        blocks[i].positionX -= 10;
+    }, 100)
+}
+    }
     playerSprite.tint = "#F4CDDB"
     setTimeout(() => {
         playerSprite.tint = "#FFFFFF"
