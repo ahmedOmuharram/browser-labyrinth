@@ -54,13 +54,13 @@ function Finale(){
     playerSprite.height = 40;
 
     blocks = [];
-    blocks.push(new Block(1850, 0, 50, innerHeight, 2, "#00FF00", "v", "#00FF00"))
-    new Cannon(endScreenWidth - 110, Math.random() * (endScreenHeight - 100) + 50, 30, 30, 2, "#ff0081", "v", "#ff0081", 10, 15, 90, 270);
-    new Cannon(endScreenWidth - 110, Math.random() * (endScreenHeight - 100) + 50, 30, 30, 2, "#8100ff", "v", "#8100ff", 10, 15, 90, 270);
-    new Cannon(endScreenWidth - 110, Math.random() * (endScreenHeight - 100) + 50, 30, 30, 2, null, "v", null, 25, 30, 90, 270);
-    new Cannon(endScreenWidth - 110, Math.random() * (endScreenHeight - 100) + 50, 30, 30, 2, null, "v", null, 35, 40, 90, 270);
-    new Cannon(endScreenWidth - 110, Math.random() * (endScreenHeight - 100) + 50, 30, 30, 2, "#00ff81", "v", "#00ff81", 10, 15, 90, 270);
-    new Cannon(endScreenWidth - 110, Math.random() * (endScreenHeight - 100) + 50, 30, 30, 2, "#81ff00", "v", "#81ff00", 10, 15, 90, 270);
+    blocks.push(new Block(1850, innerHeight/2-25, 50, 50, 2, "#00FF00", "v", "#00FF00"))
+    new Cannon(endScreenWidth - 110, Math.random() * (endScreenHeight - 100) + 50, 30, 30, 2, "#ff0081", "v", "#ff0081", 5, 20, 90, 270);
+    new Cannon(endScreenWidth - 110, Math.random() * (endScreenHeight - 100) + 50, 30, 30, 2, "#8100ff", "v", "#8100ff", 5, 20, 90, 270);
+    new Cannon(endScreenWidth - 110, Math.random() * (endScreenHeight - 100) + 50, 30, 30, 2, null, "v", null, 20, 30, 90, 270);
+    new Cannon(endScreenWidth - 110, Math.random() * (endScreenHeight - 100) + 50, 30, 30, 2, null, "v", null, 40, 50, 90, 270);
+    new Cannon(endScreenWidth - 110, Math.random() * (endScreenHeight - 100) + 50, 30, 30, 2, "#00ff81", "v", "#00ff81", 5, 20, 90, 270);
+    new Cannon(endScreenWidth - 110, Math.random() * (endScreenHeight - 100) + 50, 30, 30, 2, "#81ff00", "v", "#81ff00", 5, 20, 90, 270);
 
     endApp.stage.addChild(playerSprite)
     finale.play();
@@ -365,7 +365,7 @@ function endGameLoop(delta){
         }
     }
     for (let i = 1; i <= 6; i++) {
-        blocks[i].positionY = 30.0 * Math.sin((elapsed / 100.0 + i * 2)) + i * 100 + (innerHeight/2 - 25 - 350);
+        blocks[i].positionY = 30.0 * Math.sin((elapsed / 100.0 + i * 2)) + i * 100 + (blocks[0].positionY - 350);
     }
     if (lives < 0) {
         document.getElementById("canvas").removeChild(endApp.view);
@@ -385,10 +385,10 @@ function mainBeat(){
     setTimeout(() => {
         blocks[0].positionY -= 10;
     }, 50)
-    blocks[1].shoot(1,20,20,2,"#ff0081","#ff0081",0);
-    blocks[2].shoot(1,20,20,2,"#8100ff","#8100ff",0);
-    blocks[5].shoot(1,20,20,2,"#00ff81","#00ff81",0);
-    blocks[6].shoot(1,20,20,2,"#81ff00","#81ff00",0);
+    blocks[1].shoot(5,20,20,2,"#ff0081","#ff0081",0);
+    blocks[2].shoot(5,20,20,2,"#8100ff","#8100ff",0);
+    blocks[5].shoot(5,20,20,2,"#00ff81","#00ff81",0);
+    blocks[6].shoot(5,20,20,2,"#81ff00","#81ff00",0);
     blocks[1].positionX += 10;
     blocks[2].positionX += 10;
     blocks[5].positionX += 10;
@@ -406,10 +406,10 @@ function mainBeat(){
     }, 100)
 }
 function LoudmainBeat(){
-    blocks[1].shoot(2,30,30,2,"#ff0081","#ff0081",0);
-    blocks[2].shoot(2,30,30,2,"#8100ff","#8100ff",0);
-    blocks[5].shoot(2,30,30,2,"#00ff81","#00ff81",0);
-    blocks[6].shoot(2,30,30,2,"#81ff00","#81ff00",0);
+    blocks[1].shoot(3,30,30,2,"#ff0081","#ff0081",0);
+    blocks[2].shoot(3,30,30,2,"#8100ff","#8100ff",0);
+    blocks[5].shoot(3,30,30,2,"#00ff81","#00ff81",0);
+    blocks[6].shoot(3,30,30,2,"#81ff00","#81ff00",0);
 
     blocks[1].positionX += 10;
     blocks[2].positionX += 10;
@@ -433,19 +433,19 @@ function LoudmainBeat(){
 }
 
 function quarterBeat(){
-    // let can = quarterTimerBeats % 2 + 1;
-    // blocks[can].shoot(1, 10, 10, 2, blocks[can].color, blocks[can].fillColor,0)
-    // blocks[can+4].shoot(1, 10, 10, 2, blocks[can+4].color, blocks[can+4].fillColor,0)
-    // blocks[can].positionX += 10;
-    // blocks[can+4].positionX += 10;
-    // setTimeout(() => {
-    //     blocks[can].positionX -= 10;
-    //     blocks[can+4].positionX -= 10;
-    // }, 100)
-    // blocks[0].fillColor = "#FFFFFF"
-    // setTimeout(() => {
-    //     blocks[0].fillColor = "#00FF00";
-    // }, 70)
+    let can = quarterTimerBeats % 2 + 1;
+    blocks[can].shoot(1, 10, 10, 2, blocks[can].color, blocks[can].fillColor,0)
+    blocks[can+4].shoot(1, 10, 10, 2, blocks[can+4].color, blocks[can+4].fillColor,0)
+    blocks[can].positionX += 10;
+    blocks[can+4].positionX += 10;
+    setTimeout(() => {
+        blocks[can].positionX -= 10;
+        blocks[can+4].positionX -= 10;
+    }, 100)
+    blocks[0].fillColor = "#FFFFFF"
+    setTimeout(() => {
+        blocks[0].fillColor = "#00FF00";
+    }, 70)
 }
 function RBeat(){
     let oldMinSpeed = blocks[4].minSpeed;
@@ -476,7 +476,6 @@ function GBeat(){
     let angle = Math.atan2(playerSprite.y - blocks[4].positionY, playerSprite.x - blocks[4].positionX) * (180 / Math.PI)
     blocks[4].minAngle = angle;
     blocks[4].maxAngle = angle;
-
     blocks[4].shoot(50,20,20,2,"#00ff00","#00ff00",0);
 
     blocks[4].positionX += 10;
@@ -492,6 +491,7 @@ function BBeat(){
     blocks[4].minAngle = angle;
     blocks[4].maxAngle = angle;
     blocks[4].shoot(25,20,20,2,"#0000ff","#0000ff",0);
+
     blocks[4].positionX += 10;
     setTimeout(() => {
         blocks[4].positionX -= 10;
@@ -504,11 +504,8 @@ function S1quarterBeat(){
     blocks[3].fillColor = "#ff0000"
     blocks[3].minAngle = 90;
     blocks[3].maxAngle = 270;
-    blocks[3].minSpeed = 20;
-    blocks[3].maxSpeed = 25;
-    blocks[3].shoot(10,20,20,2,"#ff0000","#ff0000",0);
-    blocks[3].minSpeed = 25;
-    blocks[3].maxSpeed = 30;
+    blocks[3].shoot(20,20,20,2,"#ff0000","#ff0000",0);
+
     blocks[3].positionX += 10;
     setTimeout(() => {
         blocks[3].positionX -= 10;
