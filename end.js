@@ -70,7 +70,7 @@ function Finale(){
     new Cannon(endScreenWidth - 110, 3 * (endScreenHeight-100)/5 + 50, 30, 30, 2, "#0000FF", "v", "#000000", 35, 40, 90, 270);
     new Cannon(endScreenWidth - 110, 4 * (endScreenHeight-100)/5 + 50, 30, 30, 2, "#008000", "v", "#008000", 10, 15, 90, 270);
     new Cannon(endScreenWidth - 110, 5 * (endScreenHeight-100)/5 + 50, 30, 30, 2, "#008000", "v", "#008000", 10, 15, 90, 270);
-    text = new PIXI.Text("HACK IN PROGRESS... STATUS: 0% COMPLETED", {
+    text = new PIXI.Text("SEARCHING FOR VULNERABILITIES... STATUS: 0% COMPLETED", {
         fontFamily: 'Levi Windows',
         fontSize: 48,
         lineHeight: 28,
@@ -99,8 +99,13 @@ function endGameLoop(delta){
     playerSprite.xSpeed += (keys[39] || keys[68]) * speed;
     playerSprite.ySpeed -= (keys[38] || keys[87]) * speed;
     playerSprite.ySpeed += (keys[40] || keys[83]) * speed;
-    text.text = `// HACK IN PROGRESS... STATUS: ${(finale.currentTime/finale.duration * 100).toFixed(2)}% COMPLETED`;
+    if ((finale.currentTime/finale.duration * 100) < 49) {
+        text.text = `// SEARCHING FOR VULNERABILITIES... STATUS: ${(finale.currentTime/finale.duration * 100).toFixed(2)}% COMPLETED`;
+    } else {
+        text.text = `// HACK IN PROGRESS... STATUS: ${(finale.currentTime/finale.duration * 100).toFixed(2)}% COMPLETED`;
+    }
     if ((finale.currentTime/finale.duration * 100) >= 98) {
+        text.style.fill = "#ff0000"
         text.text = "// HACKED"
     }
     if (timer > 0) {
