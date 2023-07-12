@@ -14,6 +14,7 @@ let startQuarterTimer = -9.000;
 let quarterTimer = 0;
 
 function Finale(){
+    document.getElementById("body").style.backgroundColor = "#000000";
     endScreenWidth = window.innerWidth;
     endScreenHeight = window.innerHeight;
     lives = 3;
