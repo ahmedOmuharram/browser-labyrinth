@@ -369,26 +369,14 @@ function endGameLoop(delta){
             blocks[0].color = "#000000"
         }
         if (quarterTimerBeats == 448) {
-            blocks[1].minAngle = 180;
-            blocks[1].maxAngle = 180;
-            blocks[1].minSpeed = 60;
-            blocks[1].maxSpeed = 70;
-            blocks[2].minAngle = 180;
-            blocks[2].maxAngle = 180;
-            blocks[2].minSpeed = 60;
-            blocks[2].maxSpeed = 70;
-            blocks[4].minAngle = 180;
-            blocks[4].maxAngle = 180;
-            blocks[4].minSpeed = 60;
-            blocks[4].maxSpeed = 70;
-            blocks[5].minAngle = 180;
-            blocks[5].maxAngle = 180;
-            blocks[5].minSpeed = 60;
-            blocks[5].maxSpeed = 70;
-            blocks[6].minAngle = 180;
-            blocks[6].maxAngle = 180;
-            blocks[6].minSpeed = 60;
-            blocks[6].maxSpeed = 70;
+            for (let i = 1; i < 7; i++) {
+                if (i != 3) {
+                    blocks[i].minAngle = 180;
+                    blocks[i].maxAngle = 180;
+                    blocks[i].minSpeed = 60;
+                    blocks[i].maxSpeed = 70;
+                }
+            }
         }
     }
 
