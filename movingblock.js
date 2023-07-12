@@ -8,14 +8,14 @@ class MovingBlock extends Block{
     drawBlock(delta) {
         if (app.stage) {
             if (this.positionX > screenWidth || this.positionX < -1 * this.width || this.positionY > screenHeight || this.positionY < -1 * this.height) {
-                app.stage.removeChild(this);
+                app.stage.removeChild(this.graphic);
                 blocks.splice(blocks.indexOf(this), 1);
                 delete this;
             }
         }
         else {
             if (this.positionX > endScreenWidth || this.positionX < -1 * this.width || this.positionY > endScreenHeight || this.positionY < -1 * this.height) {
-                endApp.stage.removeChild(this);
+                endApp.stage.removeChild(this.graphic);
                 blocks.splice(blocks.indexOf(this), 1);
                 delete this;
             }
