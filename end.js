@@ -18,6 +18,7 @@ function Finale(){
     endScreenWidth = window.innerWidth;
     endScreenHeight = window.innerHeight;
     lives = 3;
+    lost = false;
     finale.currentTime = 0;
     fullTimerBeats = 0;
     startTimer = -9.000;
@@ -43,6 +44,12 @@ function Finale(){
     window.onresize = function (event){
         endScreenWidth = window.innerWidth;
         endScreenHeight = window.innerHeight;
+        blocks[0].positionX = endScreenWidth - 70;
+        blocks[0].height = endScreenHeight;
+        for (let i = 1; i <= 6; i++) {
+            blocks[i].positionX = endScreenWidth - 110;
+            blocks[i].positionY = (i-1) * (endScreenHeight-100)/5 + 50;
+        }
     }
 
     document.getElementById("canvas").appendChild(endApp.view);
@@ -55,13 +62,13 @@ function Finale(){
     playerSprite.height = 40;
 
     blocks = [];
-    blocks.push(new Block(1850, 0, 50, innerHeight, 2, "#14CC14", "v", "#14CC14"))
-    new Cannon(endScreenWidth - 110, Math.random() * (endScreenHeight - 100) + 50, 30, 30, 2, "#008000", "v", "#008000", 10, 15, 90, 270);
-    new Cannon(endScreenWidth - 110, Math.random() * (endScreenHeight - 100) + 50, 30, 30, 2, "#008000", "v", "#008000", 10, 15, 90, 270);
-    new Cannon(endScreenWidth - 110, Math.random() * (endScreenHeight - 100) + 50, 30, 30, 2, "#FF0000", "v", "#000000", 25, 30, 90, 270);
-    new Cannon(endScreenWidth - 110, Math.random() * (endScreenHeight - 100) + 50, 30, 30, 2, "#0000FF", "v", "#000000", 35, 40, 90, 270);
-    new Cannon(endScreenWidth - 110, Math.random() * (endScreenHeight - 100) + 50, 30, 30, 2, "#008000", "v", "#008000", 10, 15, 90, 270);
-    new Cannon(endScreenWidth - 110, Math.random() * (endScreenHeight - 100) + 50, 30, 30, 2, "#008000", "v", "#008000", 10, 15, 90, 270);
+    blocks.push(new Block(endScreenWidth - 70, 0, 50, innerHeight, 2, "#14CC14", "v", "#14CC14"))
+    new Cannon(endScreenWidth - 110, 50, 30, 30, 2, "#008000", "v", "#008000", 10, 15, 90, 270);
+    new Cannon(endScreenWidth - 110, 1 * (endScreenHeight-100)/5 + 50, 30, 30, 2, "#008000", "v", "#008000", 10, 15, 90, 270);
+    new Cannon(endScreenWidth - 110, 2 * (endScreenHeight-100)/5 + 50, 30, 30, 2, "#FF0000", "v", "#000000", 25, 30, 90, 270);
+    new Cannon(endScreenWidth - 110, 3 * (endScreenHeight-100)/5 + 50, 30, 30, 2, "#0000FF", "v", "#000000", 35, 40, 90, 270);
+    new Cannon(endScreenWidth - 110, 4 * (endScreenHeight-100)/5 + 50, 30, 30, 2, "#008000", "v", "#008000", 10, 15, 90, 270);
+    new Cannon(endScreenWidth - 110, 5 * (endScreenHeight-100)/5 + 50, 30, 30, 2, "#008000", "v", "#008000", 10, 15, 90, 270);
 
     endApp.stage.addChild(playerSprite)
     finale.play();
@@ -345,12 +352,9 @@ function endGameLoop(delta){
             }
             else if (check == 5) {
                 BBeat();
+                blocks[0].color = "#14CC14"
                 blocks[0].fillColor = "#14CC14"
             }
-        }
-        if (quarterTimerBeats == 321) {
-            blocks[0].fillColor = "#000000"
-            blocks[0].color = "#000000"
         }
         if (quarterTimerBeats == 448) {
             blocks[1].minAngle = 180;
@@ -393,10 +397,8 @@ function endGameLoop(delta){
             lives--;
         }
     }
-    for (let i = 1; i <= 6; i++) {
-        blocks[i].positionY = 30.0 * Math.sin((elapsed / 100.0 + i * 2)) + i * 100 + (innerHeight/2 - 25 - 350);
-    }
-    if (lives < 0) {
+    if (lives < 0 && !lost) {
+        lost = true;
         playerSprite.height = 0;
         quarterTimerBeats = 9000;
         finale.pause();
@@ -420,11 +422,6 @@ function mainBeat(){
         (quarterTimerBeats >= 499 && quarterTimerBeats <= 512) || (quarterTimerBeats >= 531 && quarterTimerBeats <= 544) || 
         (quarterTimerBeats >= 563 && quarterTimerBeats <= 576) || (quarterTimerBeats >= 611 && quarterTimerBeats <= 624) || 
         (quarterTimerBeats >= 643 && quarterTimerBeats <= 649) || (quarterTimerBeats >= 675 && quarterTimerBeats <= 688))) {
-        blocks[0].positionY += 10;
-        setTimeout(() => {
-            blocks[0].positionY -= 10;
-        }, 50)
-        console.log(blocks[1].minSpeed + " " + blocks[1].maxSpeed);
         blocks[1].shoot(1,20,20,2,"#008000","#008000",0);
         blocks[2].shoot(1,20,20,2,"#008000","#008000",0);
         blocks[5].shoot(1,20,20,2,"#008000","#008000",0);
@@ -452,7 +449,6 @@ function LoudmainBeat(){
         (quarterTimerBeats >= 499 && quarterTimerBeats <= 512) || (quarterTimerBeats >= 531 && quarterTimerBeats <= 544) || 
         (quarterTimerBeats >= 563 && quarterTimerBeats <= 576) || (quarterTimerBeats >= 611 && quarterTimerBeats <= 624) || 
         (quarterTimerBeats >= 643 && quarterTimerBeats <= 649) || (quarterTimerBeats >= 675 && quarterTimerBeats <= 688)))  {
-        console.log(blocks[1].minSpeed + " " + blocks[1].maxSpeed);
         blocks[1].shoot(2,30,30,2,"#008000","#008000",0);
         blocks[2].shoot(2,30,30,2,"#008000","#008000",0);
         blocks[5].shoot(2,30,30,2,"#008000","#008000",0);
@@ -480,14 +476,11 @@ function LoudmainBeat(){
 }
 
 function quarterBeat(){
-    // let can = quarterTimerBeats % 2 + 1;
+    // let can = quarterTimerBeats % 6 + 1;
     // blocks[can].shoot(1, 10, 10, 2, blocks[can].color, blocks[can].fillColor,0)
-    // blocks[can+4].shoot(1, 10, 10, 2, blocks[can+4].color, blocks[can+4].fillColor,0)
     // blocks[can].positionX += 10;
-    // blocks[can+4].positionX += 10;
     // setTimeout(() => {
     //     blocks[can].positionX -= 10;
-    //     blocks[can+4].positionX -= 10;
     // }, 100)
     // blocks[0].fillColor = "#FFFFFF"
     // setTimeout(() => {
@@ -497,6 +490,7 @@ function quarterBeat(){
 function RBeat(){
     let oldMinSpeed = blocks[4].minSpeed;
     let oldMaxSpeed = blocks[4].maxSpeed;
+    blocks[4].color = "#FF0000"
     blocks[4].fillColor = "#FF0000"
     blocks[4].minSpeed = 5;
     blocks[4].maxSpeed = 50;
@@ -516,11 +510,18 @@ function RBeat(){
         blocks[4].positionX -= 10;
     }, 100)
 
+    blocks[0].color = "#FF0000"
     blocks[0].fillColor = "#FF0000"
 }
 function GBeat(){
+    blocks[4].color = "#14CC14"
     blocks[4].fillColor = "#14CC14"
     let angle = Math.atan2(playerSprite.y - blocks[4].positionY, playerSprite.x - blocks[4].positionX) * (180 / Math.PI)
+    let line = new PIXI.Graphics().lineStyle(2, "#FFFFFF").moveTo(blocks[4].positionX + blocks[4].width/2, blocks[4].positionY + blocks[4].height/2).lineTo(blocks[4].positionX + blocks[4].width/2 + Math.cos(angle / (180 / Math.PI)) * 2203, blocks[4].positionY + blocks[4].height/2 + Math.sin(angle / (180 / Math.PI)) * 2203);
+    endApp.stage.addChild(line);
+    setTimeout(() => {
+        endApp.stage.removeChild(line);
+    }, 500)
     blocks[4].minAngle = angle;
     blocks[4].maxAngle = angle;
 
@@ -530,12 +531,20 @@ function GBeat(){
     setTimeout(() => {
         blocks[4].positionX -= 10;
     }, 100)
+    
 
+    blocks[0].color = "#14CC14"
     blocks[0].fillColor = "#14CC14"
 }
 function BBeat(){
+    blocks[4].color = "#0000FF"
     blocks[4].fillColor = "#0000FF"
     let angle = Math.atan2(playerSprite.y - blocks[4].positionY, playerSprite.x - blocks[4].positionX) * (180 / Math.PI)
+    let line = new PIXI.Graphics().lineStyle(2, "#FFFFFF").moveTo(blocks[4].positionX + blocks[4].width/2, blocks[4].positionY + blocks[4].height/2).lineTo(blocks[4].positionX + blocks[4].width/2 + Math.cos(angle / (180 / Math.PI)) * 2203, blocks[4].positionY + blocks[4].height/2 + Math.sin(angle / (180 / Math.PI)) * 2203);
+    endApp.stage.addChild(line);
+    setTimeout(() => {
+        endApp.stage.removeChild(line);
+    }, 500)
     blocks[4].minAngle = angle;
     blocks[4].maxAngle = angle;
     blocks[4].shoot(25,20,20,2,"#0000FF","#0000FF",0);
@@ -544,6 +553,7 @@ function BBeat(){
         blocks[4].positionX -= 10;
     }, 100)
 
+    blocks[0].color = "#0000FF"
     blocks[0].fillColor = "#0000FF"
 }
 
@@ -568,11 +578,17 @@ function S1quarterBeat(){
 }
 function S2quarterBeat(){
     let can = quarterTimerBeats % 6 + 1
-    let angle = 225 - 90 * blocks[can].positionY/innerHeight;
+    let angle = Math.atan2(playerSprite.y - blocks[can].positionY, playerSprite.x - blocks[can].positionX) * (180 / Math.PI)
+    // let angle = 225 - 90 * blocks[can].positionY/innerHeight;
     let oldColor = blocks[can].color;
     let oldFillColor = blocks[can].fillColor;
     let oldMinSpeed = blocks[can].minSpeed;
     let oldMaxSpeed = blocks[can].maxSpeed;
+    let line = new PIXI.Graphics().lineStyle(2, "#FFFFFF").moveTo(blocks[can].positionX + blocks[can].width/2, blocks[can].positionY + blocks[can].height/2).lineTo(blocks[can].positionX + blocks[can].width/2 + Math.cos(angle / (180 / Math.PI)) * 2203, blocks[can].positionY + blocks[can].height/2 + Math.sin(angle / (180 / Math.PI)) * 2203);
+    endApp.stage.addChild(line);
+    setTimeout(() => {
+        endApp.stage.removeChild(line);
+    }, 500)
     blocks[can].color = "#FF0000";
     blocks[can].fillColor = "#FF0000";
     blocks[can].minAngle = angle;
