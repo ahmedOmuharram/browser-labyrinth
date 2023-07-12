@@ -344,6 +344,7 @@ function endGameLoop(delta){
             }
             else if (check == 5) {
                 BBeat();
+                blocks[0].fillColor = "#14CC14"
             }
         }
         if (quarterTimerBeats == 321) {
