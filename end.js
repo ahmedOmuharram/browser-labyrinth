@@ -1,4 +1,5 @@
 let endApp = null;
+let text;
 let endScreenWidth = window.innerWidth;
 let endScreenHeight = window.innerHeight;
 let lives = 3;
@@ -62,7 +63,19 @@ function Finale(){
     new Cannon(endScreenWidth - 110, Math.random() * (endScreenHeight - 100) + 50, 30, 30, 2, "#0000FF", "v", "#000000", 35, 40, 90, 270);
     new Cannon(endScreenWidth - 110, Math.random() * (endScreenHeight - 100) + 50, 30, 30, 2, "#008000", "v", "#008000", 10, 15, 90, 270);
     new Cannon(endScreenWidth - 110, Math.random() * (endScreenHeight - 100) + 50, 30, 30, 2, "#008000", "v", "#008000", 10, 15, 90, 270);
-
+    text = new PIXI.Text("HACK IN PROGRESS... STATUS: 0% COMPLETED", {
+        fontFamily: 'Levi Windows',
+        fontSize: 48,
+        lineHeight: 28,
+        letterSpacing: 0,
+        fill: "#00ff00",
+        align: "center",
+    });
+    text.anchor.set(0);
+    text.resolution = 1;
+    text.x = 10;
+    text.y = 10;
+    endApp.stage.addChild(text);
     endApp.stage.addChild(playerSprite)
     finale.play();
     endApp.ticker.add(endGameLoop);
@@ -79,7 +92,10 @@ function endGameLoop(delta){
     playerSprite.xSpeed += (keys[39] || keys[68]) * speed;
     playerSprite.ySpeed -= (keys[38] || keys[87]) * speed;
     playerSprite.ySpeed += (keys[40] || keys[83]) * speed;
-
+    text.text = `HACK IN PROGRESS... STATUS: ${(finale.currentTime/finale.duration * 100).toFixed(2)}% COMPLETED`;
+    if ((finale.currentTime/finale.duration * 100) >= 98) {
+        text.text = "HACKED"
+    }
     if (timer > 0) {
         fullTimerBeats++;
         startTimer -= 1/(105/60);
