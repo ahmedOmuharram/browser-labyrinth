@@ -274,6 +274,7 @@ function endGameLoop(delta){
         }
         //Highest
         if (quarterTimerBeats >= 401 && quarterTimerBeats <= 433) {
+            HighquarterBeat();
             HighestquarterBeat();
         }
         //Quarter Drop Beat
@@ -518,7 +519,7 @@ function quarterBeat(){
     // }, 100)
     // blocks[0].fillColor = "#FFFFFF"
     // setTimeout(() => {
-    //     blocks[0].fillColor = "#85FF85";
+    //      blocks[0].fillColor = "#85FF85";
     // }, 70)
 }
 function RBeat(){
@@ -622,7 +623,7 @@ function S2quarterBeat(){
     endApp.stage.addChild(line);
     setTimeout(() => {
         endApp.stage.removeChild(line);
-    }, 500)
+    }, 800)
     blocks[can].color = "#FF0000";
     blocks[can].fillColor = "#FF0000";
     blocks[can].minAngle = angle;
@@ -651,27 +652,28 @@ function S2quarterBeat(){
 }
 function LowquarterBeat(){
     for (let i = 1; i <= 6; i++) {
-        if(i!=3&&i!=4){
-    let angle = 190 - 20 * blocks[i].positionY/innerHeight;
-    let oldMinSpeed = blocks[i].minSpeed;
-    let oldMaxSpeed = blocks[i].maxSpeed;
-    let oldMinAngle = blocks[i].minAngle;
-    let oldMaxAngle = blocks[i].maxAngle;
-    blocks[i].minAngle = angle;
-    blocks[i].maxAngle = angle;
-    blocks[i].minSpeed = 5;
-    blocks[i].maxSpeed = 5;
-    blocks[i].shoot(1,20,20,2,blocks[i].color,blocks[i].fillColor,0);
+        if(i != 3 && i != 4) {
+            let angle = 190 - 20 * blocks[i].positionY/innerHeight;
+            let oldMinSpeed = blocks[i].minSpeed;
+            let oldMaxSpeed = blocks[i].maxSpeed;
+            let oldMinAngle = blocks[i].minAngle;
+            let oldMaxAngle = blocks[i].maxAngle;
+            blocks[i].minAngle = angle;
+            blocks[i].maxAngle = angle;
+            blocks[i].minSpeed = 5;
+            blocks[i].maxSpeed = 5;
+            blocks[i].shoot(1,20,20,2,blocks[i].color,blocks[i].fillColor,0);
     
-    blocks[i].minSpeed = oldMinSpeed;
-    blocks[i].maxSpeed = oldMaxSpeed;
-    blocks[i].minAngle = oldMinAngle;
-    blocks[i].maxAngle = oldMaxAngle;
-    blocks[i].positionX += 10;
-    setTimeout(() => {
-        blocks[i].positionX -= 10;
-    }, 100)
-    }}
+            blocks[i].minSpeed = oldMinSpeed;
+            blocks[i].maxSpeed = oldMaxSpeed;
+            blocks[i].minAngle = oldMinAngle;
+            blocks[i].maxAngle = oldMaxAngle;
+            blocks[i].positionX += 10;
+            setTimeout(() => {
+                blocks[i].positionX -= 10;
+            }, 100)
+        }
+    }
     playerSprite.tint = "#ADFFBB"
     setTimeout(() => {
         playerSprite.tint = "#FFFFFF"
@@ -679,27 +681,28 @@ function LowquarterBeat(){
 }
 function HighquarterBeat(){
     for (let i = 1; i <= 6; i++) {
-        if(i!=3&&i!=4){
-    let angle = 195 - 30 * blocks[i].positionY/innerHeight;
-    let oldMinSpeed = blocks[i].minSpeed;
-    let oldMaxSpeed = blocks[i].maxSpeed;
-    let oldMinAngle = blocks[i].minAngle;
-    let oldMaxAngle = blocks[i].maxAngle;
-    blocks[i].minAngle = angle;
-    blocks[i].maxAngle = angle;
-    blocks[i].minSpeed = 20;
-    blocks[i].maxSpeed = 20;
-    blocks[i].shoot(1,20,20,2,blocks[i].color,blocks[i].fillColor,0);
+        if(i != 3 && i != 4) {
+            let angle = 195 - 30 * blocks[i].positionY/innerHeight;
+            let oldMinSpeed = blocks[i].minSpeed;
+            let oldMaxSpeed = blocks[i].maxSpeed;
+            let oldMinAngle = blocks[i].minAngle;
+            let oldMaxAngle = blocks[i].maxAngle;
+            blocks[i].minAngle = angle;
+            blocks[i].maxAngle = angle;
+            blocks[i].minSpeed = 20;
+            blocks[i].maxSpeed = 20;
+            blocks[i].shoot(1,20,20,2,blocks[i].color,blocks[i].fillColor,0);
     
-    blocks[i].minSpeed = oldMinSpeed;
-    blocks[i].maxSpeed = oldMaxSpeed;
-    blocks[i].minAngle = oldMinAngle;
-    blocks[i].maxAngle = oldMaxAngle;
-    blocks[i].positionX += 10;
-    setTimeout(() => {
-        blocks[i].positionX -= 10;
-    }, 100)
-    }}
+            blocks[i].minSpeed = oldMinSpeed;
+            blocks[i].maxSpeed = oldMaxSpeed;
+            blocks[i].minAngle = oldMinAngle;
+            blocks[i].maxAngle = oldMaxAngle;
+            blocks[i].positionX += 10;
+            setTimeout(() => {
+                blocks[i].positionX -= 10;
+            }, 100)
+        }
+    }
     playerSprite.tint = "#C2C2FF"
     setTimeout(() => {
         playerSprite.tint = "#FFFFFF"
@@ -707,27 +710,27 @@ function HighquarterBeat(){
 }
 function HighestquarterBeat(){
     for (let i = 1; i <= 6; i++) {
-        if(i!=3&&i!=4){
-    let angle = 200 - 40 * blocks[i].positionY/innerHeight;
-    let oldMinSpeed = blocks[i].minSpeed;
-    let oldMaxSpeed = blocks[i].maxSpeed;
-    let oldMinAngle = blocks[i].minAngle;
-    let oldMaxAngle = blocks[i].maxAngle;
-    blocks[i].minAngle = angle;
-    blocks[i].maxAngle = angle;
-    blocks[i].minSpeed = 30;
-    blocks[i].maxSpeed = 30;
-    blocks[i].shoot(1,20,20,2,blocks[i].color,blocks[i].fillColor,0);
+        if(i != 3 && i != 4 ){
+            let angle = 200 - 40 * blocks[i].positionY/innerHeight;
+            let oldMinSpeed = blocks[i].minSpeed;
+            let oldMaxSpeed = blocks[i].maxSpeed;
+            let oldMinAngle = blocks[i].minAngle;
+            let oldMaxAngle = blocks[i].maxAngle;
+            blocks[i].minAngle = angle;
+            blocks[i].maxAngle = angle;
+            blocks[i].minSpeed = 30;
+            blocks[i].maxSpeed = 30;
+            blocks[i].shoot(1,20,20,2,blocks[i].color,blocks[i].fillColor,0);
     
-    blocks[i].minSpeed = oldMinSpeed;
-    blocks[i].maxSpeed = oldMaxSpeed;
-    blocks[i].minAngle = oldMinAngle;
-    blocks[i].maxAngle = oldMaxAngle;
-    blocks[i].positionX += 10;
-    setTimeout(() => {
-        blocks[i].positionX -= 10;
-    }, 100)
-}
+            blocks[i].minSpeed = oldMinSpeed;
+            blocks[i].maxSpeed = oldMaxSpeed;
+            blocks[i].minAngle = oldMinAngle;
+            blocks[i].maxAngle = oldMaxAngle;
+            blocks[i].positionX += 10;
+            setTimeout(() => {
+                blocks[i].positionX -= 10;
+            }, 100)
+        }
     }
     playerSprite.tint = "#F4CDDB"
     setTimeout(() => {
