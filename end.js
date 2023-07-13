@@ -68,6 +68,44 @@ function Finale(){
 
         var radius = Math.sqrt(a * a + b * b);
 
+        triangleGraphic.clear();
+
+        triangleGraphic.beginFill("#14CC14");
+        triangleGraphic.moveTo(-25, (radius + 20));
+        triangleGraphic.lineTo(25, (radius + 20));
+        triangleGraphic.lineTo(0, (radius + 20) + 25*Math.sqrt(3));
+        triangleGraphic.moveTo(-25, -1 * (radius + 20));
+        triangleGraphic.lineTo(25, -1 * (radius + 20));
+        triangleGraphic.lineTo(0, -1 * (radius + 20) - 25*Math.sqrt(3));
+        triangleGraphic.moveTo((radius + 20), -25);
+        triangleGraphic.lineTo((radius + 20), 25);
+        triangleGraphic.lineTo((radius + 20) + 25*Math.sqrt(3), 0);
+        triangleGraphic.moveTo(-1 * (radius + 20), -25);
+        triangleGraphic.lineTo(-1 * (radius + 20), 25);
+        triangleGraphic.lineTo(-1 * (radius + 20) - 25*Math.sqrt(3), 0);
+        triangleGraphic.endFill();
+        triangleGraphic.x = endScreenWidth - 45;
+        triangleGraphic.y = innerHeight / 2;
+
+        triangleGraphich.clear();
+
+        triangleGraphich.beginFill("#14CC14");
+        triangleGraphich.moveTo(-25, (radius + 20));
+        triangleGraphich.lineTo(25, (radius + 20));
+        triangleGraphich.lineTo(0, (radius + 20) + 25*Math.sqrt(3));
+        triangleGraphich.moveTo(-25, -1 * (radius + 20));
+        triangleGraphich.lineTo(25, -1 * (radius + 20));
+        triangleGraphich.lineTo(0, -1 * (radius + 20) - 25*Math.sqrt(3));
+        triangleGraphich.moveTo((radius + 20), -25);
+        triangleGraphich.lineTo((radius + 20), 25);
+        triangleGraphich.lineTo((radius + 20) + 25*Math.sqrt(3), 0);
+        triangleGraphich.moveTo(-1 * (radius + 20), -25);
+        triangleGraphich.lineTo(-1 * (radius + 20), 25);
+        triangleGraphich.lineTo(-1 * (radius + 20) - 25*Math.sqrt(3), 0);
+        triangleGraphich.endFill();
+        triangleGraphich.x = endScreenWidth - 45;
+        triangleGraphich.y = innerHeight / 2;
+
         circleGraphic.clear();
         circleGraphic.beginFill("#14CC14");
         circleGraphic.drawCircle(endScreenWidth - 45, innerHeight/2, radius + 10);
@@ -105,6 +143,52 @@ function Finale(){
     playerSprite.ySpeed = 0;
     playerSprite.width = 36;
     playerSprite.height = 40;
+
+    triangleGraphic = new PIXI.Graphics();
+    triangleGraphic.beginFill("#14CC14");
+    triangleGraphic.moveTo(-25, 210);
+    triangleGraphic.lineTo(25, 210);
+    triangleGraphic.lineTo(0, 210 + 25*Math.sqrt(3));
+    triangleGraphic.moveTo(-25, -210);
+    triangleGraphic.lineTo(25, -210);
+    triangleGraphic.lineTo(0, -210 - 25*Math.sqrt(3));
+    triangleGraphic.moveTo(210, -25);
+    triangleGraphic.lineTo(210, 25);
+    triangleGraphic.lineTo(210 + 25*Math.sqrt(3), 0);
+    triangleGraphic.moveTo(-210, -25);
+    triangleGraphic.lineTo(-210, 25);
+    triangleGraphic.lineTo(-210 - 25*Math.sqrt(3), 0);
+    triangleGraphic.endFill();
+    triangleGraphic.pivot.x = 0;
+    triangleGraphic.pivot.y = 0;
+    triangleGraphic.x = endScreenWidth - 45;
+    triangleGraphic.y = innerHeight / 2;
+    triangleGraphic.rotationSpeed = 0.01;
+    endApp.stage.addChild(triangleGraphic);
+
+    triangleGraphich = new PIXI.Graphics();
+    triangleGraphich.beginFill("#14CC14");
+    triangleGraphich.moveTo(-25, 210);
+    triangleGraphich.lineTo(25, 210);
+    triangleGraphich.lineTo(0, 210 + 25*Math.sqrt(3));
+    triangleGraphich.moveTo(-25, -210);
+    triangleGraphich.lineTo(25, -210);
+    triangleGraphich.lineTo(0, -210 - 25*Math.sqrt(3));
+    triangleGraphich.moveTo(210, -25);
+    triangleGraphich.lineTo(210, 25);
+    triangleGraphich.lineTo(210 + 25*Math.sqrt(3), 0);
+    triangleGraphich.moveTo(-210, -25);
+    triangleGraphich.lineTo(-210, 25);
+    triangleGraphich.lineTo(-210 - 25*Math.sqrt(3), 0);
+    triangleGraphich.endFill();
+    triangleGraphich.pivot.x = 0;
+    triangleGraphich.pivot.y = 0;
+    triangleGraphich.x = endScreenWidth - 45;
+    triangleGraphich.y = innerHeight / 2;
+    triangleGraphich.rotationSpeed = 0.01;
+    triangleGraphich.rotation = Math.PI/4
+    endApp.stage.addChild(triangleGraphich);
+    
     circleGraphic = new PIXI.Graphics();
     circleGraphic.beginFill("#14CC14");
     circleGraphic.drawCircle(endScreenWidth - 45, innerHeight/2, 200);
@@ -151,6 +235,8 @@ function Finale(){
 }
 
 function endGameLoop(delta){
+    triangleGraphic.rotation += triangleGraphic.rotationSpeed;
+    triangleGraphich.rotation += triangleGraphich.rotationSpeed;
     elapsed += delta;
     timer = startTimer + finale.currentTime;
     halfTimer = startHalfTimer + finale.currentTime;
@@ -521,6 +607,12 @@ function mainBeat(){
         blocks[2].shoot(1,20,20,2,"#008000","#008000",0);
         blocks[5].shoot(1,20,20,2,"#008000","#008000",0);
         blocks[6].shoot(1,20,20,2,"#008000","#008000",0);
+        triangleGraphic.rotationSpeed = 0.05;
+        triangleGraphich.rotationSpeed = 0.05;
+        setTimeout(() => {
+            triangleGraphic.rotationSpeed = 0.01;
+            triangleGraphich.rotationSpeed = 0.01;  
+        }, 200);
         for (let i = 1; i < 7; i++) {
             if (i != 3 && i != 4) {
                 for (let j = 0; j <= 100; j++) {
@@ -554,6 +646,12 @@ function LoudmainBeat(){
         blocks[2].shoot(2,30,30,2,"#008000","#008000",0);
         blocks[5].shoot(2,30,30,2,"#008000","#008000",0);
         blocks[6].shoot(2,30,30,2,"#008000","#008000",0);
+        triangleGraphic.rotationSpeed = 0.1;
+        triangleGraphich.rotationSpeed = 0.1;
+        setTimeout(() => {
+            triangleGraphic.rotationSpeed = 0.01;
+            triangleGraphich.rotationSpeed = 0.01; 
+        }, 200);
 
         for (let i = 1; i < 7; i++) {
             if (i != 3 && i != 4) {
@@ -764,7 +862,7 @@ function S2quarterBeat(){
 function LowquarterBeat(){
     for (let i = 1; i <= 6; i++) {
         if(i != 3 && i != 4) {
-            let angle = 190 - 20 * blocks[i].positionY/innerHeight;
+            let angle = 210 - 60 * blocks[i].positionY/innerHeight;
             let oldMinSpeed = blocks[i].minSpeed;
             let oldMaxSpeed = blocks[i].maxSpeed;
             let oldMinAngle = blocks[i].minAngle;
