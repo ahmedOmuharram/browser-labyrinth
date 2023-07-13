@@ -7,7 +7,7 @@ let animationStarted = false;
 
 let currentLevel = 0;
 
-const app = new PIXI.Application({ 
+var app = new PIXI.Application({ 
     antialias: true,
     width: screenWidth, 
     height: screenHeight,
