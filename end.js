@@ -172,6 +172,43 @@ function endGameLoop(delta){
         text.style.fill = "#ff0000"
         text.text = "// HACKED"
     }
+    if ((finale.currentTime/finale.duration * 100) >= 99) {
+        finale.pause();
+        document.getElementById("canvas").removeChild(endApp.view);
+        endApp.destroy();
+        document.getElementById("body").style.background = 'url("media/end.gif")';
+        document.getElementById("body").style.backgroundSize = "100% 100%";
+        document.getElementById("body").style.backgroundRepeat = "no-repeat";
+        document.getElementById("body").style.height = "100vh";
+        var message = document.createElement("div");
+            message.innerText = "You have successfully corrupted the user's PC.\nWas there an alternative?";
+            message.style.position = "fixed";
+            message.style.top = "50%";
+            message.style.left = "50%";
+            message.style.transform = "translate(-50%, -50%)";
+            message.style.fontSize = "30px";
+            message.style.color = "white";
+            message.style.textAlign = "center";
+            message.style.fontFamily = "Levi Windows"; 
+        setTimeout(() => {        
+            document.getElementById("body").style.removeProperty("background");
+            document.getElementById("body").style.backgroundColor = "#000000";
+        }, 1010); 
+        setTimeout(() => {        
+            document.body.appendChild(message);
+        }, 3000); 
+        setTimeout(() => {      
+            document.body.removeChild(message);
+            message.innerText = "Thanks for playing\nMade by Ahmed Muharram and Youssef Saleh";
+            document.body.appendChild(message);
+        }, 10000); 
+        setTimeout(() => {   
+            document.body.removeChild(message);
+            // document.getElementById("body").style.backgroundColor = "#008080";
+            // document.getElementById("welcome").style.display = "flex";    
+        }, 16000); 
+    }
+
     if (timer > 0) {
         fullTimerBeats++;
         startTimer -= 1/(105/60);
