@@ -63,7 +63,8 @@ function Finale(){
     }  
     window.onfocus = function(){  
         isFocused = true;
-        finale.play();
+        if (finale.currentTime < 112)
+            finale.play();
         endApp.ticker.start();
     }
 
