@@ -47,6 +47,7 @@ function Finale(){
     window.onresize = function (event){
         endScreenWidth = window.innerWidth;
         endScreenHeight = window.innerHeight;
+        circleGraphic.x = endScreenWidth - 45;
         blocks[0].positionX = endScreenWidth - 70;
         blocks[0].height = endScreenHeight;
         for (let i = 1; i <= 6; i++) {
@@ -63,9 +64,13 @@ function Finale(){
     playerSprite.ySpeed = 0;
     playerSprite.width = 36;
     playerSprite.height = 40;
-
+    circleGraphic = new PIXI.Graphics();
+    circleGraphic.beginFill("#14CC14");
+    circleGraphic.drawCircle(endScreenWidth - 45, innerHeight/2, 200);
+    circleGraphic.endFill();
+    endApp.stage.addChild(circleGraphic);
     blocks = [];
-    blocks.push(new Block(endScreenWidth - 70, 0, 50, innerHeight, 2, "#14CC14", "v", "#14CC14"))
+    blocks.push(new Block(endScreenWidth - 70, 0, 70, innerHeight, 2, "#14CC14", "v", "#14CC14"))
     new Cannon(endScreenWidth - 110, 50, 30, 30, 2, "#008000", "v", "#008000", 10, 15, 90, 270);
     new Cannon(endScreenWidth - 110, 1 * (endScreenHeight-100)/5 + 50, 30, 30, 2, "#008000", "v", "#008000", 10, 15, 90, 270);
     new Cannon(endScreenWidth - 110, 2 * (endScreenHeight-100)/5 + 50, 30, 30, 2, "#FF0000", "v", "#000000", 25, 30, 90, 270);
