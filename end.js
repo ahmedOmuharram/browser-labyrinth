@@ -47,13 +47,42 @@ function Finale(){
     window.onresize = function (event){
         endScreenWidth = window.innerWidth;
         endScreenHeight = window.innerHeight;
-        circleGraphic.x = endScreenWidth - 45;
         blocks[0].positionX = endScreenWidth - 70;
         blocks[0].height = endScreenHeight;
         for (let i = 1; i <= 6; i++) {
-            blocks[i].positionX = endScreenWidth - 110;
-            blocks[i].positionY = (i-1) * (endScreenHeight-100)/5 + 50 - 15;
+            if (i == 1 || i == 6) {
+                blocks[i].positionX = endScreenWidth - 110;
+                blocks[i].positionY = (i-1) * (endScreenHeight-100)/5 + 50 - 15;
+            } else if (i == 2 || i == 5) {
+                blocks[i].positionX = endScreenWidth - 170;
+                blocks[i].positionY = (i-1) * (endScreenHeight-100)/5 + 50 - 15;
+            } else {
+                blocks[i].positionX = endScreenWidth - 200;
+                blocks[i].positionY = (i-1) * (endScreenHeight-100)/5 + 50 - 15;
+            }
         }
+
+        var a = blocks[3].positionX - (endScreenWidth - 35);
+        var b = blocks[3].positionY - (endScreenHeight/2);
+
+        var radius = Math.sqrt(a * a + b * b);
+
+        circleGraphic.clear();
+        circleGraphic.beginFill("#14CC14");
+        circleGraphic.drawCircle(endScreenWidth - 45, innerHeight/2, radius + 10);
+        circleGraphic.endFill();
+        rectGraphic.clear();
+        rectGraphic.beginFill("#000000");
+        rectGraphic.drawRect(endScreenWidth - 55, 0, 20, innerHeight);
+        rectGraphic.drawRect(endScreenWidth - 25, 0, 10, innerHeight);
+        rectGraphic.drawRect(endScreenWidth - 10, 0, 5, innerHeight);
+        rectGraphic.endFill();
+        rectGraphic.beginFill("#00FF00");
+        rectGraphic.drawRect(endScreenWidth - 140, 1 * (endScreenHeight-100)/5 + 50 - 15, 70, 30);
+        rectGraphic.drawRect(endScreenWidth - 80, 35, 10, 30);
+        rectGraphic.drawRect(endScreenWidth - 140, 4 * (endScreenHeight-100)/5 + 50 - 15, 70, 30);
+        rectGraphic.drawRect(endScreenWidth - 80, 5 * (endScreenHeight-100)/5 + 50 - 15, 10, 30);
+        rectGraphic.endFill();
     }
     window.onblur = function(){  
         finale.pause();  
@@ -78,7 +107,20 @@ function Finale(){
     circleGraphic.endFill();
     endApp.stage.addChild(circleGraphic);
     blocks = [];
-    blocks.push(new Block(endScreenWidth - 70, 0, 70, innerHeight, 2, "#14CC14", "v", "#14CC14"))
+    blocks.push(new Block(endScreenWidth - 70, 0, 70, innerHeight, 2, "#14CC14", "v", "#14CC14"));
+    rectGraphic = new PIXI.Graphics();
+    rectGraphic.beginFill("#000000");
+    rectGraphic.drawRect(endScreenWidth - 55, 0, 20, innerHeight);
+    rectGraphic.drawRect(endScreenWidth - 25, 0, 10, innerHeight);
+    rectGraphic.drawRect(endScreenWidth - 10, 0, 5, innerHeight);
+    rectGraphic.endFill();
+    endApp.stage.addChild(rectGraphic);
+    rectGraphic.beginFill("#00FF00");
+    rectGraphic.drawRect(endScreenWidth - 140, 1 * (endScreenHeight-100)/5 + 50 - 15, 70, 30);
+    rectGraphic.drawRect(endScreenWidth - 80, 50, 10, 30);
+    rectGraphic.drawRect(endScreenWidth - 140, 4 * (endScreenHeight-100)/5 + 50 - 15, 70, 30);
+    rectGraphic.drawRect(endScreenWidth - 80, 5 * (endScreenHeight-100)/5 + 50 - 15, 10, 30);
+    rectGraphic.endFill();
     new Cannon(endScreenWidth - 110, 50, 30, 30, 2, "#008000", "v", "#008000", 10, 15, 90, 270);
     new Cannon(endScreenWidth - 170, 1 * (endScreenHeight-100)/5 + 50 - 15, 30, 30, 2, "#008000", "v", "#008000", 10, 15, 90, 270);
     new Cannon(endScreenWidth - 200, 2 * (endScreenHeight-100)/5 + 50 - 15, 30, 30, 2, "#FF0000", "v", "#000000", 25, 30, 90, 270);
@@ -474,16 +516,22 @@ function mainBeat(){
         blocks[2].shoot(1,20,20,2,"#008000","#008000",0);
         blocks[5].shoot(1,20,20,2,"#008000","#008000",0);
         blocks[6].shoot(1,20,20,2,"#008000","#008000",0);
-        blocks[1].positionX += 10;
-        blocks[2].positionX += 10;
-        blocks[5].positionX += 10;
-        blocks[6].positionX += 10;
-        setTimeout(() => {
-            blocks[1].positionX -= 10;
-            blocks[2].positionX -= 10;
-            blocks[5].positionX -= 10;
-            blocks[6].positionX -= 10;
-        }, 100)
+        for (let i = 1; i < 7; i++) {
+            if (i != 3 && i != 4) {
+                for (let j = 0; j <= 100; j++) {
+                    setTimeout(() => {
+                      blocks[i].positionX += Math.sin((j / 100) * Math.PI);       
+                    }, j);
+                }
+                setTimeout(() => {
+                    for (let j = 0; j <= 100; j++) {
+                        setTimeout(() => {
+                          blocks[i].positionX -= Math.sin((j / 100) * Math.PI);       
+                        }, j);
+                    }
+                })
+            }
+        }
     }
 
     endApp.renderer.background.color = "#0A0A0A";
@@ -502,16 +550,22 @@ function LoudmainBeat(){
         blocks[5].shoot(2,30,30,2,"#008000","#008000",0);
         blocks[6].shoot(2,30,30,2,"#008000","#008000",0);
 
-        blocks[1].positionX += 10;
-        blocks[2].positionX += 10;
-        blocks[5].positionX += 10;
-        blocks[6].positionX += 10;
-        setTimeout(() => {
-            blocks[1].positionX -= 10;
-            blocks[2].positionX -= 10;
-            blocks[5].positionX -= 10;
-            blocks[6].positionX -= 10;
-    }, 100)
+        for (let i = 1; i < 7; i++) {
+            if (i != 3 && i != 4) {
+                for (let j = 0; j <= 100; j++) {
+                    setTimeout(() => {
+                      blocks[i].positionX += Math.sin((j / 100) * Math.PI);       
+                    }, j);
+                }
+                setTimeout(() => {
+                    for (let j = 0; j <= 100; j++) {
+                        setTimeout(() => {
+                          blocks[i].positionX -= Math.sin((j / 100) * Math.PI);       
+                        }, j);
+                    }
+                })
+            }
+        }
     }
     endApp.renderer.background.color = "#141414";
     setTimeout(() => {
@@ -553,10 +607,18 @@ function RBeat(){
     blocks[4].minSpeed = oldMinSpeed;
     blocks[4].maxSpeed = oldMaxSpeed;
 
-    blocks[4].positionX += 10;
+    for (let j = 0; j <= 100; j++) {
+        setTimeout(() => {
+          blocks[4].positionX += Math.sin((j / 100) * Math.PI);       
+        }, j);
+    }
     setTimeout(() => {
-        blocks[4].positionX -= 10;
-    }, 100)
+        for (let j = 0; j <= 100; j++) {
+            setTimeout(() => {
+              blocks[4].positionX -= Math.sin((j / 100) * Math.PI);       
+            }, j);
+        }
+    })
 
     blocks[0].color = "#FF0000"
     blocks[0].fillColor = "#FF0000"
@@ -575,11 +637,18 @@ function GBeat(){
 
     blocks[4].shoot(50,20,20,2,"#14CC14","#14CC14",0);
 
-    blocks[4].positionX += 10;
+    for (let j = 0; j <= 100; j++) {
+        setTimeout(() => {
+          blocks[4].positionX += Math.sin((j / 100) * Math.PI);       
+        }, j);
+    }
     setTimeout(() => {
-        blocks[4].positionX -= 10;
-    }, 100)
-    
+        for (let j = 0; j <= 100; j++) {
+            setTimeout(() => {
+              blocks[4].positionX -= Math.sin((j / 100) * Math.PI);       
+            }, j);
+        }
+    })
 
     blocks[0].color = "#14CC14"
     blocks[0].fillColor = "#14CC14"
@@ -596,10 +665,18 @@ function BBeat(){
     blocks[4].minAngle = angle;
     blocks[4].maxAngle = angle;
     blocks[4].shoot(25,20,20,2,"#0000FF","#0000FF",0);
-    blocks[4].positionX += 10;
+    for (let j = 0; j <= 100; j++) {
+        setTimeout(() => {
+          blocks[4].positionX += Math.sin((j / 100) * Math.PI);       
+        }, j);
+    }
     setTimeout(() => {
-        blocks[4].positionX -= 10;
-    }, 100)
+        for (let j = 0; j <= 100; j++) {
+            setTimeout(() => {
+              blocks[4].positionX -= Math.sin((j / 100) * Math.PI);       
+            }, j);
+        }
+    })
 
     blocks[0].color = "#0000FF"
     blocks[0].fillColor = "#0000FF"
@@ -614,10 +691,19 @@ function S1quarterBeat(){
     blocks[3].shoot(10,20,20,2,"#FF0000","#FF0000",0);
     blocks[3].minSpeed = 25;
     blocks[3].maxSpeed = 30;
-    blocks[3].positionX += 10;
+
+    for (let j = 0; j <= 100; j++) {
+        setTimeout(() => {
+          blocks[3].positionX += Math.sin((j / 100) * Math.PI);       
+        }, j);
+    }
     setTimeout(() => {
-        blocks[3].positionX -= 10;
-    }, 100)
+        for (let j = 0; j <= 100; j++) {
+            setTimeout(() => {
+              blocks[3].positionX -= Math.sin((j / 100) * Math.PI);       
+            }, j);
+        }
+    })
 
     playerSprite.tint = "#F4CDDB"
     setTimeout(() => {
@@ -651,11 +737,18 @@ function S2quarterBeat(){
     blocks[can].minSpeed = oldMinSpeed;
     blocks[can].maxSpeed = oldMaxSpeed;
 
-    blocks[can].positionX += 10;
+    for (let j = 0; j <= 100; j++) {
+        setTimeout(() => {
+          blocks[can].positionX += Math.sin((j / 100) * Math.PI);       
+        }, j);
+    }
     setTimeout(() => {
-        blocks[can].positionX -= 10;
-    }, 100)
-
+        for (let j = 0; j <= 100; j++) {
+            setTimeout(() => {
+              blocks[can].positionX -= Math.sin((j / 100) * Math.PI);       
+            }, j);
+        }
+    })
     playerSprite.tint = "#C2C2FF"
     setTimeout(() => {
         playerSprite.tint = "#FFFFFF"
@@ -681,10 +774,18 @@ function LowquarterBeat(){
             blocks[i].maxSpeed = oldMaxSpeed;
             blocks[i].minAngle = oldMinAngle;
             blocks[i].maxAngle = oldMaxAngle;
-            blocks[i].positionX += 10;
+            for (let j = 0; j <= 100; j++) {
+                setTimeout(() => {
+                  blocks[i].positionX += Math.sin((j / 100) * Math.PI);       
+                }, j);
+            }
             setTimeout(() => {
-                blocks[i].positionX -= 10;
-            }, 100)
+                for (let j = 0; j <= 100; j++) {
+                    setTimeout(() => {
+                      blocks[i].positionX -= Math.sin((j / 100) * Math.PI);       
+                    }, j);
+                }
+            })
         }
     }
     playerSprite.tint = "#ADFFBB"
@@ -710,10 +811,18 @@ function HighquarterBeat(){
             blocks[i].maxSpeed = oldMaxSpeed;
             blocks[i].minAngle = oldMinAngle;
             blocks[i].maxAngle = oldMaxAngle;
-            blocks[i].positionX += 10;
+            for (let j = 0; j <= 100; j++) {
+                setTimeout(() => {
+                  blocks[i].positionX += Math.sin((j / 100) * Math.PI);       
+                }, j);
+            }
             setTimeout(() => {
-                blocks[i].positionX -= 10;
-            }, 100)
+                for (let j = 0; j <= 100; j++) {
+                    setTimeout(() => {
+                      blocks[i].positionX -= Math.sin((j / 100) * Math.PI);       
+                    }, j);
+                }
+            })
         }
     }
     playerSprite.tint = "#C2C2FF"
@@ -739,10 +848,18 @@ function HighestquarterBeat(){
             blocks[i].maxSpeed = oldMaxSpeed;
             blocks[i].minAngle = oldMinAngle;
             blocks[i].maxAngle = oldMaxAngle;
-            blocks[i].positionX += 10;
+            for (let j = 0; j <= 100; j++) {
+                setTimeout(() => {
+                  blocks[i].positionX += Math.sin((j / 100) * Math.PI);       
+                }, j);
+            }
             setTimeout(() => {
-                blocks[i].positionX -= 10;
-            }, 100)
+                for (let j = 0; j <= 100; j++) {
+                    setTimeout(() => {
+                      blocks[i].positionX -= Math.sin((j / 100) * Math.PI);       
+                    }, j);
+                }
+            })
         }
     }
     playerSprite.tint = "#F4CDDB"
