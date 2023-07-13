@@ -13,6 +13,7 @@ let halfTimer = 0;
 let quarterTimerBeats = 0;
 let startQuarterTimer = -9.000;
 let quarterTimer = 0;
+let isFocused = true;
 
 function Finale(){
     document.getElementById("body").style.backgroundColor = "#000000";
@@ -84,12 +85,15 @@ function Finale(){
         rectGraphic.drawRect(endScreenWidth - 80, 5 * (endScreenHeight-100)/5 + 50 - 15, 10, 30);
         rectGraphic.endFill();
     }
-    window.onblur = function(){  
+    window.onblur = function(){
+        isFocused = false;
         finale.pause();  
         endApp.ticker.stop();
     }  
     window.onfocus = function(){  
-        finale.play();
+        isFocused = true;
+        if (finale.currentTime < 112)
+            finale.play();
         endApp.ticker.start();
     }
 
@@ -141,7 +145,8 @@ function Finale(){
     text.y = 10;
     endApp.stage.addChild(text);
     endApp.stage.addChild(playerSprite)
-    finale.play();
+    if (isFocused)
+        finale.play();
     endApp.ticker.add(endGameLoop);
 }
 
