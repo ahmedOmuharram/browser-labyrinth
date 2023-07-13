@@ -80,10 +80,10 @@ function Finale(){
     blocks = [];
     blocks.push(new Block(endScreenWidth - 70, 0, 70, innerHeight, 2, "#14CC14", "v", "#14CC14"))
     new Cannon(endScreenWidth - 110, 50, 30, 30, 2, "#008000", "v", "#008000", 10, 15, 90, 270);
-    new Cannon(endScreenWidth - 110, 1 * (endScreenHeight-100)/5 + 50 - 15, 30, 30, 2, "#008000", "v", "#008000", 10, 15, 90, 270);
-    new Cannon(endScreenWidth - 110, 2 * (endScreenHeight-100)/5 + 50 - 15, 30, 30, 2, "#FF0000", "v", "#000000", 25, 30, 90, 270);
-    new Cannon(endScreenWidth - 110, 3 * (endScreenHeight-100)/5 + 50 - 15, 30, 30, 2, "#0000FF", "v", "#000000", 35, 40, 90, 270);
-    new Cannon(endScreenWidth - 110, 4 * (endScreenHeight-100)/5 + 50 - 15, 30, 30, 2, "#008000", "v", "#008000", 10, 15, 90, 270);
+    new Cannon(endScreenWidth - 170, 1 * (endScreenHeight-100)/5 + 50 - 15, 30, 30, 2, "#008000", "v", "#008000", 10, 15, 90, 270);
+    new Cannon(endScreenWidth - 200, 2 * (endScreenHeight-100)/5 + 50 - 15, 30, 30, 2, "#FF0000", "v", "#000000", 25, 30, 90, 270);
+    new Cannon(endScreenWidth - 200, 3 * (endScreenHeight-100)/5 + 50 - 15, 30, 30, 2, "#0000FF", "v", "#000000", 35, 40, 90, 270);
+    new Cannon(endScreenWidth - 170, 4 * (endScreenHeight-100)/5 + 50 - 15, 30, 30, 2, "#008000", "v", "#008000", 10, 15, 90, 270);
     new Cannon(endScreenWidth - 110, 5 * (endScreenHeight-100)/5 + 50 - 15, 30, 30, 2, "#008000", "v", "#008000", 10, 15, 90, 270);
     text = new PIXI.Text("SEARCHING FOR VULNERABILITIES... STATUS: 0% COMPLETED", {
         fontFamily: 'Levi Windows',
