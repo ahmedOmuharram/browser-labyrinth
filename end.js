@@ -52,10 +52,10 @@ function Finale(){
         blocks[0].height = endScreenHeight;
         for (let i = 1; i <= 6; i++) {
             if (i == 1 || i == 6) {
-                blocks[i].positionX = endScreenWidth - 110;
+                blocks[i].positionX = endScreenWidth - 170;
                 blocks[i].positionY = (i-1) * (endScreenHeight-100)/5 + 50 - 15;
             } else if (i == 2 || i == 5) {
-                blocks[i].positionX = endScreenWidth - 170;
+                blocks[i].positionX = endScreenWidth - 110;
                 blocks[i].positionY = (i-1) * (endScreenHeight-100)/5 + 50 - 15;
             } else {
                 blocks[i].positionX = endScreenWidth - 200;
@@ -79,10 +79,10 @@ function Finale(){
         rectGraphic.drawRect(endScreenWidth - 10, 0, 5, innerHeight);
         rectGraphic.endFill();
         rectGraphic.beginFill("#00FF00");
-        rectGraphic.drawRect(endScreenWidth - 140, 1 * (endScreenHeight-100)/5 + 50 - 15, 70, 30);
-        rectGraphic.drawRect(endScreenWidth - 80, 35, 10, 30);
-        rectGraphic.drawRect(endScreenWidth - 140, 4 * (endScreenHeight-100)/5 + 50 - 15, 70, 30);
-        rectGraphic.drawRect(endScreenWidth - 80, 5 * (endScreenHeight-100)/5 + 50 - 15, 10, 30);
+        rectGraphic.drawRect(endScreenWidth - 80, 1 * (endScreenHeight-100)/5 + 50 - 15, 10, 30);
+        rectGraphic.drawRect(endScreenWidth - 140, 35, 70, 30);
+        rectGraphic.drawRect(endScreenWidth - 80, 4 * (endScreenHeight-100)/5 + 50 - 15, 10, 30);
+        rectGraphic.drawRect(endScreenWidth - 140, 5 * (endScreenHeight-100)/5 + 50 - 15, 70, 30);
         rectGraphic.endFill();
     }
     window.onblur = function(){
@@ -120,17 +120,17 @@ function Finale(){
     rectGraphic.endFill();
     endApp.stage.addChild(rectGraphic);
     rectGraphic.beginFill("#00FF00");
-    rectGraphic.drawRect(endScreenWidth - 140, 1 * (endScreenHeight-100)/5 + 50 - 15, 70, 30);
-    rectGraphic.drawRect(endScreenWidth - 80, 50, 10, 30);
-    rectGraphic.drawRect(endScreenWidth - 140, 4 * (endScreenHeight-100)/5 + 50 - 15, 70, 30);
-    rectGraphic.drawRect(endScreenWidth - 80, 5 * (endScreenHeight-100)/5 + 50 - 15, 10, 30);
+    rectGraphic.drawRect(endScreenWidth - 80, 1 * (endScreenHeight-100)/5 + 50 - 15, 10, 30);
+    rectGraphic.drawRect(endScreenWidth - 140, 50, 70, 30);
+    rectGraphic.drawRect(endScreenWidth - 80, 4 * (endScreenHeight-100)/5 + 50 - 15, 10, 30);
+    rectGraphic.drawRect(endScreenWidth - 140, 5 * (endScreenHeight-100)/5 + 50 - 15, 70, 30);
     rectGraphic.endFill();
-    new Cannon(endScreenWidth - 110, 50, 30, 30, 2, "#008000", "v", "#008000", 10, 15, 90, 270);
-    new Cannon(endScreenWidth - 170, 1 * (endScreenHeight-100)/5 + 50 - 15, 30, 30, 2, "#008000", "v", "#008000", 10, 15, 90, 270);
+    new Cannon(endScreenWidth - 170, 50, 30, 30, 2, "#008000", "v", "#008000", 10, 15, 90, 270);
+    new Cannon(endScreenWidth - 110, 1 * (endScreenHeight-100)/5 + 50 - 15, 30, 30, 2, "#008000", "v", "#008000", 10, 15, 90, 270);
     new Cannon(endScreenWidth - 200, 2 * (endScreenHeight-100)/5 + 50 - 15, 30, 30, 2, "#FF0000", "v", "#000000", 25, 30, 90, 270);
     new Cannon(endScreenWidth - 200, 3 * (endScreenHeight-100)/5 + 50 - 15, 30, 30, 2, "#0000FF", "v", "#000000", 35, 40, 90, 270);
-    new Cannon(endScreenWidth - 170, 4 * (endScreenHeight-100)/5 + 50 - 15, 30, 30, 2, "#008000", "v", "#008000", 10, 15, 90, 270);
-    new Cannon(endScreenWidth - 110, 5 * (endScreenHeight-100)/5 + 50 - 15, 30, 30, 2, "#008000", "v", "#008000", 10, 15, 90, 270);
+    new Cannon(endScreenWidth - 110, 4 * (endScreenHeight-100)/5 + 50 - 15, 30, 30, 2, "#008000", "v", "#008000", 10, 15, 90, 270);
+    new Cannon(endScreenWidth - 170, 5 * (endScreenHeight-100)/5 + 50 - 15, 30, 30, 2, "#008000", "v", "#008000", 10, 15, 90, 270);
     text = new PIXI.Text("SEARCHING FOR VULNERABILITIES... STATUS: 0% COMPLETED", {
         fontFamily: 'Levi Windows',
         fontSize: 48,
