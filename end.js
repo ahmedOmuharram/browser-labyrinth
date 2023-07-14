@@ -1155,6 +1155,7 @@ function restart(){
     elapsed = 0;
     spinDirection = 1;
     cannonInterval = 0;
+    colorInterval = 0;
     animationStarted = false;
 
     hardMode = false;

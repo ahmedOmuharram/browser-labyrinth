@@ -1,5 +1,6 @@
 var cannon;
 let lostAfterCrash;
+let colorInterval;
 let cannonNumber = 0;
 let cannonAudio = new Audio("media/cannon.ogg");
 let errorAudio = new Audio("media/error.ogg");
@@ -185,6 +186,7 @@ class Level{
     InitiateLevel9(){
         cannon = new Cannon(630, 350, 20, 20, 2, "#ff0081", "v", "#ff0081", 10, 20, -90, 90);
         cannonInterval = 0;
+        colorInterval = 0;
         spinDirection = 1;
     }
     Level9(delta){
@@ -214,7 +216,11 @@ class Level{
             folderSprite.positionY += 10
         }
         if (elapsed < -450) {
-            folderSprite.tint = "#FF0000";
+            colorInterval += delta;
+            if (colorInterval >= 75) {
+                folderSprite.tint = "#ff0000" ? folderSprite.tint = "#ffffff" : folderSprite.tint = "#ff0000";
+                colorInterval -= 75;
+            }
         }
         errorAudio.addEventListener('ended', () => cannonAudio.volume = 0.4);
         elapsed += spinDirection * delta;
