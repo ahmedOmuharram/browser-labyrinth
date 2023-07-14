@@ -1,22 +1,7 @@
-let endApp = null;
-let endScreenWidth = window.innerWidth;
-let endScreenHeight = window.innerHeight;
-let lives = 3;
-let finale = new Audio("media/finale.mp3");
-let fullTimerBeats = 0;
-let startTimer = -9.000;
-let timer = 0;
-let halfTimerBeats = 0;
-let startHalfTimer = -9.000;
-let halfTimer = 0;
-let quarterTimerBeats = 0;
-let startQuarterTimer = -9.000;
-let quarterTimer = 0;
-
-function Finale(){
+function FinaleHardMode(){
     endScreenWidth = window.innerWidth;
     endScreenHeight = window.innerHeight;
-    lives = 3;
+    lives = 10;
     finale.currentTime = 0;
     fullTimerBeats = 0;
     startTimer = -9.000;
@@ -42,6 +27,22 @@ function Finale(){
     window.onresize = function (event){
         endScreenWidth = window.innerWidth;
         endScreenHeight = window.innerHeight;
+        blocks[0].positionX = endScreenWidth - 70;
+        blocks[0].positionY = innerHeight/2-25;
+        for (let i = 1; i <= 6; i++) {
+            blocks[i].positionX = endScreenWidth - 110;
+        }
+    }
+    window.onblur = function(){
+        isFocused = false;
+        finale.pause();  
+        endApp.ticker.stop();
+    }  
+    window.onfocus = function(){  
+        isFocused = true;
+        if (finale.currentTime < 112)
+            finale.play();
+        endApp.ticker.start();
     }
 
     document.getElementById("canvas").appendChild(endApp.view);
@@ -54,7 +55,7 @@ function Finale(){
     playerSprite.height = 40;
 
     blocks = [];
-    blocks.push(new Block(1850, innerHeight/2-25, 50, 50, 2, "#00FF00", "v", "#00FF00"))
+    blocks.push(new Block(endScreenWidth - 70, innerHeight/2-25, 50, 50, 2, "#00FF00", "v", "#00FF00"))
     new Cannon(endScreenWidth - 110, Math.random() * (endScreenHeight - 100) + 50, 30, 30, 2, "#ff0081", "v", "#ff0081", 5, 20, 90, 270);
     new Cannon(endScreenWidth - 110, Math.random() * (endScreenHeight - 100) + 50, 30, 30, 2, "#8100ff", "v", "#8100ff", 5, 20, 90, 270);
     new Cannon(endScreenWidth - 110, Math.random() * (endScreenHeight - 100) + 50, 30, 30, 2, null, "v", null, 20, 30, 90, 270);
@@ -63,8 +64,11 @@ function Finale(){
     new Cannon(endScreenWidth - 110, Math.random() * (endScreenHeight - 100) + 50, 30, 30, 2, "#81ff00", "v", "#81ff00", 5, 20, 90, 270);
 
     endApp.stage.addChild(playerSprite)
-    finale.play();
+    if (isFocused)
+        finale.play();
     endApp.ticker.add(endGameLoop);
+    if (!isFocused)
+        endApp.ticker.stop();
 }
 
 function endGameLoop(delta){
@@ -350,6 +354,51 @@ function endGameLoop(delta){
     playerSprite.x += playerSprite.xSpeed * delta;
     playerSprite.y += playerSprite.ySpeed * delta;
 
+    if (playerSprite.x < playerSprite.width/2)
+        playerSprite.x = playerSprite.width/2;
+    if (playerSprite.x > innerWidth - 245)
+        playerSprite.x = innerWidth - 245;
+    if (playerSprite.y < playerSprite.height/2)
+        playerSprite.y = playerSprite.height/2;
+    if (playerSprite.y > innerHeight - playerSprite.height/2)
+        playerSprite.y = innerHeight - playerSprite.height/2;
+
+    if ((finale.currentTime/finale.duration * 100) >= 99) {
+        finale.pause();
+        document.getElementById("canvas").removeChild(endApp.view);
+        endApp.destroy();
+        document.getElementById("body").style.background = 'url("media/end.gif")';
+        document.getElementById("body").style.backgroundSize = "100% 100%";
+        document.getElementById("body").style.backgroundRepeat = "no-repeat";
+        document.getElementById("body").style.height = "100vh";
+        var message = document.createElement("div");
+            message.innerText = "You have wiped the user's BIOS.";
+            message.style.position = "fixed";
+            message.style.top = "50%";
+            message.style.left = "50%";
+            message.style.transform = "translate(-50%, -50%)";
+            message.style.fontSize = "30px";
+            message.style.color = "white";
+            message.style.textAlign = "center";
+            message.style.fontFamily = "Levi Windows";
+        setTimeout(() => {        
+            document.getElementById("body").style.removeProperty("background");
+            document.getElementById("body").style.backgroundColor = "#000000";
+        }, 1010); 
+        setTimeout(() => {        
+            document.body.appendChild(message);
+        }, 3000); 
+        setTimeout(() => {      
+            document.body.removeChild(message);
+            message.innerText = "Thanks for playing\nMade by Ahmed Muharram and Youssef Saleh";
+            document.body.appendChild(message);
+        }, 10000); 
+        setTimeout(() => {   
+            document.body.removeChild(message);
+            restart();
+        }, 16000);
+    }
+
     blocks.forEach(block => {
         block.drawBlock(delta);
     });
@@ -370,7 +419,7 @@ function endGameLoop(delta){
     if (lives < 0) {
         document.getElementById("canvas").removeChild(endApp.view);
         endApp.destroy();
-        Finale();
+        FinaleHardMode();
     }
 }
 function testBeat(){

@@ -3,6 +3,7 @@ let lostAfterCrash;
 let cannonNumber = 0;
 let cannonAudio = new Audio("media/cannon.ogg");
 let errorAudio = new Audio("media/error.ogg");
+let hardMode = false;
 cannonAudio.loop = false;
 cannonAudio.volume = 0.4;
 errorAudio.loop = false;
@@ -212,6 +213,9 @@ class Level{
             folderSprite.texture = PIXI.Texture.from('media/ram.png')
             folderSprite.positionY += 10
         }
+        if (elapsed < -450) {
+            folderSprite.tint = "#FF0000";
+        }
         errorAudio.addEventListener('ended', () => cannonAudio.volume = 0.4);
         elapsed += spinDirection * delta;
         cannonInterval += delta;
@@ -393,7 +397,10 @@ class Level{
                 document.getElementById("body").style.removeProperty("background-image");
                 document.getElementById("body").style.removeProperty("background-repeat");
                 document.getElementById("body").style.removeProperty("background-size");
-                Finale();
+                if (hardMode)
+                    FinaleHardMode();
+                else
+                    Finale();
             }, 5000)
             
         }
