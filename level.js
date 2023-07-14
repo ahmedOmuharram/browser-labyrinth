@@ -217,9 +217,9 @@ class Level{
         }
         if (elapsed < -450) {
             colorInterval += delta;
-            if (colorInterval >= 75) {
-                folderSprite.tint = "#ff0000" ? folderSprite.tint = "#ffffff" : folderSprite.tint = "#ff0000";
-                colorInterval -= 75;
+            if (colorInterval >= 20) {
+                folderSprite.tint == "#ff0000" ? folderSprite.tint = "#ffffff" : folderSprite.tint = "#ff0000";
+                colorInterval -= 20;
             }
         }
         errorAudio.addEventListener('ended', () => cannonAudio.volume = 0.4);
