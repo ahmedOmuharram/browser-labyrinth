@@ -397,6 +397,7 @@ class Level{
                 document.getElementById("body").style.removeProperty("background-image");
                 document.getElementById("body").style.removeProperty("background-repeat");
                 document.getElementById("body").style.removeProperty("background-size");
+                currentLevel = 11;
                 if (hardMode)
                     FinaleHardMode();
                 else

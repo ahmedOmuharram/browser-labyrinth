@@ -46,6 +46,7 @@ function Finale(){
     });
     endApp.resizeTo = window;
     window.onresize = function (event){
+        if (currentLevel == 11) {
         endScreenWidth = window.innerWidth;
         endScreenHeight = window.innerHeight;
         blocks[0].positionX = endScreenWidth - 70;
@@ -99,6 +100,7 @@ function Finale(){
         rectGraphic.drawRect(endScreenWidth - 80, 4 * (endScreenHeight-100)/5 + 50 - 15, 10, 30);
         rectGraphic.drawRect(endScreenWidth - 140, 5 * (endScreenHeight-100)/5 + 50 - 15, 70, 30);
         rectGraphic.endFill();
+    }
     }
     window.onblur = function(){
         isFocused = false;
