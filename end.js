@@ -68,7 +68,6 @@ function Finale(){
 
             var a = blocks[3].positionX - (endScreenWidth - 35);
             var b = blocks[3].positionY - (endScreenHeight/2);
-
             var radius = Math.sqrt(a * a + b * b);
 
             triangles.children.forEach(triangle => {
@@ -103,6 +102,8 @@ function Finale(){
             rectGraphic.drawRect(endScreenWidth - 140, 5 * (endScreenHeight-100)/5 + 50 - 15, 70, 30);
             rectGraphic.endFill();
             livesIndicator.y = endScreenHeight - 34;
+            bossLines.x = endScreenWidth - 300;
+            bossLines.y = endScreenHeight/2;
         }
     }
     window.onblur = function(){
@@ -194,6 +195,14 @@ function Finale(){
         fill: "#00ff00",
         align: "center",
     });
+    bossLines = new PIXI.Text("", {
+        fontFamily: 'Levi Windows',
+        fontSize: 30,
+        lineHeight: 28,
+        letterSpacing: 0,
+        fill: "#00ff00",
+        align: "center",
+    });
     text.anchor.set(0);
     text.resolution = 1;
     text.x = 10;
@@ -202,8 +211,13 @@ function Finale(){
     livesIndicator.resolution = 1;
     livesIndicator.x = 10;
     livesIndicator.y = endScreenHeight - 34;
+    bossLines.anchor.set(1);
+    bossLines.resolution = 1;
+    bossLines.x = endScreenWidth - 300;
+    bossLines.y = endScreenHeight/2;
     endApp.stage.addChild(text);
     endApp.stage.addChild(livesIndicator);
+    endApp.stage.addChild(bossLines);
     endApp.stage.addChild(playerSprite)
     if (isFocused)
         finale.play();
@@ -242,6 +256,39 @@ function endGameLoop(delta){
     if (lives < 0) {
         livesIndicator.text = `LIVES REMAINING: 0/3`;
     }
+
+    if ((finale.currentTime/finale.duration * 100) > 3 ) {
+        bossLines.text = "THREAT DETECTED"
+    }
+    
+    if ((finale.currentTime/finale.duration * 100) > 16.3) {
+        bossLines.text = "ELIMINATING THREAT"
+    } 
+    
+    if ((finale.currentTime/finale.duration * 100) > 22.3) {
+        bossLines.text = ""
+    } 
+    
+    if ((finale.currentTime/finale.duration * 100) > 49) {
+        bossLines.text = "INITIATING LASERS"
+    } 
+    
+    if ((finale.currentTime/finale.duration * 100) > 55) {
+        bossLines.text = ""
+    } 
+    
+    if ((finale.currentTime/finale.duration * 100) > 65) {
+        bossLines.text = "INITIATING PHASE 2"
+    }
+    
+    if ((finale.currentTime/finale.duration * 100) > 71) {
+        bossLines.text = ""
+    } 
+    
+    if ((finale.currentTime/finale.duration * 100) > 94) {
+        bossLines.text = "ERROR: MELTDOWN"
+    }
+
     if ((finale.currentTime/finale.duration * 100) >= 99) {
         finale.pause();
         document.getElementById("canvas").removeChild(endApp.view);
@@ -251,7 +298,7 @@ function endGameLoop(delta){
         document.getElementById("body").style.backgroundRepeat = "no-repeat";
         document.getElementById("body").style.height = "100vh";
         var message = document.createElement("div");
-            message.innerText = "You have corrupted the user's PC.";
+            message.innerText = "You have corrupted the user's PC.\nIt could have been worse...";
             message.style.position = "fixed";
             message.style.top = "50%";
             message.style.left = "50%";
@@ -919,6 +966,7 @@ function S1quarterBeat(){
     var b = blocks[3].positionY - (endScreenHeight/2);
 
     var radius = Math.sqrt(a * a + b * b);
+
     triangles.children.forEach(triangle => {
         triangle.clear();
         triangle.beginFill("#FF0000");
