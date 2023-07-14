@@ -228,7 +228,7 @@ function endGameLoop(delta){
         document.getElementById("body").style.backgroundRepeat = "no-repeat";
         document.getElementById("body").style.height = "100vh";
         var message = document.createElement("div");
-            message.innerText = "You have successfully corrupted the user's PC.\nBut... was there an alternative?";
+            message.innerText = "You have corrupted the user's PC.";
             message.style.position = "fixed";
             message.style.top = "50%";
             message.style.left = "50%";
@@ -236,7 +236,7 @@ function endGameLoop(delta){
             message.style.fontSize = "30px";
             message.style.color = "white";
             message.style.textAlign = "center";
-            message.style.fontFamily = "Levi Windows"; 
+            message.style.fontFamily = "Levi Windows";
         setTimeout(() => {        
             document.getElementById("body").style.removeProperty("background");
             document.getElementById("body").style.backgroundColor = "#000000";
@@ -251,10 +251,8 @@ function endGameLoop(delta){
         }, 10000); 
         setTimeout(() => {   
             document.body.removeChild(message);
-            RESTART();
-            // document.getElementById("body").style.backgroundColor = "#008080";
-            // document.getElementById("welcome").style.display = "flex";    
-        }, 16000); 
+            restart();
+        }, 16000);
     }
 
     if (timer > 0) {
@@ -539,13 +537,18 @@ function endGameLoop(delta){
         }
     }
 
+    var a = blocks[3].positionX - (endScreenWidth - 35);
+    var b = blocks[3].positionY - (endScreenHeight/2);
+
+    var radius = Math.sqrt(a * a + b * b);
+
     playerSprite.x += playerSprite.xSpeed * delta;
     playerSprite.y += playerSprite.ySpeed * delta;
 
     if (playerSprite.x < playerSprite.width/2)
         playerSprite.x = playerSprite.width/2;
-    if (playerSprite.x > innerWidth - playerSprite.width/2)
-        playerSprite.x = innerWidth - playerSprite.width/2;
+    if (playerSprite.x > innerWidth - radius - 45)
+        playerSprite.x = innerWidth - radius - 45;
     if (playerSprite.y < playerSprite.height/2)
         playerSprite.y = playerSprite.height/2;
     if (playerSprite.y > innerHeight - playerSprite.height/2)
@@ -1130,7 +1133,7 @@ function HighestquarterBeat(){
     }, 70)
 }
 
-function RESTART(){
+function restart(){
     document.getElementById("welcome").style.display = "flex";
     document.getElementById("loading").style.display = "flex";
     document.getElementById("body").style.backgroundColor = "#008080";
@@ -1154,6 +1157,7 @@ function RESTART(){
     cannonInterval = 0;
     animationStarted = false;
 
+    hardMode = false;
 
     lost = true;
     won = true;

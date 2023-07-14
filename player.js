@@ -161,6 +161,8 @@ function lose() {
     }
     if (currentLevel == 9 && lostAfterCrash) {
         text.text = "Eliminated by Computer";
+        folderSprite.tint = "#FFFFFF"
+        hardMode = false;
     }
     zeroParticleGenerator.createParticles(Math.random() * 10, playerSprite.x, playerSprite.y);
     oneParticleGenerator.createParticles(Math.random() * 10, playerSprite.x, playerSprite.y);
@@ -193,6 +195,9 @@ function lose() {
 
 function win() { 
     if (currentLevel == 9) {
+        if (elapsed < -450) {
+            hardMode = true;
+        }
         app.ticker.stop();
         setTimeout(() => {
             document.getElementById("main").style.display = "none";
