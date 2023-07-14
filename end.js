@@ -3,6 +3,7 @@ let text;
 let endScreenWidth = window.innerWidth;
 let endScreenHeight = window.innerHeight;
 let lives = 3;
+let livesIndicator;
 let finale = new Audio("media/finale.mp3");
 let fullTimerBeats = 0;
 let startTimer = -9.000;
@@ -19,6 +20,7 @@ function Finale(){
     document.getElementById("body").style.backgroundColor = "#000000";
     endScreenWidth = window.innerWidth;
     endScreenHeight = window.innerHeight;
+    currentLevel = 11;
     lives = 3;
     lost = false;
     finale.currentTime = 0;
@@ -47,60 +49,61 @@ function Finale(){
     endApp.resizeTo = window;
     window.onresize = function (event){
         if (currentLevel == 11) {
-        endScreenWidth = window.innerWidth;
-        endScreenHeight = window.innerHeight;
-        blocks[0].positionX = endScreenWidth - 70;
-        blocks[0].height = endScreenHeight;
-        for (let i = 1; i <= 6; i++) {
-            if (i == 1 || i == 6) {
-                blocks[i].positionX = endScreenWidth - 170;
-                blocks[i].positionY = (i-1) * (endScreenHeight-100)/5 + 50 - 15;
-            } else if (i == 2 || i == 5) {
-                blocks[i].positionX = endScreenWidth - 110;
-                blocks[i].positionY = (i-1) * (endScreenHeight-100)/5 + 50 - 15;
-            } else {
-                blocks[i].positionX = endScreenWidth - 200;
-                blocks[i].positionY = (i-1) * (endScreenHeight-100)/5 + 50 - 15;
+            endScreenWidth = window.innerWidth;
+            endScreenHeight = window.innerHeight;
+            blocks[0].positionX = endScreenWidth - 70;
+            blocks[0].height = endScreenHeight;
+            for (let i = 1; i <= 6; i++) {
+                if (i == 1 || i == 6) {
+                    blocks[i].positionX = endScreenWidth - 170;
+                    blocks[i].positionY = (i-1) * (endScreenHeight-100)/5 + 50 - 15;
+                } else if (i == 2 || i == 5) {
+                    blocks[i].positionX = endScreenWidth - 110;
+                    blocks[i].positionY = (i-1) * (endScreenHeight-100)/5 + 50 - 15;
+                } else {
+                    blocks[i].positionX = endScreenWidth - 200;
+                    blocks[i].positionY = (i-1) * (endScreenHeight-100)/5 + 50 - 15;
+                }
             }
+
+            var a = blocks[3].positionX - (endScreenWidth - 35);
+            var b = blocks[3].positionY - (endScreenHeight/2);
+
+            var radius = Math.sqrt(a * a + b * b);
+
+            triangles.children.forEach(triangle => {
+                triangle.clear();
+                triangle.beginFill("#14CC14");
+                triangle.moveTo(-25, (radius + 20));
+                triangle.lineTo(25, (radius + 20));
+                triangle.lineTo(0, (radius + 20) + 25*Math.sqrt(3));
+                triangle.endFill();
+                triangle.beginFill("#000000");
+                triangle.moveTo(-12.5, (radius + 20));
+                triangle.lineTo(12.5, (radius + 20));
+                triangle.lineTo(0, (radius + 20) + 12.5*Math.sqrt(3));
+                triangle.x = endScreenWidth - 45;
+                triangle.y = innerHeight / 2;
+            });
+
+            circleGraphic.clear();
+            circleGraphic.beginFill("#14CC14");
+            circleGraphic.drawCircle(endScreenWidth - 45, innerHeight/2, radius + 10);
+            circleGraphic.endFill();
+            rectGraphic.clear();
+            rectGraphic.beginFill("#000000");
+            rectGraphic.drawRect(endScreenWidth - 55, 0, 20, innerHeight);
+            rectGraphic.drawRect(endScreenWidth - 25, 0, 10, innerHeight);
+            rectGraphic.drawRect(endScreenWidth - 10, 0, 5, innerHeight);
+            rectGraphic.endFill();
+            rectGraphic.beginFill("#00FF00");
+            rectGraphic.drawRect(endScreenWidth - 80, 1 * (endScreenHeight-100)/5 + 50 - 15, 10, 30);
+            rectGraphic.drawRect(endScreenWidth - 140, 35, 70, 30);
+            rectGraphic.drawRect(endScreenWidth - 80, 4 * (endScreenHeight-100)/5 + 50 - 15, 10, 30);
+            rectGraphic.drawRect(endScreenWidth - 140, 5 * (endScreenHeight-100)/5 + 50 - 15, 70, 30);
+            rectGraphic.endFill();
+            livesIndicator.y = endScreenHeight - 34;
         }
-
-        var a = blocks[3].positionX - (endScreenWidth - 35);
-        var b = blocks[3].positionY - (endScreenHeight/2);
-
-        var radius = Math.sqrt(a * a + b * b);
-
-        triangles.children.forEach(triangle => {
-            triangle.clear();
-            triangle.beginFill("#14CC14");
-            triangle.moveTo(-25, (radius + 20));
-            triangle.lineTo(25, (radius + 20));
-            triangle.lineTo(0, (radius + 20) + 25*Math.sqrt(3));
-            triangle.endFill();
-            triangle.beginFill("#000000");
-            triangle.moveTo(-12.5, (radius + 20));
-            triangle.lineTo(12.5, (radius + 20));
-            triangle.lineTo(0, (radius + 20) + 12.5*Math.sqrt(3));
-            triangle.x = endScreenWidth - 45;
-            triangle.y = innerHeight / 2;
-        });
-
-        circleGraphic.clear();
-        circleGraphic.beginFill("#14CC14");
-        circleGraphic.drawCircle(endScreenWidth - 45, innerHeight/2, radius + 10);
-        circleGraphic.endFill();
-        rectGraphic.clear();
-        rectGraphic.beginFill("#000000");
-        rectGraphic.drawRect(endScreenWidth - 55, 0, 20, innerHeight);
-        rectGraphic.drawRect(endScreenWidth - 25, 0, 10, innerHeight);
-        rectGraphic.drawRect(endScreenWidth - 10, 0, 5, innerHeight);
-        rectGraphic.endFill();
-        rectGraphic.beginFill("#00FF00");
-        rectGraphic.drawRect(endScreenWidth - 80, 1 * (endScreenHeight-100)/5 + 50 - 15, 10, 30);
-        rectGraphic.drawRect(endScreenWidth - 140, 35, 70, 30);
-        rectGraphic.drawRect(endScreenWidth - 80, 4 * (endScreenHeight-100)/5 + 50 - 15, 10, 30);
-        rectGraphic.drawRect(endScreenWidth - 140, 5 * (endScreenHeight-100)/5 + 50 - 15, 70, 30);
-        rectGraphic.endFill();
-    }
     }
     window.onblur = function(){
         isFocused = false;
@@ -183,11 +186,24 @@ function Finale(){
         fill: "#00ff00",
         align: "center",
     });
+    livesIndicator = new PIXI.Text("LIVES REMAINING: 3/3", {
+        fontFamily: 'Levi Windows',
+        fontSize: 24,
+        lineHeight: 28,
+        letterSpacing: 0,
+        fill: "#00ff00",
+        align: "center",
+    });
     text.anchor.set(0);
     text.resolution = 1;
     text.x = 10;
     text.y = 10;
+    livesIndicator.anchor.set(0);
+    livesIndicator.resolution = 1;
+    livesIndicator.x = 10;
+    livesIndicator.y = endScreenHeight - 34;
     endApp.stage.addChild(text);
+    endApp.stage.addChild(livesIndicator);
     endApp.stage.addChild(playerSprite)
     if (isFocused)
         finale.play();
@@ -220,6 +236,11 @@ function endGameLoop(delta){
     if ((finale.currentTime/finale.duration * 100) >= 98) {
         text.style.fill = "#ff0000"
         text.text = "// HACKED"
+    }
+
+    livesIndicator.text = `LIVES REMAINING: ${lives}/3`;
+    if (lives < 0) {
+        livesIndicator.text = `LIVES REMAINING: 0/3`;
     }
     if ((finale.currentTime/finale.duration * 100) >= 99) {
         finale.pause();
