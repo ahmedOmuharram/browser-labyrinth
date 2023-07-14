@@ -68,43 +68,20 @@ function Finale(){
 
         var radius = Math.sqrt(a * a + b * b);
 
-        triangleGraphic.clear();
-
-        triangleGraphic.beginFill("#14CC14");
-        triangleGraphic.moveTo(-25, (radius + 20));
-        triangleGraphic.lineTo(25, (radius + 20));
-        triangleGraphic.lineTo(0, (radius + 20) + 25*Math.sqrt(3));
-        triangleGraphic.moveTo(-25, -1 * (radius + 20));
-        triangleGraphic.lineTo(25, -1 * (radius + 20));
-        triangleGraphic.lineTo(0, -1 * (radius + 20) - 25*Math.sqrt(3));
-        triangleGraphic.moveTo((radius + 20), -25);
-        triangleGraphic.lineTo((radius + 20), 25);
-        triangleGraphic.lineTo((radius + 20) + 25*Math.sqrt(3), 0);
-        triangleGraphic.moveTo(-1 * (radius + 20), -25);
-        triangleGraphic.lineTo(-1 * (radius + 20), 25);
-        triangleGraphic.lineTo(-1 * (radius + 20) - 25*Math.sqrt(3), 0);
-        triangleGraphic.endFill();
-        triangleGraphic.x = endScreenWidth - 45;
-        triangleGraphic.y = innerHeight / 2;
-
-        triangleGraphich.clear();
-
-        triangleGraphich.beginFill("#14CC14");
-        triangleGraphich.moveTo(-25, (radius + 20));
-        triangleGraphich.lineTo(25, (radius + 20));
-        triangleGraphich.lineTo(0, (radius + 20) + 25*Math.sqrt(3));
-        triangleGraphich.moveTo(-25, -1 * (radius + 20));
-        triangleGraphich.lineTo(25, -1 * (radius + 20));
-        triangleGraphich.lineTo(0, -1 * (radius + 20) - 25*Math.sqrt(3));
-        triangleGraphich.moveTo((radius + 20), -25);
-        triangleGraphich.lineTo((radius + 20), 25);
-        triangleGraphich.lineTo((radius + 20) + 25*Math.sqrt(3), 0);
-        triangleGraphich.moveTo(-1 * (radius + 20), -25);
-        triangleGraphich.lineTo(-1 * (radius + 20), 25);
-        triangleGraphich.lineTo(-1 * (radius + 20) - 25*Math.sqrt(3), 0);
-        triangleGraphich.endFill();
-        triangleGraphich.x = endScreenWidth - 45;
-        triangleGraphich.y = innerHeight / 2;
+        triangles.children.forEach(triangle => {
+            triangle.clear();
+            triangle.beginFill("#14CC14");
+            triangle.moveTo(-25, (radius + 20));
+            triangle.lineTo(25, (radius + 20));
+            triangle.lineTo(0, (radius + 20) + 25*Math.sqrt(3));
+            triangle.endFill();
+            triangle.beginFill("#000000");
+            triangle.moveTo(-12.5, (radius + 20));
+            triangle.lineTo(12.5, (radius + 20));
+            triangle.lineTo(0, (radius + 20) + 12.5*Math.sqrt(3));
+            triangle.x = endScreenWidth - 45;
+            triangle.y = innerHeight / 2;
+        });
 
         circleGraphic.clear();
         circleGraphic.beginFill("#14CC14");
@@ -144,50 +121,31 @@ function Finale(){
     playerSprite.width = 36;
     playerSprite.height = 40;
 
-    triangleGraphic = new PIXI.Graphics();
-    triangleGraphic.beginFill("#14CC14");
-    triangleGraphic.moveTo(-25, 210);
-    triangleGraphic.lineTo(25, 210);
-    triangleGraphic.lineTo(0, 210 + 25*Math.sqrt(3));
-    triangleGraphic.moveTo(-25, -210);
-    triangleGraphic.lineTo(25, -210);
-    triangleGraphic.lineTo(0, -210 - 25*Math.sqrt(3));
-    triangleGraphic.moveTo(210, -25);
-    triangleGraphic.lineTo(210, 25);
-    triangleGraphic.lineTo(210 + 25*Math.sqrt(3), 0);
-    triangleGraphic.moveTo(-210, -25);
-    triangleGraphic.lineTo(-210, 25);
-    triangleGraphic.lineTo(-210 - 25*Math.sqrt(3), 0);
-    triangleGraphic.endFill();
-    triangleGraphic.pivot.x = 0;
-    triangleGraphic.pivot.y = 0;
-    triangleGraphic.x = endScreenWidth - 45;
-    triangleGraphic.y = innerHeight / 2;
-    triangleGraphic.rotationSpeed = 0.01;
-    endApp.stage.addChild(triangleGraphic);
-
-    triangleGraphich = new PIXI.Graphics();
-    triangleGraphich.beginFill("#14CC14");
-    triangleGraphich.moveTo(-25, 210);
-    triangleGraphich.lineTo(25, 210);
-    triangleGraphich.lineTo(0, 210 + 25*Math.sqrt(3));
-    triangleGraphich.moveTo(-25, -210);
-    triangleGraphich.lineTo(25, -210);
-    triangleGraphich.lineTo(0, -210 - 25*Math.sqrt(3));
-    triangleGraphich.moveTo(210, -25);
-    triangleGraphich.lineTo(210, 25);
-    triangleGraphich.lineTo(210 + 25*Math.sqrt(3), 0);
-    triangleGraphich.moveTo(-210, -25);
-    triangleGraphich.lineTo(-210, 25);
-    triangleGraphich.lineTo(-210 - 25*Math.sqrt(3), 0);
-    triangleGraphich.endFill();
-    triangleGraphich.pivot.x = 0;
-    triangleGraphich.pivot.y = 0;
-    triangleGraphich.x = endScreenWidth - 45;
-    triangleGraphich.y = innerHeight / 2;
-    triangleGraphich.rotationSpeed = 0.01;
-    triangleGraphich.rotation = Math.PI/4
-    endApp.stage.addChild(triangleGraphich);
+    triangles = new PIXI.Container();
+    triangles.rotationSpeed = 0.01;
+    
+    for (let i = 0; i < 8; i++) {
+        let triangleGraphic = new PIXI.Graphics();
+        triangleGraphic.beginFill("#14CC14");
+        triangleGraphic.moveTo(-25, 210);
+        triangleGraphic.lineTo(25, 210);
+        triangleGraphic.lineTo(0, 210 + 25*Math.sqrt(3));
+        triangleGraphic.endFill();
+        triangleGraphic.beginFill("#000000");
+        triangleGraphic.moveTo(-12.5, 210);
+        triangleGraphic.lineTo(12.5, 210);
+        triangleGraphic.lineTo(0, 210 + 12.5*Math.sqrt(3));
+        triangleGraphic.endFill();
+        triangleGraphic.pivot.x = 0;
+        triangleGraphic.pivot.y = 0;
+        triangleGraphic.x = endScreenWidth - 45;
+        triangleGraphic.y = innerHeight / 2;
+        triangleGraphic.rotation = i * Math.PI/4
+        triangles.addChild(triangleGraphic);
+    }
+    
+    
+    endApp.stage.addChild(triangles);
     
     circleGraphic = new PIXI.Graphics();
     circleGraphic.beginFill("#14CC14");
@@ -235,8 +193,9 @@ function Finale(){
 }
 
 function endGameLoop(delta){
-    triangleGraphic.rotation += triangleGraphic.rotationSpeed;
-    triangleGraphich.rotation += triangleGraphich.rotationSpeed;
+    triangles.children.forEach(triangle => {
+        triangle.rotation += triangles.rotationSpeed;
+    });
     elapsed += delta;
     timer = startTimer + finale.currentTime;
     halfTimer = startHalfTimer + finale.currentTime;
@@ -267,7 +226,7 @@ function endGameLoop(delta){
         document.getElementById("body").style.backgroundRepeat = "no-repeat";
         document.getElementById("body").style.height = "100vh";
         var message = document.createElement("div");
-            message.innerText = "You have successfully corrupted the user's PC.\nWas there an alternative?";
+            message.innerText = "You have successfully corrupted the user's PC.\nBut... was there an alternative?";
             message.style.position = "fixed";
             message.style.top = "50%";
             message.style.left = "50%";
@@ -644,11 +603,9 @@ function mainBeat(){
         blocks[2].shoot(1,20,20,2,"#008000","#008000",0);
         blocks[5].shoot(1,20,20,2,"#008000","#008000",0);
         blocks[6].shoot(1,20,20,2,"#008000","#008000",0);
-        triangleGraphic.rotationSpeed = 0.05;
-        triangleGraphich.rotationSpeed = 0.05;
+        triangles.rotationSpeed = 0.05;
         setTimeout(() => {
-            triangleGraphic.rotationSpeed = 0.01;
-            triangleGraphich.rotationSpeed = 0.01;  
+            triangles.rotationSpeed = 0.01;
         }, 200);
         for (let i = 1; i < 7; i++) {
             if (i != 3 && i != 4) {
@@ -683,11 +640,9 @@ function LoudmainBeat(){
         blocks[2].shoot(2,30,30,2,"#008000","#008000",0);
         blocks[5].shoot(2,30,30,2,"#008000","#008000",0);
         blocks[6].shoot(2,30,30,2,"#008000","#008000",0);
-        triangleGraphic.rotationSpeed = 0.1;
-        triangleGraphich.rotationSpeed = 0.1;
+        triangles.rotationSpeed = 0.1;
         setTimeout(() => {
-            triangleGraphic.rotationSpeed = 0.01;
-            triangleGraphich.rotationSpeed = 0.01; 
+            triangles.rotationSpeed = 0.01;
         }, 200);
 
         for (let i = 1; i < 7; i++) {
@@ -747,6 +702,39 @@ function RBeat(){
     blocks[4].minSpeed = oldMinSpeed;
     blocks[4].maxSpeed = oldMaxSpeed;
 
+    var a = blocks[3].positionX - (endScreenWidth - 35);
+    var b = blocks[3].positionY - (endScreenHeight/2);
+
+    var radius = Math.sqrt(a * a + b * b);
+    triangles.children.forEach(triangle => {
+        triangle.clear();
+        triangle.beginFill("#FF0000");
+        triangle.moveTo(-25, (radius + 20));
+        triangle.lineTo(25, (radius + 20));
+        triangle.lineTo(0, (radius + 20) + 25*Math.sqrt(3));
+        triangle.endFill();
+        triangle.beginFill("#000000");
+        triangle.moveTo(-12.5, (radius + 20));
+        triangle.lineTo(12.5, (radius + 20));
+        triangle.lineTo(0, (radius + 20) + 12.5*Math.sqrt(3));
+        triangle.x = endScreenWidth - 45;
+        triangle.y = innerHeight / 2;
+        setTimeout(() => {
+                triangle.clear();
+                triangle.beginFill("#14CC14");
+                triangle.moveTo(-25, (radius + 20));
+                triangle.lineTo(25, (radius + 20));
+                triangle.lineTo(0, (radius + 20) + 25*Math.sqrt(3));
+                triangle.endFill();
+                triangle.beginFill("#000000");
+                triangle.moveTo(-12.5, (radius + 20));
+                triangle.lineTo(12.5, (radius + 20));
+                triangle.lineTo(0, (radius + 20) + 12.5*Math.sqrt(3));
+                triangle.x = endScreenWidth - 45;
+                triangle.y = innerHeight / 2; 
+          }, 200);
+    });
+
     for (let j = 0; j <= 100; j++) {
         setTimeout(() => {
           blocks[4].positionX += Math.sin((j / 100) * Math.PI);       
@@ -777,6 +765,39 @@ function GBeat(){
 
     blocks[4].shoot(50,20,20,2,"#14CC14","#14CC14",0);
 
+    var a = blocks[3].positionX - (endScreenWidth - 35);
+    var b = blocks[3].positionY - (endScreenHeight/2);
+
+    var radius = Math.sqrt(a * a + b * b);
+    triangles.children.forEach(triangle => {
+        triangle.clear();
+        triangle.beginFill("#00FF00");
+        triangle.moveTo(-25, (radius + 20));
+        triangle.lineTo(25, (radius + 20));
+        triangle.lineTo(0, (radius + 20) + 25*Math.sqrt(3));
+        triangle.endFill();
+        triangle.beginFill("#000000");
+        triangle.moveTo(-12.5, (radius + 20));
+        triangle.lineTo(12.5, (radius + 20));
+        triangle.lineTo(0, (radius + 20) + 12.5*Math.sqrt(3));
+        triangle.x = endScreenWidth - 45;
+        triangle.y = innerHeight / 2;
+        setTimeout(() => {
+                triangle.clear();
+                triangle.beginFill("#14CC14");
+                triangle.moveTo(-25, (radius + 20));
+                triangle.lineTo(25, (radius + 20));
+                triangle.lineTo(0, (radius + 20) + 25*Math.sqrt(3));
+                triangle.endFill();
+                triangle.beginFill("#000000");
+                triangle.moveTo(-12.5, (radius + 20));
+                triangle.lineTo(12.5, (radius + 20));
+                triangle.lineTo(0, (radius + 20) + 12.5*Math.sqrt(3));
+                triangle.x = endScreenWidth - 45;
+                triangle.y = innerHeight / 2; 
+          }, 200);
+    });
+
     for (let j = 0; j <= 100; j++) {
         setTimeout(() => {
           blocks[4].positionX += Math.sin((j / 100) * Math.PI);       
@@ -805,6 +826,39 @@ function BBeat(){
     blocks[4].minAngle = angle;
     blocks[4].maxAngle = angle;
     blocks[4].shoot(25,20,20,2,"#0000FF","#0000FF",0);
+
+    var a = blocks[3].positionX - (endScreenWidth - 35);
+    var b = blocks[3].positionY - (endScreenHeight/2);
+
+    var radius = Math.sqrt(a * a + b * b);
+    triangles.children.forEach(triangle => {
+        triangle.clear();
+        triangle.beginFill("#0000FF");
+        triangle.moveTo(-25, (radius + 20));
+        triangle.lineTo(25, (radius + 20));
+        triangle.lineTo(0, (radius + 20) + 25*Math.sqrt(3));
+        triangle.endFill();
+        triangle.beginFill("#000000");
+        triangle.moveTo(-12.5, (radius + 20));
+        triangle.lineTo(12.5, (radius + 20));
+        triangle.lineTo(0, (radius + 20) + 12.5*Math.sqrt(3));
+        triangle.x = endScreenWidth - 45;
+        triangle.y = innerHeight / 2;
+        setTimeout(() => {
+                triangle.clear();
+                triangle.beginFill("#14CC14");
+                triangle.moveTo(-25, (radius + 20));
+                triangle.lineTo(25, (radius + 20));
+                triangle.lineTo(0, (radius + 20) + 25*Math.sqrt(3));
+                triangle.endFill();
+                triangle.beginFill("#000000");
+                triangle.moveTo(-12.5, (radius + 20));
+                triangle.lineTo(12.5, (radius + 20));
+                triangle.lineTo(0, (radius + 20) + 12.5*Math.sqrt(3));
+                triangle.x = endScreenWidth - 45;
+                triangle.y = innerHeight / 2; 
+          }, 200);
+    });
     for (let j = 0; j <= 100; j++) {
         setTimeout(() => {
           blocks[4].positionX += Math.sin((j / 100) * Math.PI);       
@@ -832,6 +886,38 @@ function S1quarterBeat(){
     blocks[3].minSpeed = 25;
     blocks[3].maxSpeed = 30;
 
+    var a = blocks[3].positionX - (endScreenWidth - 35);
+    var b = blocks[3].positionY - (endScreenHeight/2);
+
+    var radius = Math.sqrt(a * a + b * b);
+    triangles.children.forEach(triangle => {
+        triangle.clear();
+        triangle.beginFill("#FF0000");
+        triangle.moveTo(-25, (radius + 20));
+        triangle.lineTo(25, (radius + 20));
+        triangle.lineTo(0, (radius + 20) + 25*Math.sqrt(3));
+        triangle.endFill();
+        triangle.beginFill("#000000");
+        triangle.moveTo(-12.5, (radius + 20));
+        triangle.lineTo(12.5, (radius + 20));
+        triangle.lineTo(0, (radius + 20) + 12.5*Math.sqrt(3));
+        triangle.x = endScreenWidth - 45;
+        triangle.y = innerHeight / 2;
+        setTimeout(() => {
+                triangle.clear();
+                triangle.beginFill("#14CC14");
+                triangle.moveTo(-25, (radius + 20));
+                triangle.lineTo(25, (radius + 20));
+                triangle.lineTo(0, (radius + 20) + 25*Math.sqrt(3));
+                triangle.endFill();
+                triangle.beginFill("#000000");
+                triangle.moveTo(-12.5, (radius + 20));
+                triangle.lineTo(12.5, (radius + 20));
+                triangle.lineTo(0, (radius + 20) + 12.5*Math.sqrt(3));
+                triangle.x = endScreenWidth - 45;
+                triangle.y = innerHeight / 2; 
+          }, 200);
+    });
     for (let j = 0; j <= 100; j++) {
         setTimeout(() => {
           blocks[3].positionX += Math.sin((j / 100) * Math.PI);       
@@ -876,6 +962,39 @@ function S2quarterBeat(){
     }
     blocks[can].minSpeed = oldMinSpeed;
     blocks[can].maxSpeed = oldMaxSpeed;
+
+    var a = blocks[3].positionX - (endScreenWidth - 35);
+    var b = blocks[3].positionY - (endScreenHeight/2);
+
+    var radius = Math.sqrt(a * a + b * b);
+    triangles.children.forEach(triangle => {
+        triangle.clear();
+        triangle.beginFill("#FF0000");
+        triangle.moveTo(-25, (radius + 20));
+        triangle.lineTo(25, (radius + 20));
+        triangle.lineTo(0, (radius + 20) + 25*Math.sqrt(3));
+        triangle.endFill();
+        triangle.beginFill("#000000");
+        triangle.moveTo(-12.5, (radius + 20));
+        triangle.lineTo(12.5, (radius + 20));
+        triangle.lineTo(0, (radius + 20) + 12.5*Math.sqrt(3));
+        triangle.x = endScreenWidth - 45;
+        triangle.y = innerHeight / 2;
+        setTimeout(() => {
+                triangle.clear();
+                triangle.beginFill("#14CC14");
+                triangle.moveTo(-25, (radius + 20));
+                triangle.lineTo(25, (radius + 20));
+                triangle.lineTo(0, (radius + 20) + 25*Math.sqrt(3));
+                triangle.endFill();
+                triangle.beginFill("#000000");
+                triangle.moveTo(-12.5, (radius + 20));
+                triangle.lineTo(12.5, (radius + 20));
+                triangle.lineTo(0, (radius + 20) + 12.5*Math.sqrt(3));
+                triangle.x = endScreenWidth - 45;
+                triangle.y = innerHeight / 2; 
+          }, 200);
+    });
 
     for (let j = 0; j <= 100; j++) {
         setTimeout(() => {
