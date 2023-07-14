@@ -56,11 +56,18 @@ document.onkeydown = function (e) {
     }
 };
 
+window.onblur = function(){
+    isFocused = false;
+    app.ticker.stop();
+}  
+window.onfocus = function(){  
+    isFocused = true;
+    app.ticker.start();
+}
 
+app.ticker.add(scriptGameLoop);
 
-app.ticker.add(gameLoop);
-
-function gameLoop(delta) {
+function scriptGameLoop(delta) {
     if (topBorder.positionY < 0) {
         const offsetY = -topBorder.positionY
         topBorder.positionY += offsetY;

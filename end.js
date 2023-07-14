@@ -190,6 +190,8 @@ function Finale(){
     if (isFocused)
         finale.play();
     endApp.ticker.add(endGameLoop);
+    if (!isFocused)
+        endApp.ticker.stop();
 }
 
 function endGameLoop(delta){
@@ -249,6 +251,7 @@ function endGameLoop(delta){
         }, 10000); 
         setTimeout(() => {   
             document.body.removeChild(message);
+            RESTART();
             // document.getElementById("body").style.backgroundColor = "#008080";
             // document.getElementById("welcome").style.display = "flex";    
         }, 16000); 
@@ -1125,4 +1128,69 @@ function HighestquarterBeat(){
     setTimeout(() => {
         playerSprite.tint = "#FFFFFF"
     }, 70)
+}
+
+function RESTART(){
+    document.getElementById("welcome").style.display = "flex";
+    document.getElementById("loading").style.display = "flex";
+    document.getElementById("body").style.backgroundColor = "#008080";
+    document.getElementById("top-text").style.color = "#ffffff";
+    document.getElementById("top-text").innerText = "Browser's Labyrinth";
+    document.getElementById("canvas").style.display = "none";
+    document.getElementById("top-text").style.removeProperty("display");
+    document.getElementById("grid-container").style.removeProperty("display");
+    document.getElementById("grid-container-bottom").style.removeProperty("display");
+    document.getElementById("main").style.removeProperty("display");
+    document.getElementsByClassName("taskbar")[0].style.removeProperty("display");
+    document.getElementById("main").style.borderTop = "5px dashed #008080";
+    document.getElementById("main").style.borderLeft = "5px dashed #008080";
+    document.getElementById("main").style.borderRight = "5px dashed #008080";
+    document.getElementById("main").style.borderBottom = "5px dashed #008080";
+    for (let i = 0; i < document.getElementsByClassName("loading-rectangle").length; i++) {
+        document.getElementsByClassName("loading-rectangle")[i].style.removeProperty("background-color");    
+    }
+    elapsed = 0;
+    spinDirection = 1;
+    cannonInterval = 0;
+    animationStarted = false;
+
+
+    lost = true;
+    won = true;
+
+    currentLevel = 0;
+
+    app = new PIXI.Application({ 
+        antialias: true,
+        width: screenWidth, 
+        height: screenHeight,
+        backgroundColor: "#008080",
+        resolution: 1,
+    });
+
+    app.stage.interactive = true;
+    app.stage.hitArea = app.screen;
+
+    zeroParticleGenerator = new Particles(zeroTexture, -12, 12, -12, 12, 0.5, -0.09, 0.09, 0.015, 0.03, 0.1, 0.2, "#00FF00");
+    oneParticleGenerator = new Particles(oneTexture, -12, 12, -12, 12, 0.5, -0.09, 0.09, 0.015, 0.03, 0.1, 0.2, "#00FF00");
+
+    backgroundScreen = new Block(screenWidth, screenHeight, 1280, 720, 2, "#ffffff", 'v', "#ffffff");
+
+    bottomBorder = new Border(0, 20, 20, 10, 2, "#c8c8c8", 'v', "#c8c8c8");
+    leftBorder = new Border(0, 0, 10, 30, 2, "#c8c8c8", 'h', "#c8c8c8");
+    rightBorder = new Border(10, 0, 10, 30, 2, "#c8c8c8", 'h', "#c8c8c8");
+    topBorder = new Border(0, 0, 20, 20, 2, "#c8c8c8", 'v', "#010081");
+
+    bottomBorder.graphic.interactive = false;
+    leftBorder.graphic.interactive = false;
+    rightBorder.graphic.interactive = false;
+    topBorder.graphic.interactive = false;
+
+    blocks = []
+    playLevel = new Level(currentLevel.toString(), 0);
+    levelBlocks = []
+    blocks.push(topBorder, bottomBorder, leftBorder, rightBorder)
+
+    app.ticker.add(scriptGameLoop);
+    app.ticker.add(playerGameLoop);
 }

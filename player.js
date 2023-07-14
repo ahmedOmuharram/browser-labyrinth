@@ -80,10 +80,10 @@ function onKeyUp(event) {
     }
 }
 
-app.ticker.add(gameLoop);
+app.ticker.add(playerGameLoop);
 
 var deltaTime = 0
-function gameLoop(delta) { 
+function playerGameLoop(delta) { 
     playerSprite.ySpeed += gravity * delta * 0.5;
     playerSprite.xSpeed = 0;
     if (playerSprite.ySpeed > terminalVelocity) {

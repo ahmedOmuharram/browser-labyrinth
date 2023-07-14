@@ -384,6 +384,7 @@ class Level{
         }
         if (rightBorder.height == 0 && playerSprite.x >= rightBorder.positionX) {
             document.getElementById("main").style.display = "none";
+            document.getElementById("main").childNodes[0].remove(); 
             app.ticker.stop();
             app.destroy();
             setTimeout(() => {

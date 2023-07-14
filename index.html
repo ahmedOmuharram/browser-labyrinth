@@ -403,6 +403,7 @@
         function start() {
             document.getElementById("volume-slider").value = 50;
             menuMusic.pause();
+            menuMusic.currentTime = 0;
             document.getElementById("welcome").style.display = "none";
             const rectangles = document.querySelectorAll('.loading-rectangle');
             document.getElementById("loading").style.display = "flex";
@@ -469,6 +470,7 @@
 
         function pointerAnimation(){
             let pointer = document.getElementById("animation-pointer");
+            pointer.classList.remove('animated');
             pointer.style.top = window.innerHeight/2 + "px";
             pointer.style.left = window.innerWidth/2 + "px";
             pointer.style.display = "block";
