@@ -13,6 +13,7 @@ let loseSound = new Audio("media/lose.mp3");
 loseSound.volume = 0.6;
 loseSound.loop = false;
 loseSound.playbackRate = 1.3;
+let oldX = 0;
 
 for (let i = 0; i < 11; i++)
 {
@@ -83,7 +84,11 @@ function onKeyUp(event) {
 app.ticker.add(playerGameLoop);
 
 var deltaTime = 0
-function playerGameLoop(delta) { 
+function playerGameLoop(delta) {
+    if (delta > 2) {
+        return;
+    }
+
     playerSprite.ySpeed += gravity * delta * 0.5;
     playerSprite.xSpeed = 0;
     if (playerSprite.ySpeed > terminalVelocity) {
@@ -136,6 +141,7 @@ function playerGameLoop(delta) {
     if (!colliding) {
         isOnGround = false;
     }
+    oldX = playerSprite.x;
 }
 
 function lose() { 

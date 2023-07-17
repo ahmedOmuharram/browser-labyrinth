@@ -68,6 +68,9 @@ window.onfocus = function(){
 app.ticker.add(scriptGameLoop);
 
 function scriptGameLoop(delta) {
+    if (delta > 2) {
+        return;
+    }
     if (topBorder.positionY < 0) {
         const offsetY = -topBorder.positionY
         topBorder.positionY += offsetY;
